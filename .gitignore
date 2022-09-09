@@ -2,6 +2,7 @@
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css
+/src/main/resources/config/application-dev.yml
 /target/classes/static/**
 /src/test/javascript/coverage/
 
@@ -11,6 +12,7 @@
 /node/
 node_tmp/
 node_modules/
+package-lock.json
 npm-debug.log.*
 /.awcache/*
 /.cache-loader/*
