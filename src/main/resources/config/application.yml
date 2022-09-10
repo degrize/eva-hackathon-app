@@ -204,7 +204,7 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: evaHackathonApp@localhost
+    from: kechiedou.meda18@inphb.ci
   api-docs:
     default-include-pattern: ${server.servlet.context-path:}/api/**
     management-include-pattern: ${server.servlet.context-path:}/management/**
