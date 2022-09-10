@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="transaction">
+      <h2 data-cy="transactionDetailsHeading"><span jhiTranslate="evaHackathonApp.transaction.detail.title">Transaction</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ transaction.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.numeroMtn">Numero Mtn</span></dt>
+        <dd>
+          <span>{{ transaction.numeroMtn }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.montant">Montant</span></dt>
+        <dd>
+          <span>{{ transaction.montant }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.devise">Devise</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'evaHackathonApp.Devise.' + transaction.devise }}">{{ transaction.devise }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.dateTransaction">Date Transaction</span></dt>
+        <dd>
+          <span>{{ transaction.dateTransaction | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.precision">Precision</span></dt>
+        <dd>
+          <span>{{ transaction.precision }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.annonce">Annonce</span></dt>
+        <dd>
+          <div *ngIf="transaction.annonce">
+            <a [routerLink]="['/annonce', transaction.annonce.id, 'view']">{{ transaction.annonce.titre }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.transaction.postulant">Postulant</span></dt>
+        <dd>
+          <div *ngIf="transaction.postulant">
+            <a [routerLink]="['/postulant', transaction.postulant.id, 'view']">{{ transaction.postulant.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/transaction', transaction.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

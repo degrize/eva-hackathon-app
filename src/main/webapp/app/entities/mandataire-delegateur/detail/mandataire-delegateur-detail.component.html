@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mandataireDelegateur">
+      <h2 data-cy="mandataireDelegateurDetailsHeading">
+        <span jhiTranslate="evaHackathonApp.mandataireDelegateur.detail.title">Mandataire Delegateur</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.nomDeFamille">Nom De Famille</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.nomDeFamille }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.contact">Contact</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.contact }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.email">Email</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.numeroMomo">Numero Momo</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.numeroMomo }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.sexe">Sexe</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'evaHackathonApp.Sexe.' + mandataireDelegateur.sexe }}">{{ mandataireDelegateur.sexe }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.pays">Pays</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.pays }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.ville">Ville</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.ville }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ mandataireDelegateur.adresse }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.etatCompte">Etat Compte</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'evaHackathonApp.EtatCompte.' + mandataireDelegateur.etatCompte }}">{{
+            mandataireDelegateur.etatCompte
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.mandataireDelegateur.situationMatrimoniale">Situation Matrimoniale</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'evaHackathonApp.SituationMatrimoniale.' + mandataireDelegateur.situationMatrimoniale }}">{{
+            mandataireDelegateur.situationMatrimoniale
+          }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mandataire-delegateur', mandataireDelegateur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

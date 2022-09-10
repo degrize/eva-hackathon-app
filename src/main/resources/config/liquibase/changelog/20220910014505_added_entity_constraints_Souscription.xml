@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Souscription.
+    -->
+    <changeSet id="20220910014505-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="souscription_id"
+                                 baseTableName="rel_souscription__mandataire_delegateur"
+                                 constraintName="fk_rel_souscription__mandataire_delegateur__souscription_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="souscription"/>
+
+        <addForeignKeyConstraint baseColumnNames="mandataire_delegateur_id"
+                                 baseTableName="rel_souscription__mandataire_delegateur"
+                                 constraintName="fk_rel_souscription__mandataire__mandataire_delegateur_00_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mandataire_delegateur"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+export enum SituationMatrimoniale {
+  CELIBATAIRE = 'CELIBATAIRE',
+
+  FIANCE = 'FIANCE',
+
+  CONCUBINAGE = 'CONCUBINAGE',
+
+  MARIE = 'MARIE',
+
+  VEUF = 'VEUF',
+
+  JE_PREFERE_NE_PAS_LE_DIRE = 'JE_PREFERE_NE_PAS_LE_DIRE',
+}

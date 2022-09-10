@@ -1,0 +1,27 @@
+{
+  "evaHackathonApp": {
+    "souscription": {
+      "home": {
+        "title": "Souscriptions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Souscription",
+        "createOrEditLabel": "Créer ou éditer un Souscription",
+        "notFound": "Aucun Souscription trouvé"
+      },
+      "created": "Un nouveau Souscription a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Souscription avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Souscription avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Souscription {{ id }} ?"
+      },
+      "detail": {
+        "title": "Souscription"
+      },
+      "id": "ID",
+      "etat": "Etat",
+      "montant": "Montant",
+      "pourcentageDuDon": "Pourcentage Du Don",
+      "mandataireDelegateur": "Mandataire Delegateur"
+    }
+  }
+}

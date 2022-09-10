@@ -1,0 +1,180 @@
+<div>
+  <h2 id="page-heading" data-cy="MandataireDelegateurHeading">
+    <span jhiTranslate="evaHackathonApp.mandataireDelegateur.home.title">MandataireDelegateurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="evaHackathonApp.mandataireDelegateur.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-mandataire-delegateur"
+        [routerLink]="['/mandataire-delegateur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="evaHackathonApp.mandataireDelegateur.home.createLabel"> Créer un nouveau Mandataire Delegateur </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="mandataireDelegateurs?.length === 0">
+    <span jhiTranslate="evaHackathonApp.mandataireDelegateur.home.notFound">Aucun Mandataire Delegateur trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="mandataireDelegateurs && mandataireDelegateurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nomDeFamille">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.nomDeFamille">Nom De Famille</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="prenom">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.prenom">Prenom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contact">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.contact">Contact</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeroMomo">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.numeroMomo">Numero Momo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="sexe">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.sexe">Sexe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="pays">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.pays">Pays</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ville">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.ville">Ville</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adresse">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.adresse">Adresse</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="etatCompte">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.etatCompte">Etat Compte</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="situationMatrimoniale">
+            <div class="d-flex">
+              <span jhiTranslate="evaHackathonApp.mandataireDelegateur.situationMatrimoniale">Situation Matrimoniale</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mandataireDelegateur of mandataireDelegateurs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/mandataire-delegateur', mandataireDelegateur.id, 'view']">{{ mandataireDelegateur.id }}</a>
+          </td>
+          <td>{{ mandataireDelegateur.nomDeFamille }}</td>
+          <td>{{ mandataireDelegateur.prenom }}</td>
+          <td>{{ mandataireDelegateur.contact }}</td>
+          <td>{{ mandataireDelegateur.email }}</td>
+          <td>{{ mandataireDelegateur.numeroMomo }}</td>
+          <td jhiTranslate="{{ 'evaHackathonApp.Sexe.' + mandataireDelegateur.sexe }}">{{ mandataireDelegateur.sexe }}</td>
+          <td>{{ mandataireDelegateur.pays }}</td>
+          <td>{{ mandataireDelegateur.ville }}</td>
+          <td>{{ mandataireDelegateur.adresse }}</td>
+          <td jhiTranslate="{{ 'evaHackathonApp.EtatCompte.' + mandataireDelegateur.etatCompte }}">
+            {{ mandataireDelegateur.etatCompte }}
+          </td>
+          <td jhiTranslate="{{ 'evaHackathonApp.SituationMatrimoniale.' + mandataireDelegateur.situationMatrimoniale }}">
+            {{ mandataireDelegateur.situationMatrimoniale }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/mandataire-delegateur', mandataireDelegateur.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/mandataire-delegateur', mandataireDelegateur.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(mandataireDelegateur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="mandataireDelegateurs && mandataireDelegateurs.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
