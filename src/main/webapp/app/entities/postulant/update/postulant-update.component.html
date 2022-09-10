@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-postulant-heading" data-cy="PostulantCreateUpdateHeading" jhiTranslate="evaHackathonApp.postulant.home.createOrEditLabel">
+        Créer ou éditer un Postulant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.postulant.numeroMomo" for="field_numeroMomo">Numero Momo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numeroMomo"
+            id="field_numeroMomo"
+            data-cy="numeroMomo"
+            formControlName="numeroMomo"
+          />
+          <div *ngIf="editForm.get('numeroMomo')!.invalid && (editForm.get('numeroMomo')!.dirty || editForm.get('numeroMomo')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroMomo')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.postulant.observation" for="field_observation">Observation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="observation"
+            id="field_observation"
+            data-cy="observation"
+            formControlName="observation"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="evaHackathonApp.postulant.annonce" for="field_annonces">Annonce</label>
+          <select
+            class="form-control"
+            id="field_annonces"
+            data-cy="annonce"
+            multiple
+            name="annonces"
+            formControlName="annonces"
+            [compareWith]="compareAnnonce"
+          >
+            <option [ngValue]="annonceOption" *ngFor="let annonceOption of annoncesSharedCollection">{{ annonceOption.titre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

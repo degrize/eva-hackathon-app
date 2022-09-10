@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014738",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "souscription",
+  "fields": [
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatCompte",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PREMIUM,NORMAL"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pourcentageDuDon",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Souscription",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "numeroMomo",
+      "otherEntityName": "mandataireDelegateur",
+      "otherEntityRelationshipName": "souscription",
+      "ownerSide": true,
+      "relationshipName": "mandataireDelegateur",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

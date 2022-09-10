@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014737",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "transaction",
+  "fields": [
+    {
+      "fieldName": "numeroMtn",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "devise",
+      "fieldType": "Devise",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EURO,CEDI,DLASI,DOLLAR,FCFA,LIVRE,LEONE,NAIRA,YEN"
+    },
+    {
+      "fieldName": "dateTransaction",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "precision",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Transaction",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "annonce",
+      "otherEntityRelationshipName": "transaction",
+      "ownerSide": true,
+      "relationshipName": "annonce",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "postulant",
+      "otherEntityRelationshipName": "transaction",
+      "ownerSide": true,
+      "relationshipName": "postulant",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

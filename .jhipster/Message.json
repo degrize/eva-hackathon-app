@@ -1,0 +1,33 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014733",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "message",
+  "fields": [
+    {
+      "fieldName": "texte",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fichierJoin",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Message",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "annonce",
+      "otherEntityRelationshipName": "message",
+      "relationshipName": "annonce",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

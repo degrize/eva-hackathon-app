@@ -1,0 +1,36 @@
+{
+  "evaHackathonApp": {
+    "mandataireDelegateur": {
+      "home": {
+        "title": "MandataireDelegateurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Mandataire Delegateur",
+        "createOrEditLabel": "Créer ou éditer un Mandataire Delegateur",
+        "notFound": "Aucun Mandataire Delegateur trouvé"
+      },
+      "created": "Un nouveau Mandataire Delegateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Mandataire Delegateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Mandataire Delegateur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Mandataire Delegateur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Mandataire Delegateur"
+      },
+      "id": "ID",
+      "nomDeFamille": "Nom De Famille",
+      "prenom": "Prenom",
+      "contact": "Contact",
+      "email": "Email",
+      "numeroMomo": "Numero Momo",
+      "sexe": "Sexe",
+      "pays": "Pays",
+      "ville": "Ville",
+      "adresse": "Adresse",
+      "etatCompte": "Etat Compte",
+      "situationMatrimoniale": "Situation Matrimoniale",
+      "annonce": "Annonce",
+      "souscription": "Souscription"
+    }
+  }
+}
