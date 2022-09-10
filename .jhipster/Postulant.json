@@ -1,0 +1,42 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014503",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "postulant",
+  "fields": [
+    {
+      "fieldName": "numeroMomo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "observation",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Postulant",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "annonce",
+      "otherEntityRelationshipName": "postulant",
+      "ownerSide": true,
+      "relationshipName": "annonce",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "numeroMomo",
+      "otherEntityName": "transaction",
+      "otherEntityRelationshipName": "postulant",
+      "ownerSide": false,
+      "relationshipName": "transaction",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,86 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014459",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "annonce",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDeDelegation",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateDeDelais",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "tarif",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "postulantRetenu",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "imageVideo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Donnateur entity.\\n@author BEVE.",
+  "jpaMetamodelFiltering": false,
+  "name": "Annonce",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "texte",
+      "otherEntityName": "message",
+      "otherEntityRelationshipName": "annonce",
+      "relationshipName": "message",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "categorie",
+      "otherEntityRelationshipName": "annonce",
+      "ownerSide": true,
+      "relationshipName": "categorie",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "numeroMomo",
+      "otherEntityName": "transaction",
+      "otherEntityRelationshipName": "annonce",
+      "ownerSide": false,
+      "relationshipName": "transaction",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "mandataireDelegateur",
+      "otherEntityRelationshipName": "annonce",
+      "relationshipName": "mandataireDelegateur",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "postulant",
+      "otherEntityRelationshipName": "annonce",
+      "ownerSide": false,
+      "relationshipName": "postulant",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

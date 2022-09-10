@@ -1,0 +1,86 @@
+{
+  "applications": "*",
+  "changelogDate": "20220910014502",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "mandataire_delegateur",
+  "fields": [
+    {
+      "fieldName": "nomDeFamille",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prenom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contact",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numeroMomo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sexe",
+      "fieldType": "Sexe",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "F,M,JE_PREFERE_NE_PAS_LE_DIRE"
+    },
+    {
+      "fieldName": "pays",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "etatCompte",
+      "fieldType": "EtatCompte",
+      "fieldValues": "PREMIUM,NORMAL"
+    },
+    {
+      "fieldName": "situationMatrimoniale",
+      "fieldType": "SituationMatrimoniale",
+      "fieldValues": "CELIBATAIRE,FIANCE,CONCUBINAGE,MARIE,VEUF,JE_PREFERE_NE_PAS_LE_DIRE"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "not an ignored comment",
+  "jpaMetamodelFiltering": false,
+  "name": "MandataireDelegateur",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titre",
+      "otherEntityName": "annonce",
+      "otherEntityRelationshipName": "mandataireDelegateur",
+      "relationshipName": "annonce",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "etat",
+      "otherEntityName": "souscription",
+      "otherEntityRelationshipName": "mandataireDelegateur",
+      "ownerSide": false,
+      "relationshipName": "souscription",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

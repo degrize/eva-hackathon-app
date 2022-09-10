@@ -1,0 +1,35 @@
+{
+  "evaHackathonApp": {
+    "annonce": {
+      "home": {
+        "title": "Annonces",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Annonce",
+        "createOrEditLabel": "Create or edit a Annonce",
+        "notFound": "No Annonces found"
+      },
+      "created": "A new Annonce is created with identifier {{ param }}",
+      "updated": "A Annonce is updated with identifier {{ param }}",
+      "deleted": "A Annonce is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Annonce {{ id }}?"
+      },
+      "detail": {
+        "title": "Annonce"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "dateDeDelegation": "Date De Delegation",
+      "dateDeDelais": "Date De Delais",
+      "tarif": "Tarif",
+      "postulantRetenu": "Postulant Retenu",
+      "imageVideo": "Image Video",
+      "description": "Description",
+      "message": "Message",
+      "categorie": "Categorie",
+      "transaction": "Transaction",
+      "mandataireDelegateur": "Mandataire Delegateur",
+      "postulant": "Postulant"
+    }
+  }
+}

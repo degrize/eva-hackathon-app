@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-message-heading" data-cy="MessageCreateUpdateHeading" jhiTranslate="evaHackathonApp.message.home.createOrEditLabel">
+        Créer ou éditer un Message
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.message.texte" for="field_texte">Texte</label>
+          <input type="text" class="form-control" name="texte" id="field_texte" data-cy="texte" formControlName="texte" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.message.fichierJoin" for="field_fichierJoin">Fichier Join</label>
+          <div>
+            <div *ngIf="editForm.get('fichierJoin')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('fichierJoin')!.value!, editForm.get('fichierJoinContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start"
+                >{{ editForm.get('fichierJoinContentType')!.value }}, {{ byteSize(editForm.get('fichierJoin')!.value!) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ fichierJoin: undefined, fichierJoinContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_fichierJoin"
+              data-cy="fichierJoin"
+              (change)="setFileData($event, 'fichierJoin', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichierJoin"
+            id="field_fichierJoin"
+            data-cy="fichierJoin"
+            formControlName="fichierJoin"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="fichierJoinContentType"
+            id="field_fichierJoinContentType"
+            formControlName="fichierJoinContentType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.message.annonce" for="field_annonce">Annonce</label>
+          <select
+            class="form-control"
+            id="field_annonce"
+            data-cy="annonce"
+            name="annonce"
+            formControlName="annonce"
+            [compareWith]="compareAnnonce"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="annonceOption" *ngFor="let annonceOption of annoncesSharedCollection">{{ annonceOption.titre }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

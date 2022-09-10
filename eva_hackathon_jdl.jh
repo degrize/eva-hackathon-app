@@ -1,0 +1,123 @@
+/**
+ * Donnateur entity.
+ * @author BEVE.
+ */
+entity Annonce {
+	titre String required,
+    dateDeDelegation Instant,
+    dateDeDelais LocalDate required,
+    tarif String required,
+    postulantRetenu Integer,
+    imageVideo Blob,
+    description String
+}
+
+entity Message {
+	texte String,
+    fichierJoin Blob,
+}
+
+/**
+ * Don entity.
+ * @author BEVE.
+ */
+entity Categorie {
+    nom String required
+    description String
+}
+
+
+
+// an ignored comment
+/** not an ignored comment */
+entity MandataireDelegateur {
+	nomDeFamille String required,
+    prenom String required,
+    contact String required,
+    email String required,
+    numeroMomo String required,
+    sexe Sexe required,
+    pays String,
+    ville String,
+    adresse String,
+    etatCompte EtatCompte
+    situationMatrimoniale SituationMatrimoniale,
+}
+
+entity Postulant {
+	numeroMomo String required,
+    observation String
+}
+
+entity Transaction {
+	numeroMtn String required,
+    montant Double required,
+    devise Devise required,
+	dateTransaction Instant,
+    precision String
+}
+
+entity Souscription {
+	etat EtatCompte required,
+    montant Double required,
+    pourcentageDuDon Double required,
+    
+}
+
+enum Devise {
+	EURO,
+    CEDI,
+    DLASI,
+    DOLLAR,
+    FCFA,
+    LIVRE,
+    LEONE,
+    NAIRA,
+    YEN
+}
+
+enum Sexe {
+	F, M, JE_PREFERE_NE_PAS_LE_DIRE
+}
+
+
+enum EtatCompte {
+	PREMIUM,
+    NORMAL
+}
+
+enum SituationMatrimoniale {
+    CELIBATAIRE, FIANCE, CONCUBINAGE, MARIE, VEUF, JE_PREFERE_NE_PAS_LE_DIRE
+}
+
+relationship ManyToMany {
+	Annonce{categorie(nom)} to Categorie{annonce(titre)},
+	Souscription{mandataireDelegateur(numeroMomo)} to MandataireDelegateur{souscription(etat)}
+	Postulant{annonce(titre)} to Annonce{postulant}
+}
+
+
+
+relationship OneToOne {
+	Transaction{annonce(titre)} to Annonce{transaction(numeroMomo)},
+    Transaction{postulant} to Postulant{transaction(numeroMomo)},
+}
+
+relationship OneToMany {
+	MandataireDelegateur{annonce(titre)} to Annonce,
+    Annonce{message(texte)} to Message {Annonce(titre)}
+    
+}
+
+
+// Set pagination options
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

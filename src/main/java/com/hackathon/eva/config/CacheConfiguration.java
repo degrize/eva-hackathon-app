@@ -48,6 +48,21 @@ public class CacheConfiguration {
             createCache(cm, com.hackathon.eva.domain.User.class.getName());
             createCache(cm, com.hackathon.eva.domain.Authority.class.getName());
             createCache(cm, com.hackathon.eva.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.hackathon.eva.domain.Annonce.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Annonce.class.getName() + ".messages");
+            createCache(cm, com.hackathon.eva.domain.Annonce.class.getName() + ".categories");
+            createCache(cm, com.hackathon.eva.domain.Annonce.class.getName() + ".postulants");
+            createCache(cm, com.hackathon.eva.domain.Message.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Categorie.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Categorie.class.getName() + ".annonces");
+            createCache(cm, com.hackathon.eva.domain.MandataireDelegateur.class.getName());
+            createCache(cm, com.hackathon.eva.domain.MandataireDelegateur.class.getName() + ".annonces");
+            createCache(cm, com.hackathon.eva.domain.MandataireDelegateur.class.getName() + ".souscriptions");
+            createCache(cm, com.hackathon.eva.domain.Postulant.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Postulant.class.getName() + ".annonces");
+            createCache(cm, com.hackathon.eva.domain.Transaction.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Souscription.class.getName());
+            createCache(cm, com.hackathon.eva.domain.Souscription.class.getName() + ".mandataireDelegateurs");
             // jhipster-needle-ehcache-add-entry
         };
     }
