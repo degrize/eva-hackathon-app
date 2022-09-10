@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="annonce">
+      <h2 data-cy="annonceDetailsHeading"><span jhiTranslate="evaHackathonApp.annonce.detail.title">Annonce</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ annonce.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.titre">Titre</span></dt>
+        <dd>
+          <span>{{ annonce.titre }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.dateDeDelegation">Date De Delegation</span></dt>
+        <dd>
+          <span>{{ annonce.dateDeDelegation | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.dateDeDelais">Date De Delais</span></dt>
+        <dd>
+          <span>{{ annonce.dateDeDelais | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.tarif">Tarif</span></dt>
+        <dd>
+          <span>{{ annonce.tarif }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.postulantRetenu">Postulant Retenu</span></dt>
+        <dd>
+          <span>{{ annonce.postulantRetenu }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.imageVideo">Image Video</span></dt>
+        <dd>
+          <div *ngIf="annonce.imageVideo">
+            <a (click)="openFile(annonce.imageVideo, annonce.imageVideoContentType)" jhiTranslate="entity.action.open">Ouvrir</a>
+            {{ annonce.imageVideoContentType }}, {{ byteSize(annonce.imageVideo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.description">Description</span></dt>
+        <dd>
+          <span>{{ annonce.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.categorie">Categorie</span></dt>
+        <dd>
+          <span *ngFor="let categorie of annonce.categories; let last = last">
+            <a [routerLink]="['/categorie', categorie.id, 'view']">{{ categorie.nom }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.annonce.mandataireDelegateur">Mandataire Delegateur</span></dt>
+        <dd>
+          <div *ngIf="annonce.mandataireDelegateur">
+            <a [routerLink]="['/mandataire-delegateur', annonce.mandataireDelegateur.id, 'view']">{{ annonce.mandataireDelegateur.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/annonce', annonce.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

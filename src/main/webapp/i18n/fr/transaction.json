@@ -1,0 +1,30 @@
+{
+  "evaHackathonApp": {
+    "transaction": {
+      "home": {
+        "title": "Transactions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Transaction",
+        "createOrEditLabel": "Créer ou éditer un Transaction",
+        "notFound": "Aucun Transaction trouvé"
+      },
+      "created": "Un nouveau Transaction a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Transaction avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Transaction avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Transaction {{ id }} ?"
+      },
+      "detail": {
+        "title": "Transaction"
+      },
+      "id": "ID",
+      "numeroMtn": "Numero Mtn",
+      "montant": "Montant",
+      "devise": "Devise",
+      "dateTransaction": "Date Transaction",
+      "precision": "Precision",
+      "annonce": "Annonce",
+      "postulant": "Postulant"
+    }
+  }
+}

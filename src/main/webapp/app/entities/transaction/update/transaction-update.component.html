@@ -1,0 +1,138 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-transaction-heading"
+        data-cy="TransactionCreateUpdateHeading"
+        jhiTranslate="evaHackathonApp.transaction.home.createOrEditLabel"
+      >
+        Créer ou éditer un Transaction
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.numeroMtn" for="field_numeroMtn">Numero Mtn</label>
+          <input type="text" class="form-control" name="numeroMtn" id="field_numeroMtn" data-cy="numeroMtn" formControlName="numeroMtn" />
+          <div *ngIf="editForm.get('numeroMtn')!.invalid && (editForm.get('numeroMtn')!.dirty || editForm.get('numeroMtn')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numeroMtn')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.montant" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('montant')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('montant')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.devise" for="field_devise">Devise</label>
+          <select class="form-control" name="devise" formControlName="devise" id="field_devise" data-cy="devise">
+            <option [ngValue]="null">{{ 'evaHackathonApp.Devise.null' | translate }}</option>
+            <option *ngFor="let devise of deviseValues" [value]="devise">{{ 'evaHackathonApp.Devise.' + devise | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('devise')!.invalid && (editForm.get('devise')!.dirty || editForm.get('devise')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('devise')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.dateTransaction" for="field_dateTransaction"
+            >Date Transaction</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateTransaction"
+              data-cy="dateTransaction"
+              type="datetime-local"
+              class="form-control"
+              name="dateTransaction"
+              formControlName="dateTransaction"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.precision" for="field_precision">Precision</label>
+          <input type="text" class="form-control" name="precision" id="field_precision" data-cy="precision" formControlName="precision" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.annonce" for="field_annonce">Annonce</label>
+          <select
+            class="form-control"
+            id="field_annonce"
+            data-cy="annonce"
+            name="annonce"
+            formControlName="annonce"
+            [compareWith]="compareAnnonce"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="annonceOption" *ngFor="let annonceOption of annoncesCollection">{{ annonceOption.titre }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.transaction.postulant" for="field_postulant">Postulant</label>
+          <select
+            class="form-control"
+            id="field_postulant"
+            data-cy="postulant"
+            name="postulant"
+            formControlName="postulant"
+            [compareWith]="comparePostulant"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="postulantOption" *ngFor="let postulantOption of postulantsCollection">{{ postulantOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

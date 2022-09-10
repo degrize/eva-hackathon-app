@@ -1,0 +1,27 @@
+{
+  "evaHackathonApp": {
+    "postulant": {
+      "home": {
+        "title": "Postulants",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Postulant",
+        "createOrEditLabel": "Créer ou éditer un Postulant",
+        "notFound": "Aucun Postulant trouvé"
+      },
+      "created": "Un nouveau Postulant a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Postulant avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Postulant avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Postulant {{ id }} ?"
+      },
+      "detail": {
+        "title": "Postulant"
+      },
+      "id": "ID",
+      "numeroMomo": "Numero Momo",
+      "observation": "Observation",
+      "annonce": "Annonce",
+      "transaction": "Transaction"
+    }
+  }
+}

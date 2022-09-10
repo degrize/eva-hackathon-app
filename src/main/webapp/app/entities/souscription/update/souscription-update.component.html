@@ -1,0 +1,128 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-souscription-heading"
+        data-cy="SouscriptionCreateUpdateHeading"
+        jhiTranslate="evaHackathonApp.souscription.home.createOrEditLabel"
+      >
+        Créer ou éditer un Souscription
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.souscription.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'evaHackathonApp.EtatCompte.null' | translate }}</option>
+            <option *ngFor="let etatCompte of etatCompteValues" [value]="etatCompte">
+              {{ 'evaHackathonApp.EtatCompte.' + etatCompte | translate }}
+            </option>
+          </select>
+          <div *ngIf="editForm.get('etat')!.invalid && (editForm.get('etat')!.dirty || editForm.get('etat')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('etat')?.errors?.required" jhiTranslate="entity.validation.required">
+              Ce champ est obligatoire.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.souscription.montant" for="field_montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          <div *ngIf="editForm.get('montant')!.invalid && (editForm.get('montant')!.dirty || editForm.get('montant')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('montant')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('montant')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.souscription.pourcentageDuDon" for="field_pourcentageDuDon"
+            >Pourcentage Du Don</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="pourcentageDuDon"
+            id="field_pourcentageDuDon"
+            data-cy="pourcentageDuDon"
+            formControlName="pourcentageDuDon"
+          />
+          <div
+            *ngIf="
+              editForm.get('pourcentageDuDon')!.invalid &&
+              (editForm.get('pourcentageDuDon')!.dirty || editForm.get('pourcentageDuDon')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('pourcentageDuDon')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              Ce champ est obligatoire.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('pourcentageDuDon')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              Ce champ doit être un nombre.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="evaHackathonApp.souscription.mandataireDelegateur" for="field_mandataireDelegateurs"
+            >Mandataire Delegateur</label
+          >
+          <select
+            class="form-control"
+            id="field_mandataireDelegateurs"
+            data-cy="mandataireDelegateur"
+            multiple
+            name="mandataireDelegateurs"
+            formControlName="mandataireDelegateurs"
+            [compareWith]="compareMandataireDelegateur"
+          >
+            <option [ngValue]="mandataireDelegateurOption" *ngFor="let mandataireDelegateurOption of mandataireDelegateursSharedCollection">
+              {{ mandataireDelegateurOption.numeroMomo }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

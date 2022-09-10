@@ -1,0 +1,43 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="postulant">
+      <h2 data-cy="postulantDetailsHeading"><span jhiTranslate="evaHackathonApp.postulant.detail.title">Postulant</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ postulant.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.postulant.numeroMomo">Numero Momo</span></dt>
+        <dd>
+          <span>{{ postulant.numeroMomo }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.postulant.observation">Observation</span></dt>
+        <dd>
+          <span>{{ postulant.observation }}</span>
+        </dd>
+        <dt><span jhiTranslate="evaHackathonApp.postulant.annonce">Annonce</span></dt>
+        <dd>
+          <span *ngFor="let annonce of postulant.annonces; let last = last">
+            <a [routerLink]="['/annonce', annonce.id, 'view']">{{ annonce.titre }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/postulant', postulant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

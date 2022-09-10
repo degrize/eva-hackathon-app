@@ -1,0 +1,9 @@
+{
+  "evaHackathonApp": {
+    "EtatCompte": {
+      "null": "",
+      "PREMIUM": "PREMIUM",
+      "NORMAL": "NORMAL"
+    }
+  }
+}
