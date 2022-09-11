@@ -1,0 +1,32 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.regle-condition {
+  font-family: Geomanist;
+  max-width: 700px;
+  margin: auto;
+
+  .ap {
+    font-size: 35px;
+    text-align: center;
+    background: #99be0e;
+    margin: auto;
+  }
+
+  .card-text {
+    text-align: justify;
+    color: black;
+    font-size: 17px;
+    padding: 5px;
+  }
+
+  .tab-pane {
+    margin-top: 50px;
+  }
+
+  .card-img-top {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+  }
+}

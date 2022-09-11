@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.a-propos {
+  font-family: Geomanist;
+
+  h2 {
+    font-size: 35px;
+    text-align: center;
+  }
+  .ap {
+    text-align: center;
+    font-size: 35px;
+    background: #99be0e;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .card-img-top {
+    width: 200px;
+    height: 200px;
+  }
+  .text {
+    text-align: justify;
+    color: black;
+    font-size: 17px;
+  }
+}

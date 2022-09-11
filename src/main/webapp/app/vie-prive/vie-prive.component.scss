@@ -1,0 +1,25 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.vie-prive {
+  font-family: Geomanist;
+
+  .ap {
+    font-size: 35px;
+    text-align: center;
+    background: #99be0e;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .text {
+    text-align: justify;
+    color: black;
+    padding: 20px;
+    font-size: 17px;
+  }
+  .card {
+    max-width: 700px;
+    margin: auto;
+  }
+}
