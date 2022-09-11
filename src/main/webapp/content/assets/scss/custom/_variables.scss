@@ -971,6 +971,10 @@ $footer-link-hover-color: $gray-700 !default;
 $footer-heading-color: $gray-600 !default;
 $footer-heading-font-size: $font-size-sm !default;
 
+//Modal z-index
+$zindex-modal-backdrop: 1500;
+$zindex-modal: 1500;
+
 // Import Bootstrap variable defaults
 
 @import '~bootstrap/scss/variables';

@@ -1,8 +1,8 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
-  <div class="container-fluid">
+<nav data-cy="navbar" class="navbar navbar-light navbar-expand-md bg-eva">
+  <div class="container-fluid d-flex justify-content-end">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
-      <span jhiTranslate="global.title" class="navbar-title">EvaHackathonApp</span>
+      <!--      <span jhiTranslate="global.title" class="navbar-title">EvaHackathonApp</span>-->
       <span class="navbar-version">{{ version }}</span>
     </a>
     <a
@@ -18,14 +18,31 @@
       <fa-icon icon="bars"></fa-icon>
     </a>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="account !== null">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto d-flex align-items-center justify-content-end navbar-nav ml-lg-auto">
         <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
             <span>
-              <fa-icon icon="home"></fa-icon>
               <span jhiTranslate="global.menu.home">Accueil</span>
             </span>
           </a>
+        </li>
+        <li>
+          <form class="navbar-search navbar-search-light form-inline mr-3 d-none d-md-flex ml-lg-auto">
+            <div class="form-group mb-0" [ngClass]="{ focused: focus === true }">
+              <div class="input-group input-group-alternative bg-white">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Qu'est ce que vous recherchez?"
+                  type="text"
+                  (focus)="focus = true"
+                  (blur)="focus = false"
+                />
+              </div>
+            </div>
+          </form>
         </li>
         <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
         <li
