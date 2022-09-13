@@ -1,0 +1,65 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.paiement {
+  font-family: Geomanist;
+  max-width: 700px;
+  margin: auto;
+
+  .alert {
+    margin: auto;
+
+    margin-bottom: 10px;
+  }
+
+  .ptext {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bolder;
+  }
+
+  .mtn {
+    max-height: 50px;
+    max-width: 50px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+
+  .ap {
+    font-size: 35px;
+    text-align: center;
+    background: #99be0e;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .card-text {
+    text-align: justify;
+    color: black;
+    font-size: 17px;
+    padding: 5px;
+  }
+
+  .tab-pane {
+    margin-top: 50px;
+  }
+
+  .card-img-top {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+  }
+  .card {
+    margin: auto;
+  }
+
+  .btn {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px; /* largeur obligatoire pour être centré */
+    background: #99be0e;
+    color: white;
+  }
+}

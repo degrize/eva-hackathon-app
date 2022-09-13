@@ -1,0 +1,24 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.commande {
+  font-family: Geomanist;
+
+  .tab {
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px; /* largeur obligatoire pour être centré */
+  }
+  .ap {
+    font-size: 35px;
+    text-align: center;
+    background: #99be0e;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .btn {
+    background: #99be0e;
+    color: white;
+  }
+}

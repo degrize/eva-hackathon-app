@@ -16,12 +16,21 @@ export const FenStartLayoutRoutes: Routes = [
     loadChildren: () => import(`../../a-propos/a-propos.module`).then(m => m.AProposModule),
   },
   {
-    path: 'vie-privee',
+    path: 'vie-prive',
     loadChildren: () => import(`../../vie-prive/vie-prive.module`).then(m => m.ViePriveModule),
   },
   {
-    path: 'regle-conditions',
+    path: 'regle-condition',
     loadChildren: () => import(`../../regle-condition/regle-condition.module`).then(m => m.RegleConditionModule),
+  },
+  {
+    path: 'remboursement',
+    loadChildren: () => import(`../../remboursement/remboursement.module`).then(m => m.RemboursementModule),
+  },
+
+  {
+    path: 'paiement',
+    loadChildren: () => import(`../../paiement/paiement.module`).then(m => m.PaiementModule),
   },
 
   {

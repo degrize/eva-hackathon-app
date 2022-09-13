@@ -1,84 +1,336 @@
-<div>
-  <div class="row">
-    <div class="col-md-3">
-      <span class="hipster img-fluid rounded"></span>
+<div [ngSwitch]="account !== null" class="home flex-column d-flex justify-content-center">
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="head col-xl-6 d-flex flex-column align-items-center col-sm-10">
+      <carousel class="slider mt-5">
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/andre-hunter.jpg" alt="First slide" />
+        </slide>
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/images/Imagese.jpg" alt="First slide" />
+        </slide>
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/images/Imagese1.jpg" alt="First slide" />
+        </slide>
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/images/Imagese2.jpg" alt="First slide" />
+        </slide>
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/geo-chierchia.jpg" alt="Second slide" />
+        </slide>
+        <slide>
+          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/jefferson.jpg" alt="First slide" />
+        </slide>
+      </carousel>
+
+      <button *ngSwitchCase="false" type="button" routerLink="/account/register" class="btn btn-info btn-slider text-white">
+        Commencer
+      </button>
     </div>
 
-    <div class="col-md-9">
-      <h1 class="display-4">
-        <span jhiTranslate="home.title" [translateValues]="{ username: account?.login }">Bienvenue, Java Hipster !</span> (Eva Hackathon
-        App)
-      </h1>
-
-      <p class="lead" jhiTranslate="home.subtitle">Ceci est votre page d'accueil</p>
-
-      <div [ngSwitch]="account !== null">
-        <div class="alert alert-success" *ngSwitchCase="true">
-          <span id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }"
-            >Vous êtes connecté en tant que "{{ account.login }}".</span
-          >
+    <div class="box">
+      <div>
+        <h2 class="ap text-white justify-content-center">Programmation</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
         </div>
-
-        <div class="alert alert-warning" *ngSwitchCase="false">
-          <span jhiTranslate="global.messages.info.authenticated.prefix">Si vous voulez vous </span>
-          <a class="alert-link" (click)="login()" jhiTranslate="global.messages.info.authenticated.link">connecter</a
-          ><span jhiTranslate="global.messages.info.authenticated.suffix"
-            >, vous pouvez utiliser les comptes par défaut : <br />
-            - Administrateur (nom d'utilisateur="admin" et mot de passe ="admin") <br />
-            - Utilisateur (nom d'utilisateur="user" et mot de passe ="user").</span
-          >
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
         </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="alert alert-warning" *ngSwitchCase="false">
-          <span jhiTranslate="global.messages.info.register.noaccount">Vous n'avez pas encore de compte ?</span>&nbsp;
-          <a class="alert-link" routerLink="account/register" jhiTranslate="global.messages.info.register.link">Créer un compte</a>
+    <div class="box">
+      <div>
+        <h2 class="ap text-white justify-content-center">Marketing digital</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div>
+        <h2 class="ap text-white justify-content-center">Rédaction & Traduction</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div>
+        <h2 class="ap text-white justify-content-center">Audio & Vidéo</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">
+      <div>
+        <h2 class="ap text-white justify-content-center">Creat & Design</h2>
+      </div>
+      <div class="card-deck">
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+        <div class="card" style="width: 14rem">
+          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-titlee">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h5 class="prix">xxx FCFA</h5>
+            <a href="#" class="btn btn-primary">Commander</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-row flex-wrap">
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ "Qu'est ce que BEVE ?".toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                BEVE est une plateforme d'aide aux createurs africains.Elle permet aux createurs de recevoir des dons de leur fan à travers
+                MTN MOMO
+              </p>
+            </blockquote>
+          </div>
         </div>
       </div>
 
-      <p jhiTranslate="home.question">Si vous avez des questions à propos de JHipster :</p>
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ 'qui peut utiliser BEVE ?'.toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                Vous etes un createur ayant 18 ans ou plus . Vos créations sont légales vis à vis de la loi de votre pays.Beve est fait pour
+                vous aidez a grandir.
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
 
-      <ul>
-        <li>
-          <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.homepage"
-            >Page d'accueil de JHipster</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://stackoverflow.com/tags/jhipster/info"
-            target="_blank"
-            rel="noopener noreferrer"
-            jhiTranslate="home.link.stackoverflow"
-            >JHipster sur Stack Overflow</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://github.com/jhipster/generator-jhipster/issues?state=open"
-            target="_blank"
-            rel="noopener noreferrer"
-            jhiTranslate="home.link.bugtracker"
-            >JHipster bug tracker</a
-          >
-        </li>
-        <li>
-          <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.chat"
-            >JHipster public chat room</a
-          >
-        </li>
-        <li>
-          <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.link.follow"
-            >Suivez @jhipster sur Twitter</a
-          >
-        </li>
-      </ul>
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ 'Comment recuperez ses dons ?'.toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                Pour recuperer vos dons, vous avez besoin d'un compte MTN MOMO.Les transactions sont faites instantanement par rapport aux
+                dons.
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
 
-      <p>
-        <span jhiTranslate="home.like">Si vous aimez JHipster, donnez nous une étoile sur</span>
-        <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer" jhiTranslate="home.github"
-          >GitHub </a
-        >!
-      </p>
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ 'Pourquoi passer en premium ?'.toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                Le mode premium de BEVE vous permet d'etre mis en vue sur nos plateformes mais aussi de beneficier d'une reduction de
+                commission.
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ 'Frais BEVE à deduire ?'.toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                Beve preleve juste 10 % de la valeur de chaque dons que reçoit chaque createur.Alors le createur reçoit sans autre frais 90%
+                de la valeur du don de ses fans
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-blockquote-component-tab">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ "Besoin d'aide ?".toUpperCase() }}</h3>
+            <blockquote class="blockquote mb-0">
+              <p>
+                Votre call center est ouvert 24h/7j pour vos questions et préocupations pressantes. Notre email est disponible pour tout
+                autre preocupations (rélévé...)
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
