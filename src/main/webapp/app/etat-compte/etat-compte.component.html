@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center" [ngSwitch]="premium !== false">
+  <div class="wrapper">
+    <ng-container *ngSwitchCase="true">
+      <input (click)="switch(false)" type="radio" name="slider" id="tab-1" />
+      <input (click)="switch(true)" type="radio" name="slider" id="tab-2" checked />
+    </ng-container>
+    <ng-container *ngSwitchCase="false">
+      <input (click)="switch(false)" type="radio" name="slider" id="tab-1" checked />
+      <input (click)="switch(true)" type="radio" name="slider" id="tab-2" />
+    </ng-container>
+    <header>
+      <label for="tab-1" class="tab-1">Normal</label>
+      <label for="tab-2" class="tab-2">Premium</label>
+      <div class="slider"></div>
+    </header>
+    <div class="card-area">
+      <div class="cards">
+        <div class="row row-1">
+          <div class="price-details">
+            <span class="price">{{ CompteNormal.price }}</span>
+            <p class="text-eva">{{ CompteNormal.title }}</p>
+          </div>
+          <ul class="features">
+            <li>
+              <i class="fas fa-check"></i><span>{{ CompteNormal.text1 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ CompteNormal.text2 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ CompteNormal.text3 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ CompteNormal.text4 }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="price-details">
+            <span class="price">{{ ComptePremium.price }}</span>
+            <p class="text-eva">{{ ComptePremium.title }}</p>
+          </div>
+          <ul class="features">
+            <li>
+              <i class="fas fa-check"></i><span>{{ ComptePremium.text1 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ ComptePremium.text2 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ ComptePremium.text3 }}</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i><span>{{ ComptePremium.text4 }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button (click)="startPayementForm()">Choisir le plan</button>
+  </div>
+</div>

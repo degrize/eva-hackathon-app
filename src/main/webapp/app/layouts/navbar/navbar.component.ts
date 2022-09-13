@@ -10,6 +10,9 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
+import { HttpResponse } from '@angular/common/http';
+import { IMandataireDelegateur } from '../../entities/mandataire-delegateur/mandataire-delegateur.model';
+import { MandataireDelegateurService } from '../../entities/mandataire-delegateur/service/mandataire-delegateur.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -24,7 +27,10 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+
   public focus: any;
+  lang = 'fr';
+  mandataireDelegateur?: IMandataireDelegateur | null;
 
   constructor(
     private loginService: LoginService,
@@ -32,7 +38,8 @@ export class NavbarComponent implements OnInit {
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private mandataireDelegateurService: MandataireDelegateurService
   ) {
     if (VERSION) {
       this.version = VERSION.toLowerCase().startsWith('v') ? VERSION : `v${VERSION}`;
@@ -40,6 +47,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.sessionStorageService.retrieve('locale')) {
+      this.lang = this.sessionStorageService.retrieve('locale');
+    }
+
     this.entitiesNavbarItems = EntityNavbarItems;
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
@@ -48,10 +59,16 @@ export class NavbarComponent implements OnInit {
 
     this.accountService.getAuthenticationState().subscribe(account => {
       this.account = account;
+      // On recupère les infos sur le compte
+      this.mandataireDelegateurService.findByJhiUserId({ login: this.account?.login }).subscribe(
+        (res: HttpResponse<IMandataireDelegateur>) => this.onSucessUser(res.body),
+        (res: HttpResponse<any>) => this.onError()
+      );
     });
   }
 
   changeLanguage(languageKey: string): void {
+    this.lang = languageKey;
     this.sessionStorageService.store('locale', languageKey);
     this.translateService.use(languageKey);
   }
@@ -72,5 +89,15 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  protected onError(): void {
+    console.log('erreur de recuperation des informations sur le compte');
+  }
+
+  protected onSucessUser(data: IMandataireDelegateur | null): void {
+    this.mandataireDelegateur = data;
+    console.log('DATA USER MANDATAIRE DELEGATEUR');
+    console.log(data?.email);
   }
 }

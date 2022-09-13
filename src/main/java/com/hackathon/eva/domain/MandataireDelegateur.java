@@ -81,6 +81,19 @@ public class MandataireDelegateur implements Serializable {
     @JsonIgnoreProperties(value = { "mandataireDelegateurs" }, allowSetters = true)
     private Set<Souscription> souscriptions = new HashSet<>();
 
+    // Ajout de mes propres champs
+
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
+    @Column(name = "photo_content_type")
+    private String photoContentType;
+
+    @ManyToOne
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private User jhiUser;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -301,6 +314,45 @@ public class MandataireDelegateur implements Serializable {
         return this;
     }
 
+    public byte[] getPhoto() {
+        return this.photo;
+    }
+
+    public MandataireDelegateur photo(byte[] photo) {
+        this.setPhoto(photo);
+        return this;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return this.photoContentType;
+    }
+
+    public MandataireDelegateur photoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+        return this;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public User getUser() {
+        return this.jhiUser;
+    }
+
+    public void setUser(User user) {
+        this.jhiUser = user;
+    }
+
+    public MandataireDelegateur jhiUser(User user) {
+        this.setUser(user);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -336,6 +388,8 @@ public class MandataireDelegateur implements Serializable {
             ", adresse='" + getAdresse() + "'" +
             ", etatCompte='" + getEtatCompte() + "'" +
             ", situationMatrimoniale='" + getSituationMatrimoniale() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
             "}";
     }
 }

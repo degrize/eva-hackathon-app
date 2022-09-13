@@ -1,11 +1,13 @@
 package com.hackathon.eva.service.dto;
 
+import com.hackathon.eva.domain.User;
 import com.hackathon.eva.domain.enumeration.EtatCompte;
 import com.hackathon.eva.domain.enumeration.Sexe;
 import com.hackathon.eva.domain.enumeration.SituationMatrimoniale;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 import javax.validation.constraints.*;
 
 /**
@@ -44,6 +46,13 @@ public class MandataireDelegateurDTO implements Serializable {
     private EtatCompte etatCompte;
 
     private SituationMatrimoniale situationMatrimoniale;
+
+    @Lob
+    private byte[] photo;
+
+    private String photoContentType;
+
+    private UserDTO jhiUser;
 
     public Long getId() {
         return id;
@@ -141,6 +150,30 @@ public class MandataireDelegateurDTO implements Serializable {
         this.situationMatrimoniale = situationMatrimoniale;
     }
 
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public String getPhotoContentType() {
+        return photoContentType;
+    }
+
+    public void setPhotoContentType(String photoContentType) {
+        this.photoContentType = photoContentType;
+    }
+
+    public UserDTO getUser() {
+        return jhiUser;
+    }
+
+    public void setUser(UserDTO user) {
+        this.jhiUser = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -178,6 +211,9 @@ public class MandataireDelegateurDTO implements Serializable {
             ", adresse='" + getAdresse() + "'" +
             ", etatCompte='" + getEtatCompte() + "'" +
             ", situationMatrimoniale='" + getSituationMatrimoniale() + "'" +
+            ", photo='" + getPhoto() + "'" +
+            ", photoContentType='" + getPhotoContentType() + "'" +
+            ", mandataireDelegateur=" + getUser() +
             "}";
     }
 }

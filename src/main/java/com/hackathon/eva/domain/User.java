@@ -1,6 +1,7 @@
 package com.hackathon.eva.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hackathon.eva.config.Constants;
 import java.io.Serializable;
 import java.time.Instant;
@@ -92,6 +93,10 @@ public class User extends AbstractAuditingEntity<Long> implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "jhiUser")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<MandataireDelegateur> mandataireDelegateurs = new HashSet<>();
 
     public Long getId() {
         return id;

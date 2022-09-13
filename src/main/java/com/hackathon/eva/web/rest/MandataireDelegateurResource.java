@@ -1,8 +1,14 @@
 package com.hackathon.eva.web.rest;
 
+import com.hackathon.eva.domain.MandataireDelegateur;
+import com.hackathon.eva.domain.User;
 import com.hackathon.eva.repository.MandataireDelegateurRepository;
+import com.hackathon.eva.repository.UserRepository;
 import com.hackathon.eva.service.MandataireDelegateurService;
+import com.hackathon.eva.service.UserService;
+import com.hackathon.eva.service.dto.AdminUserDTO;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
+import com.hackathon.eva.service.dto.UserDTO;
 import com.hackathon.eva.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,6 +19,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +42,9 @@ public class MandataireDelegateurResource {
     private final Logger log = LoggerFactory.getLogger(MandataireDelegateurResource.class);
 
     private static final String ENTITY_NAME = "mandataireDelegateur";
+
+    @Autowired
+    private UserService userService;
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
@@ -186,5 +196,15 @@ public class MandataireDelegateurResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping(value = "/mandataire-delegateurs/account", params = { "login" })
+    public ResponseEntity<MandataireDelegateur> findUser(@RequestParam(value = "login") String login) {
+        log.debug(" =========REST request to get a User : {}", login);
+
+        User userCurrent = userService.findUser(login);
+        MandataireDelegateur result = mandataireDelegateurService.findUser(userCurrent.getId());
+
+        return ResponseEntity.ok().body(result);
     }
 }

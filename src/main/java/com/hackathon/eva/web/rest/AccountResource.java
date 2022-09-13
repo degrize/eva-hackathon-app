@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -182,6 +183,13 @@ public class AccountResource {
         if (!user.isPresent()) {
             throw new AccountResourceException("No user was found for this reset key");
         }
+    }
+
+    public AdminUserDTO getAccountUser() {
+        return userService
+            .getUserWithAuthorities()
+            .map(AdminUserDTO::new)
+            .orElseThrow(() -> new AccountResourceException("User could not be found"));
     }
 
     private static boolean isPasswordLengthInvalid(String password) {

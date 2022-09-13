@@ -1,5 +1,6 @@
 package com.hackathon.eva.service;
 
+import com.hackathon.eva.domain.MandataireDelegateur;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -55,4 +56,6 @@ public interface MandataireDelegateurService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    MandataireDelegateur findUser(Long id);
 }

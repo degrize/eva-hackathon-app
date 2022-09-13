@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -79,5 +79,14 @@ export class MandataireDelegateurService {
       return [...mandataireDelegateursToAdd, ...mandataireDelegateurCollection];
     }
     return mandataireDelegateurCollection;
+  }
+
+  findByJhiUserId(req?: any): Observable<HttpResponse<IMandataireDelegateur>> {
+    const params: HttpParams = createRequestOption(req);
+    params.set('login', req.login);
+    return this.http.get<IMandataireDelegateur>(this.applicationConfigService.getEndpointFor('api/mandataire-delegateurs/account'), {
+      params,
+      observe: 'response',
+    });
   }
 }

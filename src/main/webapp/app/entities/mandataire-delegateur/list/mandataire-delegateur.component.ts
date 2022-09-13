@@ -41,7 +41,7 @@ export class MandataireDelegateurComponent implements OnInit {
   }
 
   delete(mandataireDelegateur: IMandataireDelegateur): void {
-    const modalRef = this.modalService.open(MandataireDelegateurDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    const modalRef = this.modalService.open(MandataireDelegateurDeleteDialogComponent, { size: 'sm', backdrop: 'static' });
     modalRef.componentInstance.mandataireDelegateur = mandataireDelegateur;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed

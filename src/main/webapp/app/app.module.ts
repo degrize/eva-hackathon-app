@@ -19,18 +19,20 @@ import { HomeModule } from './home/home.module';
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
+import { FindLanguageFromKeyPipe } from 'app/shared/language/find-language-from-key.pipe';
 import { MainComponent } from './layouts/main/main.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { ComponentsModule } from './components/components.module';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { EtatCompteComponent } from './etat-compte/etat-compte.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
-    HomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     AppRoutingModule,
     // Set this to true to enable service worker (PWA)
@@ -38,15 +40,26 @@ import { ErrorComponent } from './layouts/error/error.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
+    ComponentsModule,
   ],
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: NgbDateAdapter, useClass: NgbDateDayjsAdapter },
+    FindLanguageFromKeyPipe,
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    AdminLayoutComponent,
+    EtatCompteComponent,
+  ],
   bootstrap: [MainComponent],
+  exports: [ActiveMenuDirective],
 })
 export class AppModule {
   constructor(applicationConfigService: ApplicationConfigService, iconLibrary: FaIconLibrary, dpConfig: NgbDatepickerConfig) {

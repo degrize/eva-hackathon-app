@@ -14,6 +14,7 @@ import { EtatCompte } from 'app/entities/enumerations/etat-compte.model';
 @Component({
   selector: 'jhi-souscription-update',
   templateUrl: './souscription-update.component.html',
+  styleUrls: ['./souscription-update.component.scss'],
 })
 export class SouscriptionUpdateComponent implements OnInit {
   isSaving = false;

@@ -1,13 +1,22 @@
 package com.hackathon.eva.service.impl;
 
 import com.hackathon.eva.domain.MandataireDelegateur;
+import com.hackathon.eva.domain.Souscription;
+import com.hackathon.eva.domain.User;
+import com.hackathon.eva.domain.enumeration.EtatCompte;
 import com.hackathon.eva.repository.MandataireDelegateurRepository;
+import com.hackathon.eva.repository.UserRepository;
 import com.hackathon.eva.service.MandataireDelegateurService;
+import com.hackathon.eva.service.dto.AdminUserDTO;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
 import com.hackathon.eva.service.mapper.MandataireDelegateurMapper;
+import com.hackathon.eva.web.rest.AccountResource;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +35,12 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
 
     private final MandataireDelegateurMapper mandataireDelegateurMapper;
 
+    @Autowired
+    private AccountResource accountResource;
+
+    @Autowired
+    private UserRepository userRepository;
+
     public MandataireDelegateurServiceImpl(
         MandataireDelegateurRepository mandataireDelegateurRepository,
         MandataireDelegateurMapper mandataireDelegateurMapper
@@ -38,6 +53,14 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
     public MandataireDelegateurDTO save(MandataireDelegateurDTO mandataireDelegateurDTO) {
         log.debug("Request to save MandataireDelegateur : {}", mandataireDelegateurDTO);
         MandataireDelegateur mandataireDelegateur = mandataireDelegateurMapper.toEntity(mandataireDelegateurDTO);
+
+        AdminUserDTO adminUserDTO = new AdminUserDTO();
+        adminUserDTO = accountResource.getAccountUser();
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(adminUserDTO.getEmail());
+        mandataireDelegateur.setUser(existingUser.get());
+
+        mandataireDelegateur.setEtatCompte(EtatCompte.NORMAL);
+
         mandataireDelegateur = mandataireDelegateurRepository.save(mandataireDelegateur);
         return mandataireDelegateurMapper.toDto(mandataireDelegateur);
     }
@@ -46,6 +69,12 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
     public MandataireDelegateurDTO update(MandataireDelegateurDTO mandataireDelegateurDTO) {
         log.debug("Request to update MandataireDelegateur : {}", mandataireDelegateurDTO);
         MandataireDelegateur mandataireDelegateur = mandataireDelegateurMapper.toEntity(mandataireDelegateurDTO);
+
+        AdminUserDTO adminUserDTO = new AdminUserDTO();
+        adminUserDTO = accountResource.getAccountUser();
+        Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(adminUserDTO.getEmail());
+
+        mandataireDelegateur.setUser(existingUser.get());
         mandataireDelegateur = mandataireDelegateurRepository.save(mandataireDelegateur);
         return mandataireDelegateurMapper.toDto(mandataireDelegateur);
     }
@@ -83,5 +112,12 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
     public void delete(Long id) {
         log.debug("Request to delete MandataireDelegateur : {}", id);
         mandataireDelegateurRepository.deleteById(id);
+    }
+
+    @Override
+    public MandataireDelegateur findUser(Long id) {
+        MandataireDelegateur existingMandataireDelegateur = mandataireDelegateurRepository.findByJhiUserId(id);
+
+        return existingMandataireDelegateur;
     }
 }

@@ -15,6 +15,7 @@ export class MandataireDelegateurDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ mandataireDelegateur }) => {
       this.mandataireDelegateur = mandataireDelegateur;
+      console.log(mandataireDelegateur);
     });
   }
 

@@ -30,6 +30,8 @@ type MandataireDelegateurFormGroupContent = {
   etatCompte: FormControl<IMandataireDelegateur['etatCompte']>;
   situationMatrimoniale: FormControl<IMandataireDelegateur['situationMatrimoniale']>;
   souscriptions: FormControl<IMandataireDelegateur['souscriptions']>;
+  photo: FormControl<IMandataireDelegateur['photo']>;
+  photoContentType: FormControl<IMandataireDelegateur['photoContentType']>;
 };
 
 export type MandataireDelegateurFormGroup = FormGroup<MandataireDelegateurFormGroupContent>;
@@ -75,6 +77,8 @@ export class MandataireDelegateurFormService {
       etatCompte: new FormControl(mandataireDelegateurRawValue.etatCompte),
       situationMatrimoniale: new FormControl(mandataireDelegateurRawValue.situationMatrimoniale),
       souscriptions: new FormControl(mandataireDelegateurRawValue.souscriptions ?? []),
+      photo: new FormControl(mandataireDelegateurRawValue.photo),
+      photoContentType: new FormControl(mandataireDelegateurRawValue.photoContentType),
     });
   }
 

@@ -10,6 +10,9 @@ import { MandataireDelegateurService } from '../service/mandataire-delegateur.se
 import { Sexe } from 'app/entities/enumerations/sexe.model';
 import { EtatCompte } from 'app/entities/enumerations/etat-compte.model';
 import { SituationMatrimoniale } from 'app/entities/enumerations/situation-matrimoniale.model';
+import { DataUtils, FileLoadError } from '../../../core/util/data-util.service';
+import { EventManager, EventWithContent } from '../../../core/util/event-manager.service';
+import { AlertError } from '../../../shared/alert/alert-error.model';
 
 @Component({
   selector: 'jhi-mandataire-delegateur-update',
@@ -27,7 +30,9 @@ export class MandataireDelegateurUpdateComponent implements OnInit {
   constructor(
     protected mandataireDelegateurService: MandataireDelegateurService,
     protected mandataireDelegateurFormService: MandataireDelegateurFormService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected eventManager: EventManager,
+    protected dataUtils: DataUtils
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +41,21 @@ export class MandataireDelegateurUpdateComponent implements OnInit {
       if (mandataireDelegateur) {
         this.updateForm(mandataireDelegateur);
       }
+    });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    this.dataUtils.openFile(base64String, contentType);
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe({
+      error: (err: FileLoadError) =>
+        this.eventManager.broadcast(new EventWithContent<AlertError>('evaHackathonApp.error', { ...err, key: 'error.file.' + err.key })),
     });
   }
 

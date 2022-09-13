@@ -12,10 +12,12 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN']">
+          <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+            <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        </ng-container>
 
         <div class="row mb-3">
           <label class="form-label" jhiTranslate="evaHackathonApp.mandataireDelegateur.nomDeFamille" for="field_nomDeFamille"
@@ -159,7 +161,45 @@
             </option>
           </select>
         </div>
+
+        <div class="row mb-3 mb-5">
+          <label class="form-label" for="field_photo">Photo</label>
+          <div class="form-control">
+            <div *ngIf="editForm.get('photo')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('photo')!.value!, editForm.get('photoContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >Ouvrir</a
+              ><br />
+              <span class="pull-start">{{ editForm.get('photoContentType')!.value }}, {{ byteSize(editForm.get('photo')!.value!) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ photo: undefined, photoContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_imageVideo"
+              data-cy="imageVideo"
+              (change)="setFileData($event, 'photo', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="photo" id="field_photo" data-cy="photo" formControlName="photo" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="photoContentType"
+            id="field_photoContentType"
+            formControlName="photoContentType"
+          />
+        </div>
       </div>
+      <br /><br />
 
       <div>
         <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
