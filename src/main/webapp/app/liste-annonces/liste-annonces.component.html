@@ -1,0 +1,88 @@
+<div class="component-main">
+  <div class="wrapper">
+    <div class="title">Trouvez toutes les annonces <span>Que vous chercher</span>, renseignez le text juste en bas!</div>
+    <form action="#" class="form">
+      <div class="email-field shadow">
+        <input
+          type="search"
+          class="form-control form-control-sm"
+          placeholder="Trouver une annonce"
+          aria-controls="datatable"
+          (keyup)="filterTable($event)"
+        />
+        <button type="submit">Rechercher</button>
+      </div>
+    </form>
+    <div class="count-down">
+      <div class="timer day">
+        <div class="count">
+          <div class="numb">00</div>
+          <div class="text">Site web</div>
+        </div>
+      </div>
+      <div class="clone">:</div>
+      <div class="timer hour">
+        <div class="count">
+          <div class="numb">00</div>
+          <div class="text">Voiture</div>
+        </div>
+      </div>
+      <div class="clone">:</div>
+      <div class="timer min">
+        <div class="count">
+          <div class="numb">00</div>
+          <div class="text">Menusier</div>
+        </div>
+      </div>
+      <div class="clone">:</div>
+      <div class="timer sec">
+        <div class="count">
+          <div class="numb">00</div>
+          <div class="text">Coord</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dataTables_wrapper py-4">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="dataTables_length" id="datatable_length">
+            <label>
+              Show
+              <select
+                name="datatable_length"
+                aria-controls="datatable"
+                class="form-control form-control-sm"
+                (change)="entriesChange($event)"
+              >
+                <option value="10" [selected]="entries == 10">10</option>
+                <option value="25" [selected]="entries == 25">25</option>
+                <option value="50" [selected]="entries == 50">50</option>
+                <option value="-1" [selected]="entries == -1">All</option>
+              </select>
+              entries
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <ngx-datatable
+        class="bootstrap selection-cell"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="entries != -1 ? entries : undefined"
+        [rows]="temp"
+        (activate)="onActivate($event)"
+      >
+        <ngx-datatable-column name="Name"></ngx-datatable-column>
+        <ngx-datatable-column name="Position"></ngx-datatable-column>
+        <ngx-datatable-column name="Office"></ngx-datatable-column>
+        <ngx-datatable-column name="Age"></ngx-datatable-column>
+        <ngx-datatable-column name="Start"></ngx-datatable-column>
+        <ngx-datatable-column name="Salary"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,6 @@ import './config/dayjs';
 import { SharedModule } from 'app/shared/shared.module';
 import { TranslationModule } from 'app/shared/language/translation.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HomeModule } from './home/home.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
@@ -28,6 +27,8 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { EtatCompteComponent } from './etat-compte/etat-compte.component';
+import { ListeAnnoncesComponent } from './liste-annonces/liste-annonces.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { EtatCompteComponent } from './etat-compte/etat-compte.component';
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslationModule,
     ComponentsModule,
+    NgxDatatableModule,
   ],
   providers: [
     Title,

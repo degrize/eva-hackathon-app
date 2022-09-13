@@ -18,7 +18,7 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/mon-profile', title: 'Ma Page', icon: 'ni-planet text-blue', class: '' },
+  { path: '/annonce/new', title: 'Créer une annonce', icon: 'ni-planet text-blue', class: '' },
   { path: '/echanges', title: 'Mes echanges', icon: 'ni-pin-3 text-orange', class: '' },
   { path: '/user-profile', title: 'profile', icon: 'ni-single-02 text-yellow', class: '' },
 ];

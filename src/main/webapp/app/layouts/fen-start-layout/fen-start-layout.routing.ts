@@ -28,6 +28,10 @@ export const FenStartLayoutRoutes: Routes = [
     path: 'aide',
     loadChildren: () => import(`../../aide/aide.module`).then(m => m.AideModule),
   },
+  {
+    path: 'liste-annonces',
+    loadChildren: () => import(`../../liste-annonces/liste-annonces.module`).then(m => m.ListeAnnoncesModule),
+  },
 
   navbarRoute,
 ];
