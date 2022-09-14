@@ -1,5 +1,6 @@
 package com.hackathon.eva.service;
 
+import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.service.dto.AnnonceDTO;
 import java.util.List;
 import java.util.Optional;
@@ -70,4 +71,6 @@ public interface AnnonceService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<Annonce> findAllNoPageble();
 }

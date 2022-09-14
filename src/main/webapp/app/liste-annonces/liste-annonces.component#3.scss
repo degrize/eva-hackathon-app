@@ -10,7 +10,7 @@
 .component-main {
   display: grid;
   height: 100%;
-  width: 100vw;
+  max-width: 100vw;
   width: 100%;
   place-items: center;
 }
@@ -20,6 +20,7 @@
 }
 .wrapper {
   color: #070707;
+  max-width: 900px;
   text-align: center;
   padding: 0 50px;
 }

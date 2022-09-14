@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AnnonceService } from '../entities/annonce/service/annonce.service';
+import { IAnnonce } from '../entities/annonce/annonce.model';
+import { HttpResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import List from 'list.js';
 
 @Component({
   selector: 'jhi-liste-annonces',
@@ -8,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListeAnnoncesComponent implements OnInit {
   entries: number = 10;
   selected: any[] = [];
-  temp = [];
+  temp: any[] = [];
   activeRow: any;
   rows: any = [
     {
@@ -28,15 +33,9 @@ export class ListeAnnoncesComponent implements OnInit {
       salary: '$112,000',
     },
   ];
+  annonces?: IAnnonce[];
 
-  constructor() {
-    this.temp = this.rows.map((prop: any, key: any) => {
-      return {
-        ...prop,
-        id: key,
-      };
-    });
-  }
+  constructor(protected annonceService: AnnonceService) {}
 
   entriesChange($event: any) {
     this.entries = $event.target?.value;
@@ -62,7 +61,25 @@ export class ListeAnnoncesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    new List('users', {
+      valueNames: ['name', 'budget', 'status', 'completion'],
+      listClass: 'list',
+    });
+
     this.startJsFile();
+    this.loadAnnonceList();
+  }
+
+  loadAnnonceList(): void {
+    this.annonceService.getAnnonceList().subscribe(
+      (res: HttpResponse<IAnnonce[]>) => {
+        this.annonces = res.body ?? [];
+        this.onSuccess();
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
 
   startJsFile(): void {
@@ -106,5 +123,36 @@ export class ListeAnnoncesComponent implements OnInit {
         clearInterval(timer);
       }
     }, 1000);
+  }
+
+  protected onSuccess(): void {
+    if (this.annonces) {
+      console.log(this.annonces);
+      this.temp = this.annonces.map((prop: any, key: any) => {
+        return {
+          ...prop,
+          id: key,
+        };
+      });
+    }
+  }
+
+  protected onError(): void {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 8000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'warning',
+      title: 'Aucune annonce trouvée',
+    });
   }
 }

@@ -54,6 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   compteEvaSwal() {
     Swal.fire({
+      showCancelButton: false,
+      showConfirmButton: false,
       html:
         ' <div id="card-pricing-component" class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="card-pricing-component-tab">\n' +
         '    <div class="card card-pricing bg-gradient-success border-0 text-center mb-4">\n' +

@@ -1,53 +1,15 @@
-<div id="users" class="component-main">
-  <div class="wrapper d-flex justify-content-center align-items-center flex-column">
-    <div class="title">Trouvez toutes les annonces <span>Que vous chercher</span>, renseignez le text juste en bas!</div>
-    <form action="#" class="form">
-      <div class="email-field shadow">
-        <input
-          class="search form-control form-control-sm"
-          placeholder="Trouver une annonce"
-          aria-controls="datatable"
-          (keyup)="filterTable($event)"
-        />
-        <button type="submit">Rechercher</button>
-      </div>
-    </form>
-    <div class="count-down mb-3">
-      <div class="timer day">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Site web</div>
-        </div>
-      </div>
-      <div class="timer hour">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Voiture</div>
-        </div>
-      </div>
-      <div class="timer min">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Menusier</div>
-        </div>
-      </div>
-      <div class="timer sec">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Coord</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="component-main">
+  <input class="search" placeholder="Search" />
+  <button class="sort" data-sort="name">Sort by name</button>
   <div class="table-responsive">
     <table class="table table-dark align-items-center">
       <thead class="thead-light">
         <tr>
-          <th class="sort hand" data-sort="name" scope="col">Project</th>
+          <th class="sort" data-sort="name" scope="col">Project</th>
 
-          <th class="sort hand" data-sort="budget" scope="col">Budget</th>
+          <th class="sort" data-sort="budget" scope="col">Budget</th>
 
-          <th class="sort hand" data-sort="status" scope="col">Status</th>
+          <th class="sort" data-sort="status" scope="col">Status</th>
 
           <th scope="col">Users</th>
 

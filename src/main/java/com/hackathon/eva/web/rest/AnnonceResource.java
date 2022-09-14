@@ -1,5 +1,6 @@
 package com.hackathon.eva.web.rest;
 
+import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.repository.AnnonceRepository;
 import com.hackathon.eva.service.AnnonceService;
 import com.hackathon.eva.service.dto.AnnonceDTO;
@@ -195,5 +196,12 @@ public class AnnonceResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/annonces/liste")
+    public ResponseEntity<List<Annonce>> getAllAnnoncesNoPageble() {
+        log.debug("REST request to get list of Annonces");
+        List<Annonce> annonceList = annonceService.findAllNoPageble();
+        return ResponseEntity.ok().body(annonceList);
     }
 }

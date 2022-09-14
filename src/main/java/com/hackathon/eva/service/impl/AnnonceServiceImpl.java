@@ -103,4 +103,11 @@ public class AnnonceServiceImpl implements AnnonceService {
         log.debug("Request to delete Annonce : {}", id);
         annonceRepository.deleteById(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Annonce> findAllNoPageble() {
+        log.debug("Request to get list of Annonces");
+        return annonceRepository.findAll();
+    }
 }

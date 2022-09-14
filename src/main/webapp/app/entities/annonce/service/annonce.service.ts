@@ -66,6 +66,10 @@ export class AnnonceService {
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 
+  getAnnonceList(): Observable<HttpResponse<any>> {
+    return this.http.get<IAnnonce[]>(`${this.resourceUrl}/liste`, { observe: 'response' });
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

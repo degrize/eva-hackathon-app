@@ -29,10 +29,12 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { EtatCompteComponent } from './etat-compte/etat-compte.component';
 import { ListeAnnoncesComponent } from './liste-annonces/liste-annonces.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     SharedModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     AppRoutingModule,
