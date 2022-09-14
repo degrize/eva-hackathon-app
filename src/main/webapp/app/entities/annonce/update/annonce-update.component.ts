@@ -17,6 +17,8 @@ import { MandataireDelegateurService } from 'app/entities/mandataire-delegateur/
 import { AccountService } from '../../../core/auth/account.service';
 import { Account } from '../../../core/auth/account.model';
 import { EtatCompte } from '../../enumerations/etat-compte.model';
+import { Sexe } from '../../enumerations/sexe.model';
+import { Duree } from '../../enumerations/duree.model';
 
 @Component({
   selector: 'jhi-annonce-update',
@@ -28,6 +30,9 @@ export class AnnonceUpdateComponent implements OnInit {
   annonce: IAnnonce | null = null;
 
   categoriesSharedCollection: ICategorie[] = [];
+
+  dureeValues = Object.keys(Duree);
+
   mandataireDelegateursSharedCollection: IMandataireDelegateur[] = [];
 
   editForm: AnnonceFormGroup = this.annonceFormService.createAnnonceFormGroup();

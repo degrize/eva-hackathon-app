@@ -81,6 +81,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  verifCompteEva(): void {
+    if (this.mandataireDelegateur) {
+      this.router.navigate(['/user-profile']);
+    } else {
+      this.router.navigate(['/create-eva-profile']);
+    }
+  }
+
   logout(): void {
     this.collapseNavbar();
     this.loginService.logout();

@@ -14,6 +14,8 @@ import { DataUtils, FileLoadError } from '../../../core/util/data-util.service';
 import { EventManager, EventWithContent } from '../../../core/util/event-manager.service';
 import { AlertError } from '../../../shared/alert/alert-error.model';
 
+import * as country from '../../../../content/country.json';
+
 @Component({
   selector: 'jhi-mandataire-delegateur-update',
   templateUrl: './mandataire-delegateur-update.component.html',

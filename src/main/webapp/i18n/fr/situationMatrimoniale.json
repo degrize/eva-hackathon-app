@@ -2,12 +2,12 @@
   "evaHackathonApp": {
     "SituationMatrimoniale": {
       "null": "",
-      "CELIBATAIRE": "CELIBATAIRE",
-      "FIANCE": "FIANCE",
-      "CONCUBINAGE": "CONCUBINAGE",
-      "MARIE": "MARIE",
-      "VEUF": "VEUF",
-      "JE_PREFERE_NE_PAS_LE_DIRE": "JE_PREFERE_NE_PAS_LE_DIRE"
+      "CELIBATAIRE": "célibataire",
+      "FIANCE": "fiancé",
+      "CONCUBINAGE": "concubinage",
+      "MARIE": "marié",
+      "VEUF": "veuf-ve",
+      "JE_PREFERE_NE_PAS_LE_DIRE": "Je ne prefers pas le dire"
     }
   }
 }

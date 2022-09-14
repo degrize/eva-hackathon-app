@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router } from '@angular/router';
-import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, filter, Observable, Subject, switchMap, tap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAnnonce } from '../entities/annonce/annonce.model';
@@ -11,6 +11,11 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/conf
 import { EntityArrayResponseType, AnnonceService } from '../entities/annonce/service/annonce.service';
 import { AnnonceDeleteDialogComponent } from '../entities/annonce/delete/annonce-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
+import { takeUntil } from 'rxjs/operators';
+import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandataire-delegateur.model';
+import { AccountService } from '../core/auth/account.service';
+import { MandataireDelegateurService } from '../entities/mandataire-delegateur/service/mandataire-delegateur.service';
+import { Account } from '../core/auth/account.model';
 
 @Component({
   selector: 'jhi-annonce',
@@ -28,18 +33,26 @@ export class AnnonceComponent implements OnInit {
   totalItems = 0;
   page = 1;
 
+  account: Account | null = null;
+  mandataireDelegateur?: IMandataireDelegateur | null;
+
+  private readonly destroy$ = new Subject<void>();
+
   constructor(
     protected annonceService: AnnonceService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected dataUtils: DataUtils,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService,
+    private mandataireDelegateurService: MandataireDelegateurService
   ) {}
 
   trackId = (_index: number, item: IAnnonce): number => this.annonceService.getAnnonceIdentifier(item);
 
   ngOnInit(): void {
     this.load();
+    this.LoadProfileEVA();
   }
 
   byteSize(base64String: string): string {
@@ -80,6 +93,25 @@ export class AnnonceComponent implements OnInit {
 
   navigateToPage(page = this.page): void {
     this.handleNavigation(page, this.predicate, this.ascending);
+  }
+
+  LoadProfileEVA(): void {
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => {
+        this.account = account;
+        if (account !== null) {
+          this.mandataireDelegateurService.findByJhiUserId({ login: this.account?.login }).subscribe(
+            (res: HttpResponse<IMandataireDelegateur>) => this.onSucessUser(res.body),
+            (res: HttpResponse<any>) => this.onError()
+          );
+        }
+      });
+  }
+
+  verifTest(): void {
+    console.log(this.annonces);
   }
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
@@ -139,6 +171,17 @@ export class AnnonceComponent implements OnInit {
       return [];
     } else {
       return [predicate + ',' + ascendingQueryParam];
+    }
+  }
+
+  protected onError(): void {
+    console.log('Erreur find user all informations');
+  }
+
+  protected onSucessUser(data: IMandataireDelegateur | null): void {
+    if (data?.id) {
+      this.mandataireDelegateur = data;
+      console.log('DATA USER MANDATAIRE DELEGATEUR');
     }
   }
 }

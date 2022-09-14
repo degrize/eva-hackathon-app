@@ -53,18 +53,12 @@ export class MandataireDelegateurFormService {
           validators: [Validators.required],
         }
       ),
-      nomDeFamille: new FormControl(mandataireDelegateurRawValue.nomDeFamille, {
-        validators: [Validators.required],
-      }),
-      prenom: new FormControl(mandataireDelegateurRawValue.prenom, {
-        validators: [Validators.required],
-      }),
+      nomDeFamille: new FormControl(mandataireDelegateurRawValue.nomDeFamille),
+      prenom: new FormControl(mandataireDelegateurRawValue.prenom),
       contact: new FormControl(mandataireDelegateurRawValue.contact, {
         validators: [Validators.required],
       }),
-      email: new FormControl(mandataireDelegateurRawValue.email, {
-        validators: [Validators.required],
-      }),
+      email: new FormControl(mandataireDelegateurRawValue.email),
       numeroMomo: new FormControl(mandataireDelegateurRawValue.numeroMomo, {
         validators: [Validators.required],
       }),

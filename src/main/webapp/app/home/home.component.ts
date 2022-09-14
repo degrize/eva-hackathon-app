@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, Observable, Subject, switchMap, tap } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
@@ -10,6 +10,9 @@ import Swal from 'sweetalert2';
 import { MandataireDelegateurService } from '../entities/mandataire-delegateur/service/mandataire-delegateur.service';
 import { HttpResponse } from '@angular/common/http';
 import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandataire-delegateur.model';
+import { MandataireDelegateurComponent } from '../entities/mandataire-delegateur/list/mandataire-delegateur.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EntityArrayResponseType } from '../entities/annonce/service/annonce.service';
 
 @Component({
   selector: 'jhi-home',
@@ -25,7 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private mandataireDelegateurService: MandataireDelegateurService,
-    private router: Router
+    private router: Router,
+    protected modalService: NgbModal,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -106,7 +111,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         '            </div>\n' +
         '          </li>\n' +
         '        </ul>\n' +
-        '        <a href="http://localhost:9000/mandataire-delegateur/new" class="btn btn-primary mb-3">Demarrer maintenant</a>\n' +
+        '        <a href="/create-eva-profile" class="btn btn-primary mb-3">Demarrer maintenant</a>\n' +
         '      </div>\n' +
         '    </div>\n' +
         '  </div>',

@@ -41,6 +41,13 @@ export const FenStartLayoutRoutes: Routes = [
     path: 'liste-annonces',
     loadChildren: () => import(`../../liste-annonces/liste-annonces.module`).then(m => m.ListeAnnoncesModule),
   },
+  {
+    path: 'create-eva-profile',
+    loadChildren: () =>
+      import(`../../mandataire-delegateur-create-profile/mandataire-delegateur-create-profile.module`).then(
+        m => m.MandataireDelegateurCreateProfileModule
+      ),
+  },
 
   navbarRoute,
 ];

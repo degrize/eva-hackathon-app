@@ -52,14 +52,16 @@
           <label class="col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.categorie" for="field_categories">Categorie</label>
           <div class="col-sm-10">
             <ng-select
-              [clearable]="true"
+              [items]="categoriesSharedCollection"
+              [clearable]="false"
+              bindLabel="nom"
+              placeholder="choisir Categorie"
               class="form-control-lg"
               id="field_categories"
               data-cy="categorie"
               [multiple]="true"
               name="categories"
               formControlName="categories"
-              [compareWith]="compareCategorie"
             >
               <ng-option [value]="categorieOption" *ngFor="let categorieOption of categoriesSharedCollection">
                 {{ categorieOption.nom }}
@@ -71,19 +73,19 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Durée</label>
           <div class="col-sm-10">
-            <ng-select [clearable]="true" class="form-control-lg" id="field_duree" data-cy="duree" name="duree" formControlName="duree">
-              <ng-option value="Demi-journée">Demi-journée</ng-option>
-              <ng-option value="1 jour" selected>1 jour</ng-option>
-              <ng-option value="2 jours">2 jours</ng-option>
-              <ng-option value="3 jours">3 jours</ng-option>
-              <ng-option value="4 jours">4 jours</ng-option>
-              <ng-option value="5 jours">5 jours</ng-option>
-              <ng-option value="6 jours">6 jours</ng-option>
-              <ng-option value="1 semaine">1 semaine</ng-option>
-              <ng-option value="1 mois">1 mois</ng-option>
-              <ng-option value="2 mois">2 mois</ng-option>
-              <ng-option value="3 mois">3 mois</ng-option>
-              <option value="10">Indeterminée</option>
+            <ng-select
+              [items]="dureeValues"
+              bindLabel="duree"
+              [clearable]="true"
+              bindLabel="nom"
+              class="form-control-lg"
+              id="field_duree"
+              data-cy="duree"
+              name="duree"
+              formControlName="duree"
+            >
+              <ng-option [value]="null">{{ 'evaHackathonApp.Sexe.null' | translate }}</ng-option>
+              <ng-option *ngFor="let duree of dureeValues" [value]="duree"> {{ duree }} </ng-option>
             </ng-select>
           </div>
         </div>

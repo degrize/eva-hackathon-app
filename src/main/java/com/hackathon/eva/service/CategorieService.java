@@ -1,6 +1,9 @@
 package com.hackathon.eva.service;
 
+import com.hackathon.eva.domain.Annonce;
+import com.hackathon.eva.domain.Categorie;
 import com.hackathon.eva.service.dto.CategorieDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +58,6 @@ public interface CategorieService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<Categorie> findAllNoPageble();
 }
