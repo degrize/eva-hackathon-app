@@ -13,6 +13,7 @@ export interface IAnnonce {
   imageVideo?: string | null;
   imageVideoContentType?: string | null;
   description?: string | null;
+  duree?: string | null;
   categories?: Pick<ICategorie, 'id' | 'nom'>[] | null;
   mandataireDelegateur?: Pick<IMandataireDelegateur, 'id'> | null;
   postulants?: Pick<IPostulant, 'id'>[] | null;

@@ -38,6 +38,8 @@ public class AnnonceDTO implements Serializable {
     private String imageVideoContentType;
     private String description;
 
+    private String duree;
+
     private Set<CategorieDTO> categories = new HashSet<>();
 
     private MandataireDelegateurDTO mandataireDelegateur;
@@ -114,6 +116,14 @@ public class AnnonceDTO implements Serializable {
         this.description = description;
     }
 
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
     public Set<CategorieDTO> getCategories() {
         return categories;
     }
@@ -164,6 +174,7 @@ public class AnnonceDTO implements Serializable {
             ", imageVideo='" + getImageVideo() + "'" +
             ", description='" + getDescription() + "'" +
             ", categories=" + getCategories() +
+            ", duree=" + getDuree() +
             ", mandataireDelegateur=" + getMandataireDelegateur() +
             "}";
     }

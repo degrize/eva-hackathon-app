@@ -1,6 +1,7 @@
 package com.hackathon.eva.service;
 
 import com.hackathon.eva.domain.User;
+import com.hackathon.eva.service.dto.AideDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.MessagingException;
@@ -28,6 +29,7 @@ public class MailService {
     private final Logger log = LoggerFactory.getLogger(MailService.class);
 
     private static final String USER = "user";
+    private static final String AIDE = "aide";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -93,9 +95,30 @@ public class MailService {
     }
 
     @Async
+    public void sendAideEmailFromTemplate(AideDTO aide, String templateName, String titleKey) {
+        if (aide.getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", aide.getNom());
+            return;
+        }
+        Locale locale = Locale.forLanguageTag("fr");
+        Context context = new Context(locale);
+        context.setVariable(AIDE, aide);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail("kechiedou.meda18@inphb.ci", subject, content, false, true);
+    }
+
+    @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+    }
+
+    @Async
+    public void sendAideEmail(AideDTO aide) {
+        log.debug("Sending aide email from '{}'", aide.getEmail());
+        sendAideEmailFromTemplate(aide, "mail/aideEmail", "email.aide.title");
     }
 
     @Async

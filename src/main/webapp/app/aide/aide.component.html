@@ -7,37 +7,64 @@
     <div class="vb col-md-6 col-md-offset-3" id="form_container">
       <h2>Nous Contacter</h2>
       <p>Veuillez envoyer votre message ci-dessous. Nous vous répondrons au plus tôt !</p>
-      <form role="form" method="post" id="reused_form">
+      <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" id="reused_form">
         <div class="row">
           <div class="col-sm-12 form-group">
             <label for="message"> Message:</label>
-            <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
+            <textarea
+              formControlName="message"
+              class="form-control"
+              type="textarea"
+              name="message"
+              id="message"
+              maxlength="6000"
+              rows="7"
+            ></textarea>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 form-group">
             <label for="name"> Votre Nom:</label>
-            <input type="text" class="form-control" id="name" name="name" required />
+            <input formControlName="nom" type="text" class="form-control" id="name" name="name" />
           </div>
           <div class="col-sm-6 form-group">
             <label for="email"> Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required />
+            <input
+              type="email"
+              class="form-control input"
+              id="email"
+              name="email"
+              placeholder="{{ 'global.form.email.placeholder' | translate }}"
+              formControlName="email"
+              data-cy="email"
+            />
+            <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('email')?.errors?.required"
+                jhiTranslate="global.messages.validate.email.required"
+              >
+                Votre email est requis.
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('email')?.errors?.invalid"
+                jhiTranslate="global.messages.validate.email.invalid"
+              >
+                Votre email n'est pas valide.
+              </small>
+            </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 form-group">
-            <button type="submit" class="btn btn-lg btn-default pull-right">Envoyer →</button>
+            <button type="submit" [disabled]="editForm.invalid" class="btn btn-lg btn-default pull-right" data-cy="submit">
+              Envoyer →
+            </button>
           </div>
         </div>
       </form>
-      <div id="success_message" style="width: 100%; height: 100%; display: none">
-        <h3>Envoie Succès!</h3>
-      </div>
-      <div id="error_message" style="width: 100%; height: 100%; display: none">
-        <h3>Error</h3>
-        Erreur d'envoie.
-      </div>
     </div>
   </div>
 </div>

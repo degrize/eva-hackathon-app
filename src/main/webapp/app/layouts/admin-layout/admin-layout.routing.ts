@@ -15,6 +15,10 @@ export const AdminLayoutRoutes: Routes = [
     loadChildren: () => import(`../../entities/entity-routing.module`).then(m => m.EntityRoutingModule),
   },
   {
+    path: 'mes-annonces',
+    loadChildren: () => import(`../../annonce/annonce.module`).then(m => m.AnnonceModule),
+  },
+  {
     path: 'account',
     loadChildren: () => import('../../account/accountDashboard.module').then(m => m.AccountDashboardModule),
   },

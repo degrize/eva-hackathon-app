@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { finalize, map, takeUntil } from 'rxjs/operators';
 
 import { AnnonceFormService, AnnonceFormGroup } from './annonce-form.service';
 import { IAnnonce } from '../annonce.model';
@@ -14,10 +14,14 @@ import { ICategorie } from 'app/entities/categorie/categorie.model';
 import { CategorieService } from 'app/entities/categorie/service/categorie.service';
 import { IMandataireDelegateur } from 'app/entities/mandataire-delegateur/mandataire-delegateur.model';
 import { MandataireDelegateurService } from 'app/entities/mandataire-delegateur/service/mandataire-delegateur.service';
+import { AccountService } from '../../../core/auth/account.service';
+import { Account } from '../../../core/auth/account.model';
+import { EtatCompte } from '../../enumerations/etat-compte.model';
 
 @Component({
   selector: 'jhi-annonce-update',
   templateUrl: './annonce-update.component.html',
+  styleUrls: ['./annonce-update.component.scss'],
 })
 export class AnnonceUpdateComponent implements OnInit {
   isSaving = false;
@@ -28,6 +32,11 @@ export class AnnonceUpdateComponent implements OnInit {
 
   editForm: AnnonceFormGroup = this.annonceFormService.createAnnonceFormGroup();
 
+  account: Account | null = null;
+  mandataireDelegateur?: IMandataireDelegateur | null;
+
+  private readonly destroy$ = new Subject<void>();
+
   constructor(
     protected dataUtils: DataUtils,
     protected eventManager: EventManager,
@@ -35,7 +44,8 @@ export class AnnonceUpdateComponent implements OnInit {
     protected annonceFormService: AnnonceFormService,
     protected categorieService: CategorieService,
     protected mandataireDelegateurService: MandataireDelegateurService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService
   ) {}
 
   compareCategorie = (o1: ICategorie | null, o2: ICategorie | null): boolean => this.categorieService.compareCategorie(o1, o2);
@@ -44,6 +54,19 @@ export class AnnonceUpdateComponent implements OnInit {
     this.mandataireDelegateurService.compareMandataireDelegateur(o1, o2);
 
   ngOnInit(): void {
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => {
+        this.account = account;
+        if (account !== null) {
+          this.mandataireDelegateurService.findByJhiUserId({ login: this.account?.login }).subscribe(
+            (res: HttpResponse<IMandataireDelegateur>) => this.onSucessUser(res.body),
+            (res: HttpResponse<any>) => this.onError()
+          );
+        }
+      });
+
     this.activatedRoute.data.subscribe(({ annonce }) => {
       this.annonce = annonce;
       if (annonce) {
@@ -76,9 +99,11 @@ export class AnnonceUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const annonce = this.annonceFormService.getAnnonce(this.editForm);
+    annonce.dateDeDelais = annonce.dateDeDelegation;
     if (annonce.id !== null) {
       this.subscribeToSaveResponse(this.annonceService.update(annonce));
     } else {
+      annonce.mandataireDelegateur = this.mandataireDelegateur;
       this.subscribeToSaveResponse(this.annonceService.create(annonce));
     }
   }
@@ -140,5 +165,16 @@ export class AnnonceUpdateComponent implements OnInit {
         )
       )
       .subscribe((mandataireDelegateurs: IMandataireDelegateur[]) => (this.mandataireDelegateursSharedCollection = mandataireDelegateurs));
+  }
+
+  protected onError(): void {
+    console.log('Erreur find user all informations');
+  }
+
+  protected onSucessUser(data: IMandataireDelegateur | null): void {
+    if (data) {
+      this.mandataireDelegateur = data;
+      console.log('DATA USER MANDATAIRE DELEGATEUR');
+    }
   }
 }

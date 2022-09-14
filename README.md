@@ -230,3 +230,59 @@ docker-compose -f src/main/docker/app.yml up -d
 ```
 npm install list.js --save
 ```
+
+```
+npm i --save-dev @types/chart.js
+
+```
+
+# le boton spprimer
+
+Ajouter ce code dans content/asset/scss/customer/\_variables.scss
+
+```
+//Modal z-index
+$zindex-modal-backdrop: 1500;
+$zindex-modal: 1500;
+```
+
+# Mes requetes SQL
+
+pour la relation entre le mandataire_delegateur et le chaps photo et son compte utilisateur EVA
+
+```
+alter table "public".mandataire_delegateur
+    add photo bytea,
+    add image_video_content_type character varying(255),
+    add jhi_user_id bigint,
+    add CONSTRAINT fk_mandataire_delegateur__jhi_user_id FOREIGN KEY (jhi_user_id)
+        REFERENCES jhi_user (id) MATCH SIMPLE
+            ON UPDATE NO ACTION ON DELETE NO ACTION
+```
+
+Pour la table aide
+
+```
+CREATE TABLE aide
+(
+id bigint NOT NULL,
+nom character varying(255) NOT NULL,
+message character varying(255),
+email character varying(255),
+CONSTRAINT aide_pkey PRIMARY KEY (id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE aide
+OWNER TO postgres;
+COMMENT ON TABLE aide
+IS E'Don entity.\\n@author BEVE.';
+```
+
+insertion du champs duree
+
+```
+alter table "public".annonce
+add duree varchar(255)
+```

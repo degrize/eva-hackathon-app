@@ -39,6 +39,7 @@ type AnnonceFormGroupContent = {
   imageVideo: FormControl<AnnonceFormRawValue['imageVideo']>;
   imageVideoContentType: FormControl<AnnonceFormRawValue['imageVideoContentType']>;
   description: FormControl<AnnonceFormRawValue['description']>;
+  duree: FormControl<AnnonceFormRawValue['duree']>;
   categories: FormControl<AnnonceFormRawValue['categories']>;
   mandataireDelegateur: FormControl<AnnonceFormRawValue['mandataireDelegateur']>;
   postulants: FormControl<AnnonceFormRawValue['postulants']>;
@@ -64,10 +65,10 @@ export class AnnonceFormService {
       titre: new FormControl(annonceRawValue.titre, {
         validators: [Validators.required],
       }),
-      dateDeDelegation: new FormControl(annonceRawValue.dateDeDelegation),
-      dateDeDelais: new FormControl(annonceRawValue.dateDeDelais, {
+      dateDeDelegation: new FormControl(annonceRawValue.dateDeDelegation, {
         validators: [Validators.required],
       }),
+      dateDeDelais: new FormControl(annonceRawValue.dateDeDelais),
       tarif: new FormControl(annonceRawValue.tarif, {
         validators: [Validators.required],
       }),
@@ -75,6 +76,7 @@ export class AnnonceFormService {
       imageVideo: new FormControl(annonceRawValue.imageVideo),
       imageVideoContentType: new FormControl(annonceRawValue.imageVideoContentType),
       description: new FormControl(annonceRawValue.description),
+      duree: new FormControl(annonceRawValue.duree),
       categories: new FormControl(annonceRawValue.categories ?? []),
       mandataireDelegateur: new FormControl(annonceRawValue.mandataireDelegateur),
       postulants: new FormControl(annonceRawValue.postulants ?? []),

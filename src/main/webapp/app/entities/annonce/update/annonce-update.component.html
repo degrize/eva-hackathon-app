@@ -13,67 +13,99 @@
           <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.titre" for="field_titre">Titre</label>
-          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
-          <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
-            <small class="form-text text-danger" *ngIf="editForm.get('titre')?.errors?.required" jhiTranslate="entity.validation.required">
-              Ce champ est obligatoire.
-            </small>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.titre" for="field_titre">Titre</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+            <div *ngIf="editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="editForm.get('titre')?.errors?.required"
+                jhiTranslate="entity.validation.required"
+              >
+                Ce champ est obligatoire.
+              </small>
+            </div>
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.dateDeDelegation" for="field_dateDeDelegation"
-            >Date De Delegation</label
+        <div class="form-group row">
+          <label for="field_description" class="col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.description"
+            >Description</label
           >
-          <div class="d-flex">
-            <input
-              id="field_dateDeDelegation"
-              data-cy="dateDeDelegation"
-              type="datetime-local"
+          <div class="col-sm-10">
+            <textarea
               class="form-control"
-              name="dateDeDelegation"
-              formControlName="dateDeDelegation"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
+              placeholder="Description"
+              type="textarea"
+              name="description"
+              id="field_description"
+              data-cy="description"
+              formControlName="description"
+              maxlength="6000"
+              rows="5"
+            ></textarea>
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.dateDeDelais" for="field_dateDeDelais">Date De Delais</label>
-          <div class="input-group">
-            <input
-              id="field_dateDeDelais"
-              data-cy="dateDeDelais"
-              type="text"
-              class="form-control"
-              name="dateDeDelais"
-              ngbDatepicker
-              #dateDeDelaisDp="ngbDatepicker"
-              formControlName="dateDeDelais"
-            />
-            <button type="button" class="btn btn-secondary" (click)="dateDeDelaisDp.toggle()">
-              <fa-icon icon="calendar-alt"></fa-icon>
-            </button>
-          </div>
-          <div
-            *ngIf="editForm.get('dateDeDelais')!.invalid && (editForm.get('dateDeDelais')!.dirty || editForm.get('dateDeDelais')!.touched)"
-          >
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('dateDeDelais')?.errors?.required"
-              jhiTranslate="entity.validation.required"
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.categorie" for="field_categories">Categorie</label>
+          <div class="col-sm-10">
+            <ng-select
+              [clearable]="true"
+              class="form-control-lg"
+              id="field_categories"
+              data-cy="categorie"
+              [multiple]="true"
+              name="categories"
+              formControlName="categories"
+              [compareWith]="compareCategorie"
             >
-              Ce champ est obligatoire.
-            </small>
+              <ng-option [value]="categorieOption" *ngFor="let categorieOption of categoriesSharedCollection">
+                {{ categorieOption.nom }}
+              </ng-option>
+            </ng-select>
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.tarif" for="field_tarif">Tarif</label>
-          <input type="text" class="form-control" name="tarif" id="field_tarif" data-cy="tarif" formControlName="tarif" />
-          <div *ngIf="editForm.get('tarif')!.invalid && (editForm.get('tarif')!.dirty || editForm.get('tarif')!.touched)">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Durée</label>
+          <div class="col-sm-10">
+            <ng-select [clearable]="true" class="form-control-lg" id="field_duree" data-cy="duree" name="duree" formControlName="duree">
+              <ng-option value="Demi-journée">Demi-journée</ng-option>
+              <ng-option value="1 jour" selected>1 jour</ng-option>
+              <ng-option value="2 jours">2 jours</ng-option>
+              <ng-option value="3 jours">3 jours</ng-option>
+              <ng-option value="4 jours">4 jours</ng-option>
+              <ng-option value="5 jours">5 jours</ng-option>
+              <ng-option value="6 jours">6 jours</ng-option>
+              <ng-option value="1 semaine">1 semaine</ng-option>
+              <ng-option value="1 mois">1 mois</ng-option>
+              <ng-option value="2 mois">2 mois</ng-option>
+              <ng-option value="3 mois">3 mois</ng-option>
+              <option value="10">Indeterminée</option>
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="form-label col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.tarif" for="field_tarif">Tarif</label>
+          <div class="col-sm-4 input-group">
+            <input
+              type="text"
+              class="form-control pl-2"
+              name="tarif"
+              id="field_tarif"
+              data-cy="tarif"
+              formControlName="tarif"
+              aria-label="Sizing example input"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">FCFA</span>
+            </div>
+          </div>
+          <div class="col-sm-10" *ngIf="editForm.get('tarif')!.invalid && (editForm.get('tarif')!.dirty || editForm.get('tarif')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('tarif')?.errors?.required" jhiTranslate="entity.validation.required">
               Ce champ est obligatoire.
             </small>
@@ -81,22 +113,10 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.postulantRetenu" for="field_postulantRetenu"
-            >Postulant Retenu</label
+          <label class="col-sm-2 col-form-label" jhiTranslate="evaHackathonApp.annonce.imageVideo" for="field_imageVideo"
+            >Image Video</label
           >
-          <input
-            type="number"
-            class="form-control"
-            name="postulantRetenu"
-            id="field_postulantRetenu"
-            data-cy="postulantRetenu"
-            formControlName="postulantRetenu"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.imageVideo" for="field_imageVideo">Image Video</label>
-          <div>
+          <div class="col-sm-10">
             <div *ngIf="editForm.get('imageVideo')!.value" class="form-text text-danger clearfix">
               <a
                 class="pull-start"
@@ -138,54 +158,6 @@
             id="field_imageVideoContentType"
             formControlName="imageVideoContentType"
           />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.description" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label jhiTranslate="evaHackathonApp.annonce.categorie" for="field_categories">Categorie</label>
-          <select
-            class="form-control"
-            id="field_categories"
-            data-cy="categorie"
-            multiple
-            name="categories"
-            formControlName="categories"
-            [compareWith]="compareCategorie"
-          >
-            <option [ngValue]="categorieOption" *ngFor="let categorieOption of categoriesSharedCollection">
-              {{ categorieOption.nom }}
-            </option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.mandataireDelegateur" for="field_mandataireDelegateur"
-            >Mandataire Delegateur</label
-          >
-          <select
-            class="form-control"
-            id="field_mandataireDelegateur"
-            data-cy="mandataireDelegateur"
-            name="mandataireDelegateur"
-            formControlName="mandataireDelegateur"
-            [compareWith]="compareMandataireDelegateur"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="mandataireDelegateurOption" *ngFor="let mandataireDelegateurOption of mandataireDelegateursSharedCollection">
-              {{ mandataireDelegateurOption.id }}
-            </option>
-          </select>
         </div>
       </div>
 

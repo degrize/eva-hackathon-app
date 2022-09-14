@@ -3,21 +3,23 @@ package com.hackathon.eva.service.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
 /**
- * A DTO for the {@link com.hackathon.eva.domain.Categorie} entity.
+ * A DTO for the {@link com.hackathon.eva.domain.Aide} entity.
  */
-@Schema(description = "Don entity.\n@author EVA.")
+@Schema(description = "Aide entity.\n@author EVA.")
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class CategorieDTO implements Serializable {
+public class AideDTO implements Serializable {
 
     private Long id;
 
     @NotNull
     private String nom;
 
-    private String description;
+    private String message;
+
+    private String email;
 
     public Long getId() {
         return id;
@@ -35,12 +37,20 @@ public class CategorieDTO implements Serializable {
         this.nom = nom;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMessage() {
+        return message;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -48,11 +58,11 @@ public class CategorieDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof CategorieDTO)) {
+        if (!(o instanceof AideDTO)) {
             return false;
         }
 
-        CategorieDTO categorieDTO = (CategorieDTO) o;
+        AideDTO categorieDTO = (AideDTO) o;
         if (this.id == null) {
             return false;
         }
@@ -70,7 +80,8 @@ public class CategorieDTO implements Serializable {
         return "CategorieDTO{" +
             "id=" + getId() +
             ", nom='" + getNom() + "'" +
-            ", description='" + getDescription() + "'" +
+            ", message='" + getMessage() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

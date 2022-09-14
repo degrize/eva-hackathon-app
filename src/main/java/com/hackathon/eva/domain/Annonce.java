@@ -56,6 +56,9 @@ public class Annonce implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "duree")
+    private String duree;
+
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "annonce" }, allowSetters = true)
@@ -201,6 +204,19 @@ public class Annonce implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDuree() {
+        return duree;
+    }
+
+    public Annonce duree(String duree) {
+        this.setDuree(duree);
+        return this;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
     }
 
     public Set<Message> getMessages() {
@@ -354,6 +370,7 @@ public class Annonce implements Serializable {
             ", imageVideo='" + getImageVideo() + "'" +
             ", imageVideoContentType='" + getImageVideoContentType() + "'" +
             ", description='" + getDescription() + "'" +
+            ", duree='" + getDuree() + "'" +
             "}";
     }
 }

@@ -82,7 +82,7 @@ export class EtatCompteComponent implements OnInit {
 
     Toast.fire({
       icon: 'success',
-      title: 'Ta soucription a été mise à jour',
+      title: 'Votre soucription a été mise à jour',
     });
   }
 
