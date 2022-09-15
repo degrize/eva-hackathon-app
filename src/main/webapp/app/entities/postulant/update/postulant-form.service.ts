@@ -21,6 +21,7 @@ type PostulantFormGroupContent = {
   numeroMomo: FormControl<IPostulant['numeroMomo']>;
   observation: FormControl<IPostulant['observation']>;
   annonces: FormControl<IPostulant['annonces']>;
+  mandataireDelegateur: FormControl<IPostulant['mandataireDelegateur']>;
 };
 
 export type PostulantFormGroup = FormGroup<PostulantFormGroupContent>;
@@ -45,6 +46,7 @@ export class PostulantFormService {
       }),
       observation: new FormControl(postulantRawValue.observation),
       annonces: new FormControl(postulantRawValue.annonces ?? []),
+      mandataireDelegateur: new FormControl(postulantRawValue.mandataireDelegateur),
     });
   }
 

@@ -1,6 +1,7 @@
 package com.hackathon.eva.repository;
 
 import com.hackathon.eva.domain.MandataireDelegateur;
+import java.time.LocalDate;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +17,17 @@ public interface MandataireDelegateurRepository extends JpaRepository<Mandataire
         "select mandataireDelegateur from MandataireDelegateur mandataireDelegateur left join fetch mandataireDelegateur.jhiUser where mandataireDelegateur.jhiUser.id =:id"
     )
     MandataireDelegateur findByJhiUserId(@Param("id") Long id);
+
+    @Query(
+        "SELECT COUNT(mandataireDelegateur) FROM MandataireDelegateur mandataireDelegateur where mandataireDelegateur.etatCompte = 'NORMAL'"
+    )
+    int getCountMandataireDelegateurNormal();
+
+    @Query(
+        "SELECT COUNT(mandataireDelegateur) FROM MandataireDelegateur mandataireDelegateur where mandataireDelegateur.etatCompte = 'PREMIUM'"
+    )
+    int getCountMandataireDelegateurPremium();
+
+    @Query("select count(mandataireDelegateur) from MandataireDelegateur mandataireDelegateur")
+    int getCountMandataireDelegateurPremiumPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

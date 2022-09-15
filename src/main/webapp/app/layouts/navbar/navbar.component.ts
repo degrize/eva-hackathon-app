@@ -14,6 +14,8 @@ import { HttpResponse } from '@angular/common/http';
 import { IMandataireDelegateur } from '../../entities/mandataire-delegateur/mandataire-delegateur.model';
 import { MandataireDelegateurService } from '../../entities/mandataire-delegateur/service/mandataire-delegateur.service';
 
+import Selectr from 'mobius1-selectr';
+
 @Component({
   selector: 'jhi-navbar',
   templateUrl: './navbar.component.html',
@@ -65,6 +67,11 @@ export class NavbarComponent implements OnInit {
         (res: HttpResponse<any>) => this.onError()
       );
     });
+
+    var selectr: any = document.getElementById('selectr1');
+    var options = {};
+    // var optionsMultiple = {multiple: true};
+    var selectorDefault = new Selectr(selectr, options);
   }
 
   changeLanguage(languageKey: string): void {

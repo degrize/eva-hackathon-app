@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IPostulant, NewPostulant } from '../postulant.model';
+import { IAnnonce } from '../../annonce/annonce.model';
 
 export type PartialUpdatePostulant = Partial<IPostulant> & Pick<IPostulant, 'id'>;
 
@@ -37,6 +38,10 @@ export class PostulantService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IPostulant[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  getPostulantList(): Observable<HttpResponse<any>> {
+    return this.http.get<IPostulant[]>(`${this.resourceUrl}/liste`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

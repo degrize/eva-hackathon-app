@@ -12,7 +12,11 @@ import { HttpResponse } from '@angular/common/http';
 import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandataire-delegateur.model';
 import { MandataireDelegateurComponent } from '../entities/mandataire-delegateur/list/mandataire-delegateur.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EntityArrayResponseType } from '../entities/annonce/service/annonce.service';
+import { AnnonceService, EntityArrayResponseType } from '../entities/annonce/service/annonce.service';
+import { IAnnonce } from '../entities/annonce/annonce.model';
+import { ICategorie } from '../entities/categorie/categorie.model';
+import { CategorieService } from '../entities/categorie/service/categorie.service';
+import List from 'list.js';
 
 @Component({
   selector: 'jhi-home',
@@ -23,6 +27,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   mandataireDelegateur?: IMandataireDelegateur | null;
 
+  photoAnnonce = '';
+  annonces?: IAnnonce[];
+  categories?: ICategorie[];
+
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -30,7 +38,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private mandataireDelegateurService: MandataireDelegateurService,
     private router: Router,
     protected modalService: NgbModal,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected annonceService: AnnonceService,
+    protected categorieService: CategorieService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +56,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           );
         }
       });
+
+    this.loadAnnonceList();
+    this.loadCategorieList();
   }
 
   login(): void {
@@ -115,6 +128,78 @@ export class HomeComponent implements OnInit, OnDestroy {
         '      </div>\n' +
         '    </div>\n' +
         '  </div>',
+    });
+  }
+
+  loadAnnonceList(): void {
+    this.annonceService.getAnnonceList().subscribe(
+      (res: HttpResponse<IAnnonce[]>) => {
+        this.annonces = res.body ?? [];
+        new List('users', {
+          valueNames: ['name', 'budget', 'status', 'completion'],
+          listClass: 'list',
+        });
+
+        this.onSuccess();
+      },
+      () => {
+        this.onErrorAnnonce();
+      }
+    );
+  }
+
+  loadCategorieList(): void {
+    this.categorieService.getCategorieList().subscribe(
+      (res: HttpResponse<ICategorie[]>) => {
+        this.categories = res.body ?? [];
+        this.onSuccess();
+      },
+      () => {
+        this.onError();
+      }
+    );
+  }
+
+  public loadImages(): void {
+    this.annonces?.forEach(annonce => {
+      if (annonce?.imageVideo && annonce?.imageVideoContentType) {
+        this.photoAnnonce = `data:${annonce.imageVideoContentType};base64,${annonce.imageVideo}`;
+      }
+    });
+  }
+
+  protected onSuccess(): void {
+    if (this.annonces) {
+      console.log(this.annonces);
+      /*this.temp = this.annonces.map((prop: any, key: any) => {
+        return {
+          ...prop,
+          id: key,
+        };
+      });*/
+    }
+
+    if (this.categories) {
+      console.log(this.categories);
+    }
+  }
+
+  protected onErrorAnnonce(): void {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'warning',
+      title: 'Aucune annonce trouvée',
     });
   }
 

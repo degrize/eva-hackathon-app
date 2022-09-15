@@ -286,3 +286,13 @@ insertion du champs duree
 alter table "public".annonce
 add duree varchar(255)
 ```
+
+relation entre postulant et le mandataireDelegateur
+
+```
+alter table "public".postulant
+    add mandataire_delegateur_id bigint,
+    add CONSTRAINT fk_postulant__mandataire_delegateur_id FOREIGN KEY (mandataire_delegateur_id)
+        REFERENCES mandataire_delegateur (id) MATCH SIMPLE
+            ON UPDATE NO ACTION ON DELETE NO ACTION
+```

@@ -1,5 +1,6 @@
 package com.hackathon.eva.service.impl;
 
+import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.domain.Postulant;
 import com.hackathon.eva.repository.PostulantRepository;
 import com.hackathon.eva.service.PostulantService;
@@ -102,5 +103,12 @@ public class PostulantServiceImpl implements PostulantService {
     public void delete(Long id) {
         log.debug("Request to delete Postulant : {}", id);
         postulantRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Postulant> findAllNoPageble() {
+        log.debug("Request to get list of Postulants");
+        return postulantRepository.findAllWithEagerRelationships();
     }
 }

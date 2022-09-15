@@ -60,6 +60,25 @@
             <option [ngValue]="annonceOption" *ngFor="let annonceOption of annoncesSharedCollection">{{ annonceOption.titre }}</option>
           </select>
         </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="evaHackathonApp.annonce.mandataireDelegateur" for="field_mandataireDelegateur"
+            >Mandataire Delegateur</label
+          >
+          <select
+            class="form-control"
+            id="field_mandataireDelegateur"
+            data-cy="mandataireDelegateur"
+            name="mandataireDelegateur"
+            formControlName="mandataireDelegateur"
+            [compareWith]="compareMandataireDelegateur"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="mandataireDelegateurOption" *ngFor="let mandataireDelegateurOption of mandataireDelegateursSharedCollection">
+              {{ mandataireDelegateurOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{email.createDocumentService.title}">JHipster activation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+
+    <!-- use the font -->
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+    </style>
+  </head>
+  <body style="margin: 5px; padding: 5px; background-color: #fafafa">
+    <p th:text="#{email.createDocumentService.greeting(${user.getLastName()}, ${user.getFirstName()})}">Dear</p>
+    <p th:text="#{email.createDocumentService.text1}">
+      EVA vous offre la possibilté de gagner un gombo de travailler tout en restant chez vous
+    </p>
+
+    <p th:text="#{email.createDocumentService.text2}" style="color: blue">
+      terminer votre incription, ne gaspillez plus vos energies et devenez incontournable dans le domaine de l'emploi
+    </p>
+    <p>
+      <span th:text="#{email.createDocumentService.text3}">Regards, </span>
+      <br />
+      <em th:text="#{email.createDocumentService.signature}">EVA/Hackathon...</em>
+    </p>
+  </body>
+</html>

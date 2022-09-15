@@ -21,6 +21,8 @@ public class PostulantDTO implements Serializable {
 
     private Set<AnnonceDTO> annonces = new HashSet<>();
 
+    private MandataireDelegateurDTO mandataireDelegateur;
+
     public Long getId() {
         return id;
     }
@@ -53,6 +55,14 @@ public class PostulantDTO implements Serializable {
         this.annonces = annonces;
     }
 
+    public MandataireDelegateurDTO getMandataireDelegateur() {
+        return mandataireDelegateur;
+    }
+
+    public void setMandataireDelegateur(MandataireDelegateurDTO mandataireDelegateur) {
+        this.mandataireDelegateur = mandataireDelegateur;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -82,6 +92,7 @@ public class PostulantDTO implements Serializable {
             ", numeroMomo='" + getNumeroMomo() + "'" +
             ", observation='" + getObservation() + "'" +
             ", annonces=" + getAnnonces() +
+            ", mandataireDelegateur=" + getMandataireDelegateur() +
             "}";
     }
 }

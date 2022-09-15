@@ -14,9 +14,10 @@ export interface IAnnonce {
   imageVideoContentType?: string | null;
   description?: string | null;
   duree?: string | null;
+  photoUrl?: string | null;
   categories?: Pick<ICategorie, 'id' | 'nom'>[] | null;
-  mandataireDelegateur?: Pick<IMandataireDelegateur, 'id'> | null;
-  postulants?: Pick<IPostulant, 'id'>[] | null;
+  mandataireDelegateur?: IMandataireDelegateur | null;
+  postulants?: IPostulant[] | null;
 }
 
 export type NewAnnonce = Omit<IAnnonce, 'id'> & { id: null };

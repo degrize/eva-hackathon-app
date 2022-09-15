@@ -23,7 +23,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/mes-annonces', title: 'Mes annonces', icon: 'ni-planet text-blue', class: '' },
-  { path: '/echanges', title: 'Mes echanges', icon: 'ni-pin-3 text-orange', class: '' },
+  { path: '/mes-echanges', title: 'Mes echanges', icon: 'ni-pin-3 text-orange', class: '' },
   { path: '/user-profile', title: 'profile', icon: 'ni-single-02 text-yellow', class: '' },
 ];
 

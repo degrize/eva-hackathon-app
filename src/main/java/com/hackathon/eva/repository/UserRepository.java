@@ -4,6 +4,7 @@ import com.hackathon.eva.domain.User;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -35,4 +36,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findAllByIdNotNullAndActivatedIsTrue(Pageable pageable);
 
     User findByLogin(String login);
+
+    Set<User> findByLoginNotIn(List<String> exclusions);
 }

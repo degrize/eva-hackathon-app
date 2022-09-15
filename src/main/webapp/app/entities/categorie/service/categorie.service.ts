@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { ICategorie, NewCategorie } from '../categorie.model';
+import { IAnnonce } from '../../annonce/annonce.model';
 
 export type PartialUpdateCategorie = Partial<ICategorie> & Pick<ICategorie, 'id'>;
 
@@ -37,6 +38,10 @@ export class CategorieService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<ICategorie[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  getCategorieList(): Observable<HttpResponse<any>> {
+    return this.http.get<ICategorie[]>(`${this.resourceUrl}/liste`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

@@ -1,6 +1,7 @@
 package com.hackathon.eva.repository;
 
 import com.hackathon.eva.domain.Transaction;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -37,4 +38,10 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query("select transaction from Transaction transaction left join fetch transaction.annonce where transaction.id =:id")
     Optional<Transaction> findOneWithToOneRelationships(@Param("id") Long id);
+
+    @Query("SELECT COUNT(transaction) FROM Transaction transaction")
+    int getCountTransaction();
+
+    @Query("select count(transaction) from Transaction transaction")
+    int getCountTransactionParPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

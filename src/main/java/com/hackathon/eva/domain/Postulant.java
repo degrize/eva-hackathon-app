@@ -47,6 +47,10 @@ public class Postulant implements Serializable {
     @OneToOne(mappedBy = "postulant")
     private Transaction transaction;
 
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "postulants", "souscriptions" }, allowSetters = true)
+    private MandataireDelegateur mandataireDelegateur;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -129,6 +133,19 @@ public class Postulant implements Serializable {
 
     public Postulant transaction(Transaction transaction) {
         this.setTransaction(transaction);
+        return this;
+    }
+
+    public MandataireDelegateur getMandataireDelegateur() {
+        return this.mandataireDelegateur;
+    }
+
+    public void setMandataireDelegateur(MandataireDelegateur mandataireDelegateur) {
+        this.mandataireDelegateur = mandataireDelegateur;
+    }
+
+    public Postulant mandataireDelegateur(MandataireDelegateur mandataireDelegateur) {
+        this.setMandataireDelegateur(mandataireDelegateur);
         return this;
     }
 

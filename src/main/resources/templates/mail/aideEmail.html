@@ -60,11 +60,15 @@
     </div>
 
     <p th:text="#{email.global.message(${aide.message})}"></p>
+    <br />
 
     <p>
       <span th:text="#{email.activation.text2}">Regards, </span>
       <br />
-      <em th:text="#{email.global.message(${aide.nom})}">JHipster.</em>
+      <span th:text="#{email.global.message(${aide.prenom})}">JHipster.</span>
+      <span th:text="#{email.global.message(${aide.nom})}">JHipster.</span>
+      <br />
+      <em th:text="#{email.global.message(${aide.email})}">JHipster.</em>
     </p>
   </body>
 </html>

@@ -1,5 +1,7 @@
 package com.hackathon.eva.web.rest;
 
+import com.hackathon.eva.domain.Annonce;
+import com.hackathon.eva.domain.Postulant;
 import com.hackathon.eva.repository.PostulantRepository;
 import com.hackathon.eva.service.PostulantService;
 import com.hackathon.eva.service.dto.PostulantDTO;
@@ -195,5 +197,12 @@ public class PostulantResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/postulants/liste")
+    public ResponseEntity<List<Postulant>> getAllPostulantNoPageble() {
+        log.debug("REST request to get list of postulants");
+        List<Postulant> postulantList = postulantService.findAllNoPageble();
+        return ResponseEntity.ok().body(postulantList);
     }
 }

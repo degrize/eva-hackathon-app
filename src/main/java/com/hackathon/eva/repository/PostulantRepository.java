@@ -1,6 +1,7 @@
 package com.hackathon.eva.repository;
 
 import com.hackathon.eva.domain.Postulant;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -28,4 +29,10 @@ public interface PostulantRepository extends PostulantRepositoryWithBagRelations
     default Page<Postulant> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    @Query("SELECT COUNT(postulant) FROM Postulant postulant")
+    int getCountPostulant();
+
+    @Query("select count(postulant) from Postulant postulant")
+    int getCountPostulantParPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

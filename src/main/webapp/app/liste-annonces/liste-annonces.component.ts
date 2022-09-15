@@ -4,6 +4,20 @@ import { IAnnonce } from '../entities/annonce/annonce.model';
 import { HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import List from 'list.js';
+import { CategorieService } from '../entities/categorie/service/categorie.service';
+import { ICategorie } from '../entities/categorie/categorie.model';
+import { DataUtils } from '../core/util/data-util.service';
+import { Observable, Subject } from 'rxjs';
+import { IPostulant } from '../entities/postulant/postulant.model';
+import { finalize, takeUntil } from 'rxjs/operators';
+import { PostulantService } from '../entities/postulant/service/postulant.service';
+import { PostulantFormGroup, PostulantFormService } from '../entities/postulant/update/postulant-form.service';
+import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandataire-delegateur.model';
+import { AccountService } from '../core/auth/account.service';
+import { MandataireDelegateurService } from '../entities/mandataire-delegateur/service/mandataire-delegateur.service';
+import { Account } from '../core/auth/account.model';
+import { EtatCompte } from '../entities/enumerations/etat-compte.model';
+import { ITEM_DELETED_EVENT } from '../config/navigation.constants';
 
 @Component({
   selector: 'jhi-liste-annonces',
@@ -34,8 +48,28 @@ export class ListeAnnoncesComponent implements OnInit {
     },
   ];
   annonces?: IAnnonce[];
+  postulants?: IPostulant[];
+  categories?: ICategorie[];
+  postulant?: IPostulant | null;
+  verifDoublonAbonnement = false;
+  isCollapsed = false;
 
-  constructor(protected annonceService: AnnonceService) {}
+  account: Account | null = null;
+  mandataireDelegateur?: IMandataireDelegateur | null;
+
+  editForm: PostulantFormGroup = this.postulantFormService.createPostulantFormGroup();
+
+  private readonly destroy$ = new Subject<void>();
+
+  constructor(
+    protected annonceService: AnnonceService,
+    protected categorieService: CategorieService,
+    protected dataUtils: DataUtils,
+    protected postulantService: PostulantService,
+    protected postulantFormService: PostulantFormService,
+    private accountService: AccountService,
+    private mandataireDelegateurService: MandataireDelegateurService
+  ) {}
 
   entriesChange($event: any) {
     this.entries = $event.target?.value;
@@ -43,14 +77,16 @@ export class ListeAnnoncesComponent implements OnInit {
 
   filterTable($event: any) {
     let val = $event.target.value;
-    this.temp = this.rows.filter(function (d: { [x: string]: string }) {
-      for (let key in d) {
-        if (d[key].toLowerCase().indexOf(val) !== -1) {
-          return true;
+    if (this.annonces) {
+      this.temp = this.rows.filter(function (d: { [x: string]: string }) {
+        for (let key in d) {
+          if (d[key].toLowerCase().indexOf(val) !== -1) {
+            return true;
+          }
         }
-      }
-      return false;
-    });
+        return false;
+      });
+    }
   }
   onSelect({ selected }: any) {
     this.selected.splice(0, this.selected.length);
@@ -61,19 +97,76 @@ export class ListeAnnoncesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    new List('users', {
-      valueNames: ['name', 'budget', 'status', 'completion'],
-      listClass: 'list',
-    });
-
-    this.startJsFile();
     this.loadAnnonceList();
+    this.loadCategorieList();
+    this.loadProfileMandataire();
+    this.loadPostulantList();
+  }
+
+  printAlert(): void {
+    this.verifDoublonAbonnement = true;
+  }
+
+  loadProfileMandataire(): void {
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => {
+        this.account = account;
+        if (account !== null) {
+          this.mandataireDelegateurService.findByJhiUserId({ login: this.account?.login }).subscribe(
+            (res: HttpResponse<IMandataireDelegateur>) => this.onSucessUser(res.body),
+            (res: HttpResponse<any>) => this.onError()
+          );
+        }
+      });
+  }
+
+  startAbonnement(annonce: IAnnonce): void {
+    const postulant = this.postulantFormService.getPostulant(this.editForm);
+    postulant.mandataireDelegateur = this.mandataireDelegateur;
+    postulant.numeroMomo = this.mandataireDelegateur?.numeroMomo;
+    postulant.annonces?.push(annonce);
+
+    if (postulant?.id !== null) {
+      this.subscribeToSaveResponse(this.postulantService.update(postulant));
+    } else {
+      this.subscribeToSaveResponse(this.postulantService.create(postulant));
+      console.log(" qui vient d'inserer");
+      console.log(postulant);
+    }
+  }
+
+  deleteAbonnement(id: number): void {
+    this.postulantService.delete(id).subscribe(() => {
+      this.verifDoublonAbonnement = true;
+      this.loadPostulantList();
+      this.notification('Vous etes désabonné', 'success');
+    });
+  }
+
+  loadPostulantList(): void {
+    this.postulantService.getPostulantList().subscribe(
+      (res: HttpResponse<IPostulant[]>) => {
+        this.postulants = res.body ?? [];
+        console.log('Postulants');
+        console.log(this.postulants);
+      },
+      () => {
+        this.onError();
+      }
+    );
   }
 
   loadAnnonceList(): void {
     this.annonceService.getAnnonceList().subscribe(
       (res: HttpResponse<IAnnonce[]>) => {
         this.annonces = res.body ?? [];
+        /* new List('users', {
+          valueNames: ['name', 'budget', 'status', 'completion'],
+          listClass: 'list',
+        }); */
+
         this.onSuccess();
       },
       () => {
@@ -82,62 +175,79 @@ export class ListeAnnoncesComponent implements OnInit {
     );
   }
 
-  startJsFile(): void {
-    const day = document.querySelector('.day .numb');
-    const hour = document.querySelector('.hour .numb');
-    const min = document.querySelector('.min .numb');
-    const sec = document.querySelector('.sec .numb');
-    let timer = setInterval(() => {
-      let currentDate = new Date().getTime();
-      let launchDate = new Date('Sep 18, 2020 13:00:00').getTime();
-      let duration = launchDate - currentDate;
-      let days = Math.floor(duration / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((duration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((duration % (1000 * 60)) / 1000);
-
-      if (day) {
-        day.innerHTML = String(days);
-        if (days < 10) {
-          day.innerHTML = '0' + days;
-        }
+  loadCategorieList(): void {
+    this.categorieService.getCategorieList().subscribe(
+      (res: HttpResponse<ICategorie[]>) => {
+        this.categories = res.body ?? [];
+        this.onSuccess();
+      },
+      () => {
+        this.onError();
       }
+    );
+  }
 
-      if (hour && min && sec) {
-        hour.innerHTML = String(hours);
-        min.innerHTML = String(minutes);
-        sec.innerHTML = String(seconds);
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
 
-        if (hours < 10) {
-          hour.innerHTML = '0' + hours;
-        }
-        if (minutes < 10) {
-          min.innerHTML = '0' + minutes;
-        }
-        if (seconds < 10) {
-          sec.innerHTML = '0' + seconds;
-        }
-      }
-
-      if (duration < 0) {
-        clearInterval(timer);
-      }
-    }, 1000);
+  openFile(base64String: string, contentType: string | null | undefined): void {
+    return this.dataUtils.openFile(base64String, contentType);
   }
 
   protected onSuccess(): void {
     if (this.annonces) {
       console.log(this.annonces);
-      this.temp = this.annonces.map((prop: any, key: any) => {
+      /*this.temp = this.annonces.map((prop: any, key: any) => {
         return {
           ...prop,
           id: key,
         };
-      });
+      });*/
+    }
+
+    if (this.categories) {
+      console.log(this.categories);
     }
   }
 
   protected onError(): void {
+    this.notification('Aucune annonce trouvée', 'warning');
+  }
+
+  protected afterClickAbonner() {
+    this.notification("Vous etes abonné à l'annonce", 'success');
+  }
+
+  protected onSaveFinalize(): void {
+    console.log('success abonnement');
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IPostulant>>): void {
+    result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
+      next: () => this.onSaveSuccess(),
+      error: () => this.onSaveError(),
+    });
+  }
+
+  protected onSaveSuccess(): void {
+    this.loadPostulantList();
+    this.afterClickAbonner();
+  }
+
+  protected onSaveError(): void {
+    // Api for inheritance.
+  }
+
+  protected onSucessUser(data: IMandataireDelegateur | null): void {
+    if (data) {
+      this.mandataireDelegateur = data;
+      console.log('DATA USERIO MANDATAIRE DELEGATEUR');
+      console.log(this.mandataireDelegateur);
+    }
+  }
+
+  protected notification(message: string, type: string): void {
     const Toast = Swal.mixin({
       toast: true,
       position: 'top-end',
@@ -150,9 +260,17 @@ export class ListeAnnoncesComponent implements OnInit {
       },
     });
 
-    Toast.fire({
-      icon: 'warning',
-      title: 'Aucune annonce trouvée',
-    });
+    if (type === 'success') {
+      Toast.fire({
+        icon: 'success',
+        title: message,
+      });
+    }
+    if (type === 'warning') {
+      Toast.fire({
+        icon: 'warning',
+        title: message,
+      });
+    }
   }
 }

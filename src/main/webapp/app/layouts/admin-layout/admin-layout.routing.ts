@@ -7,19 +7,49 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { EtatCompteComponent } from '../../etat-compte/etat-compte.component';
 
 export const AdminLayoutRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'premium', component: EtatCompteComponent },
-  { path: 'user-profile', component: UserProfileComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    data: {
+      authorities: [Authority.ADMIN],
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+    data: {
+      authorities: [Authority.USER],
+    },
+    canActivate: [UserRouteAccessService],
+  },
   {
     path: '',
     loadChildren: () => import(`../../entities/entity-routing.module`).then(m => m.EntityRoutingModule),
   },
   {
     path: 'mes-annonces',
+    data: {
+      authorities: [Authority.USER],
+    },
+    canActivate: [UserRouteAccessService],
     loadChildren: () => import(`../../annonce/annonce.module`).then(m => m.AnnonceModule),
   },
   {
+    path: 'mes-echanges',
+    data: {
+      authorities: [Authority.USER],
+    },
+    canActivate: [UserRouteAccessService],
+    loadChildren: () => import(`../../mes-echanges/mes-echanges.module`).then(m => m.MesEchangesModule),
+  },
+  {
     path: 'account',
+    data: {
+      authorities: [Authority.USER],
+    },
+    canActivate: [UserRouteAccessService],
     loadChildren: () => import('../../account/accountDashboard.module').then(m => m.AccountDashboardModule),
   },
   {

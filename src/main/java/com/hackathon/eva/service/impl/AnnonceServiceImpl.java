@@ -108,6 +108,6 @@ public class AnnonceServiceImpl implements AnnonceService {
     @Transactional(readOnly = true)
     public List<Annonce> findAllNoPageble() {
         log.debug("Request to get list of Annonces");
-        return annonceRepository.findAll();
+        return annonceRepository.findAllWithEagerRelationships();
     }
 }

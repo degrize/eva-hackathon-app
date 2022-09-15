@@ -1,6 +1,7 @@
 package com.hackathon.eva.repository;
 
 import com.hackathon.eva.domain.Annonce;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -28,4 +29,10 @@ public interface AnnonceRepository extends AnnonceRepositoryWithBagRelationships
     default Page<Annonce> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    @Query("SELECT COUNT(annonce) FROM Annonce annonce")
+    int getCountAnnonce();
+
+    @Query("select count(annonce) from Annonce annonce")
+    int getCountAnnonceParPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

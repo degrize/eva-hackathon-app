@@ -12,158 +12,79 @@
         <button type="submit">Rechercher</button>
       </div>
     </form>
-    <div class="count-down mb-3">
-      <div class="timer day">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Site web</div>
-        </div>
-      </div>
-      <div class="timer hour">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Voiture</div>
-        </div>
-      </div>
-      <div class="timer min">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Menusier</div>
-        </div>
-      </div>
-      <div class="timer sec">
-        <div class="count">
-          <div class="numb">00</div>
-          <div class="text">Coord</div>
-        </div>
-      </div>
-    </div>
   </div>
   <div class="table-responsive">
     <table class="table table-dark align-items-center">
       <thead class="thead-light">
         <tr>
-          <th class="sort hand" data-sort="name" scope="col">Project</th>
+          <th class="sort hand" data-sort="name" scope="col">Titre</th>
 
-          <th class="sort hand" data-sort="budget" scope="col">Budget</th>
+          <th class="sort hand" data-sort="budget" scope="col">Tarif</th>
 
-          <th class="sort hand" data-sort="status" scope="col">Status</th>
+          <th class="sort hand" data-sort="status" scope="col">Categorie</th>
 
-          <th scope="col">Users</th>
+          <th scope="col">Proprietaire</th>
 
-          <th class="sort" data-sort="completion" scope="col">Completion</th>
+          <th class="sort" data-sort="completion" scope="col">Durée</th>
 
           <th scope="col"></th>
         </tr>
       </thead>
 
       <tbody class="list">
-        <tr>
+        <tr *ngFor="let annonce of annonces">
           <th scope="row">
             <div class="media align-items-center">
-              <a class="avatar rounded-circle mr-3" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../../content/images/logo-jhipster.png" />
+              <a
+                class="avatar rounded-circle mr-3"
+                [tooltip]="annonce?.description + ' '"
+                placement="bottom"
+                (click)="openFile(annonce?.imageVideo + '', annonce?.imageVideoContentType + '')"
+              >
+                <img alt="Image placeholder" [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" />
               </a>
 
               <div class="media-body">
-                <span class="name mb-0 text-sm"> Argon Design System </span>
+                <span class="name mb-0 text-sm">{{ annonce?.titre }} </span>
               </div>
             </div>
           </th>
 
-          <td class="budget">$2500 USD</td>
+          <td class="budget">{{ annonce?.tarif }}</td>
 
           <td>
             <span class="badge badge-dot mr-4">
               <i class="bg-warning"> </i>
 
-              <span class="status"> pending </span>
+              <span *ngFor="let annonceCatgorie of annonce?.categories" class="status"> {{ annonceCatgorie?.nom }}, &nbsp; </span>
             </span>
           </td>
 
           <td>
             <div class="avatar-group">
-              <a class="avatar avatar-sm rounded-circle" tooltip="Romina Hadid" placement="top" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../../content/images/logo-jhipster.png" />
-              </a>
-            </div>
-          </td>
-
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="completion mr-2"> 60% </span>
-
-              <div>
-                <div class="progress">
-                  <progressbar type="warning" [value]="60"> </progressbar>
-                </div>
-              </div>
-            </div>
-          </td>
-
-          <td class="text-right">
-            <div dropdown class="dropdown no-caret">
               <a
-                id="button-basic"
-                dropdownToggle
-                role="button"
-                class="btn btn-sm btn-icon-only text-light dropdown-toggle"
-                aria-controls="dropdown-basic"
+                class="avatar avatar-sm rounded-circle"
+                [tooltip]="
+                  annonce?.mandataireDelegateur?.nomDeFamille +
+                  ' ' +
+                  annonce?.mandataireDelegateur?.prenom +
+                  ' ' +
+                  annonce?.mandataireDelegateur?.contact
+                "
+                placement="top"
+                href="javascript:void(0)"
               >
-                <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-              </a>
-
-              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
-                <a class="dropdown-item" href="javascript:void(0)"> Action </a>
-
-                <a class="dropdown-item" href="javascript:void(0)"> Another action </a>
-
-                <a class="dropdown-item" href="javascript:void(0)"> Something else here </a>
-              </div>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">
-            <div class="media align-items-center">
-              <a class="avatar rounded-circle mr-3" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../content/images/planet-earth.png" />
-              </a>
-
-              <div class="media-body">
-                <span class="name mb-0 text-sm"> Angular Now UI Kit PRO </span>
-              </div>
-            </div>
-          </th>
-
-          <td class="budget">$1800 USD</td>
-
-          <td>
-            <span class="badge badge-dot mr-4">
-              <i class="bg-success"> </i>
-
-              <span class="status"> completed </span>
-            </span>
-          </td>
-
-          <td>
-            <div class="avatar-group">
-              <a class="avatar avatar-sm rounded-circle" tooltip="Ryan Thompson" placement="top" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../content/images/planet-earth.png" />
+                <img
+                  alt="Image placeholder"
+                  [src]="'data:' + annonce?.mandataireDelegateur?.photoContentType + ';base64,' + annonce?.mandataireDelegateur?.photo"
+                />
               </a>
             </div>
           </td>
 
           <td>
             <div class="d-flex align-items-center">
-              <span class="completion mr-2"> 100% </span>
-
-              <div>
-                <div class="progress">
-                  <progressbar type="success" [value]="100"> </progressbar>
-                </div>
-              </div>
+              <span class="completion mr-2"> {{ annonce?.duree }} </span>
             </div>
           </td>
 
@@ -180,77 +101,21 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
-                <a href="javascript:void(0)" class="dropdown-item"> Action </a>
-
-                <a href="javascript:void(0)" class="dropdown-item"> Another action </a>
-
-                <a href="javascript:void(0)" class="dropdown-item"> Something else here </a>
-              </div>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <th scope="row">
-            <div class="media align-items-center">
-              <a class="avatar rounded-circle mr-3" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../content/images/jhipster_family_member_1_head-384.png" />
-              </a>
-
-              <div class="media-body">
-                <span class="name mb-0 text-sm"> Black Dashboard </span>
-              </div>
-            </div>
-          </th>
-
-          <td class="budget">$3150 USD</td>
-
-          <td>
-            <span class="badge badge-dot mr-4">
-              <i class="bg-danger"> </i>
-
-              <span class="status"> delayed </span>
-            </span>
-          </td>
-
-          <td>
-            <div class="avatar-group">
-              <a class="avatar avatar-sm rounded-circle" tooltip="Ryan Thompson" placement="top" href="javascript:void(0)">
-                <img alt="Image placeholder" src="../../content/images/jhipster_family_member_1_head-384.png" />
-              </a>
-            </div>
-          </td>
-
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="completion mr-2"> 72% </span>
-
-              <div>
-                <div class="progress">
-                  <progressbar type="danger" [value]="72"> </progressbar>
-                </div>
-              </div>
-            </div>
-          </td>
-
-          <td class="text-right">
-            <div dropdown class="dropdown no-caret">
-              <a
-                id="button-basic"
-                dropdownToggle
-                role="button"
-                class="btn btn-sm btn-icon-only text-light dropdown-toggle"
-                aria-controls="dropdown-basic"
-              >
-                <i class="ni ni-planet text-blue"> </i>
-              </a>
-
-              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
-                <a href="javascript:void(0)" class="dropdown-item"> Action </a>
-
-                <a href="javascript:void(0)" class="dropdown-item"> Another action </a>
-
-                <a href="javascript:void(0)" class="dropdown-item"> Something else here </a>
+                <ng-container *ngFor="let postulantItem of postulants">
+                  <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
+                    <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">
+                      <a
+                        *ngIf="postulantItem?.mandataireDelegateur?.id === mandataireDelegateur?.id"
+                        class="dropdown-item"
+                        (click)="deleteAbonnement(postulantItem.id)"
+                      >
+                        Désabonner {{ printAlert() }}
+                      </a>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a>
+                <a class="dropdown-item" [routerLink]="['/annonce', annonce.id, 'edit']"> Afficher </a>
               </div>
             </div>
           </td>

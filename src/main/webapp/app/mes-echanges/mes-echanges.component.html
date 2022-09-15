@@ -1,0 +1,74 @@
+<div>
+  <accordion [isAnimated]="true" [closeOthers]="true">
+    <ng-container *ngFor="let annonce of annonces">
+      <ng-container *ngIf="annonce?.mandataireDelegateur?.id === mandataireDelegateur?.id">
+        <accordion-group>
+          <div class="d-flex justify-between align-items-center w-60" accordion-heading>
+            <button type="button" class="btn btn-secondary mb-0">
+              <span>{{ annonce?.titre }}</span>
+            </button>
+            <span>{{ annonce?.dateDeDelais }}</span>
+          </div>
+
+          <blockquote class="blockquote">
+            <p class="mb-0">{{ annonce?.description }}</p>
+            <footer class="blockquote-footer">
+              Tarif : <cite title="Source Title">{{ annonce?.tarif }} FCFA</cite>
+            </footer>
+          </blockquote>
+
+          <div
+            id="card-stats-bg-component"
+            class="tab-pane tab-example-result fade show active"
+            role="tabpanel"
+            aria-labelledby="card-stats-bg-component-tab"
+          >
+            <div class="row mb-4">
+              <ng-container *ngFor="let postulantItem of postulants">
+                <ng-container *ngFor="let postulantAnnonce of postulantItem?.annonces">
+                  <ng-container *ngIf="annonce?.id === postulantAnnonce?.id">
+                    <div class="col-lg-6">
+                      <div class="card bg-gradient-success">
+                        <!-- Card body -->
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h5 class="card-title text-uppercase text-muted mb-0 text-dark">
+                                {{ postulantItem?.mandataireDelegateur?.prenom }} {{ postulantItem?.mandataireDelegateur?.nomDeFamille }}
+                              </h5>
+                              <span class="h2 font-weight-bold mb-0 text-white">{{ postulantItem?.mandataireDelegateur?.numeroMomo }}</span>
+                              <span class="text-sm"> compte MoMo</span>
+                            </div>
+                            <div class="col-auto">
+                              <div class="icon icon-shape bg-white text-dark rounded-circle shadow">
+                                <img
+                                  width="40"
+                                  [src]="
+                                    'data:' +
+                                    postulantItem?.mandataireDelegateur?.photoContentType +
+                                    ';base64,' +
+                                    postulantItem?.mandataireDelegateur?.photo
+                                  "
+                                  alt=""
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <p class="mt-3 mb-0 text-sm">
+                            <button type="button" class="btn btn-secondary btn-sm">échanger</button>
+                            <a [routerLink]="['/mandataire-delegateur', mandataireDelegateur?.id, 'view']">Afficher</a>
+                            <span class="text-white mr-2"><i class="fa fa-arrow-up"></i></span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+        </accordion-group>
+      </ng-container>
+    </ng-container>
+  </accordion>
+</div>

@@ -24,223 +24,28 @@
       </button>
     </div>
 
-    <div class="box">
+    <div *ngFor="let categorie of categories" class="box">
       <div>
-        <h2 class="ap text-white justify-content-center">Programmation</h2>
+        <h2 class="ap text-white justify-content-center">{{ categorie.nom }}</h2>
       </div>
       <div class="card-deck">
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <div>
-        <h2 class="ap text-white justify-content-center">Marketing digital</h2>
-      </div>
-      <div class="card-deck">
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <div>
-        <h2 class="ap text-white justify-content-center">Rédaction & Traduction</h2>
-      </div>
-      <div class="card-deck">
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <div>
-        <h2 class="ap text-white justify-content-center">Audio & Vidéo</h2>
-      </div>
-      <div class="card-deck">
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese1.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="box">
-      <div>
-        <h2 class="ap text-white justify-content-center">Creat & Design</h2>
-      </div>
-      <div class="card-deck">
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
-        <div class="card" style="width: 14rem">
-          <img class="card-img-top" src="../../../content/images/Imagese.jpg" alt="Card image cap" />
-          <div class="card-body">
-            <h5 class="card-titlee">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <h5 class="prix">xxx FCFA</h5>
-            <a href="#" class="btn btn-primary">Commander</a>
-          </div>
-        </div>
+        <ng-container *ngFor="let annonce of annonces">
+          <ng-container *ngFor="let annonceCategorie of annonce.categories">
+            <div *ngIf="annonceCategorie.id === categorie.id" class="card" style="width: 14rem">
+              <img
+                class="card-img-top"
+                [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
+                alt="Card image cap"
+              />
+              <div class="card-body">
+                <h5 class="card-titlee">{{ annonce?.titre }}</h5>
+                <p class="card-text">{{ annonce?.description }}</p>
+                <h5 class="prix">{{ annonce?.tarif }}</h5>
+                <a [routerLink]="['/annonce', annonce.id, 'edit']" class="btn btn-primary">Commander</a>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
 
@@ -251,25 +56,25 @@
         </div>
 
         <div class="row no-gutters clients-wrap clearfix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp">
-          <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-4">
             <div class="client-logo">
               <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1559460379/client-5.png" class="img-fluid" alt="" />
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
             <div class="client-logo">
               <img src="../../../content/assets/img/beve/log3.jpg" class="img-fluid" alt="" />
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
             <div class="client-logo">
               <img src="../../../content/assets/img/beve/log2.jpg" class="img-fluid" alt="" />
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="col-lg-3 col-md-4 col-xs-6 mb-2">
             <div class="client-logo">
               <img src="../../../content/assets/img/beve/log1.jpg" class="img-fluid" alt="" />
             </div>
