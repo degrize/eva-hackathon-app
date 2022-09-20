@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IMandataireDelegateur, NewMandataireDelegateur } from '../mandataire-delegateur.model';
+import { numeroMoMoValidator } from '../../../shared/validators/valid.validator';
 
 /**
  * A partial Type with required key is used as form input.
@@ -56,11 +57,11 @@ export class MandataireDelegateurFormService {
       nomDeFamille: new FormControl(mandataireDelegateurRawValue.nomDeFamille),
       prenom: new FormControl(mandataireDelegateurRawValue.prenom),
       contact: new FormControl(mandataireDelegateurRawValue.contact, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
       }),
       email: new FormControl(mandataireDelegateurRawValue.email),
       numeroMomo: new FormControl(mandataireDelegateurRawValue.numeroMomo, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), numeroMoMoValidator()],
       }),
       sexe: new FormControl(mandataireDelegateurRawValue.sexe, {
         validators: [Validators.required],

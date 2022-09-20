@@ -80,7 +80,7 @@ public class SecurityConfiguration {
             .antMatchers("/api/authenticate").permitAll()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
-            .antMatchers("/api/annonces/mandataireDelegateurs/search/**").permitAll()
+            .antMatchers("/api/mandataire-delegateurs/search/**").permitAll()
             .antMatchers("/api/annonces/search-list").permitAll()
             .antMatchers("/api/annonces/liste").permitAll()
             .antMatchers("/api/categories/liste").permitAll()

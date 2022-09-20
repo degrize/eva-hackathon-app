@@ -14,6 +14,7 @@ import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandata
 export class GlobalSearchComponent implements OnInit {
   loading$!: Observable<boolean>;
   mandataireDelegateurs$!: Observable<IMandataireDelegateur[]>;
+  mandataireDelegateursList = false;
 
   params: any;
   searchInput: any;
@@ -23,7 +24,7 @@ export class GlobalSearchComponent implements OnInit {
   ngOnInit(): void {
     this.initObservables();
     this.route.queryParams.subscribe(params => {
-      this.searchInput = params['nomprenom'];
+      this.searchInput = params['nomprenom'].toLowerCase();
       // on recuperes les données depuis la base
       this.globalSearchService.getMandataireDelegateursFromServer(this.searchInput);
     });
@@ -32,5 +33,15 @@ export class GlobalSearchComponent implements OnInit {
   private initObservables() {
     this.loading$ = this.globalSearchService.loading$;
     this.mandataireDelegateurs$ = this.globalSearchService.mandataireDelegateurs$;
+
+    this.loading$.subscribe(element => {
+      this.mandataireDelegateurs$.subscribe(value => {
+        if (value.length <= 0) {
+          this.mandataireDelegateursList = true;
+        } else {
+          this.mandataireDelegateursList = false;
+        }
+      });
+    });
   }
 }

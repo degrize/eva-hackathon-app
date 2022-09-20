@@ -8,7 +8,7 @@ import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandata
   providedIn: 'root',
 })
 export class GlobalSearchService {
-  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/mandataireDelegateurs');
+  protected resourceUrl = this.applicationConfigService.getEndpointFor('api/mandataire-delegateurs');
 
   constructor(private http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -29,9 +29,6 @@ export class GlobalSearchService {
   private lastMandataireDelegateursLoad = 0;
 
   getMandataireDelegateursFromServer(nomprenom: string) {
-    if (Date.now() - this.lastMandataireDelegateursLoad <= 300000) {
-      return;
-    }
     this.setLoadingStatus(true);
     this.http
       .get<IMandataireDelegateur[]>(`${this.resourceUrl}/search/${nomprenom}`)

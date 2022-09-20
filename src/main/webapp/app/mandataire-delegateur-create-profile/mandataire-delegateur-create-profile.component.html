@@ -39,6 +39,12 @@
                   >
                     Ce champ est obligatoire.
                   </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('contact')?.errors?.maxlength">
+                    Renseignez un numero de 10 chiffres.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('contact')?.errors?.minlength">
+                    Renseignez un numero de 10 chiffres.
+                  </small>
                 </div>
               </div>
 
@@ -69,6 +75,15 @@
                     jhiTranslate="entity.validation.required"
                   >
                     Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.maxlength">
+                    Renseignez un numero de 10 chiffres.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.minlength">
+                    Renseignez un numero de 10 chiffres.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.validValidator">
+                    Veuillez commencer par le prefixe 05
                   </small>
                 </div>
               </div>

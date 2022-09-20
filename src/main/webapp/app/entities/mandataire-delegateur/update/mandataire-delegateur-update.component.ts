@@ -15,6 +15,7 @@ import { EventManager, EventWithContent } from '../../../core/util/event-manager
 import { AlertError } from '../../../shared/alert/alert-error.model';
 
 import * as country from '../../../../content/country.json';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'jhi-mandataire-delegateur-update',
@@ -68,10 +69,28 @@ export class MandataireDelegateurUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const mandataireDelegateur = this.mandataireDelegateurFormService.getMandataireDelegateur(this.editForm);
+
+    // tout en miniscule pour la recherche
+    mandataireDelegateur.nomDeFamille = mandataireDelegateur.nomDeFamille?.toLowerCase();
+    mandataireDelegateur.prenom = mandataireDelegateur.prenom?.toLowerCase();
     if (mandataireDelegateur.id !== null) {
       this.subscribeToSaveResponse(this.mandataireDelegateurService.update(mandataireDelegateur));
     } else {
       this.subscribeToSaveResponse(this.mandataireDelegateurService.create(mandataireDelegateur));
+    }
+  }
+
+  getFormControlErrorText(ctrl: AbstractControl) {
+    if (ctrl.hasError('required')) {
+      return 'Ce champ est requis';
+    } else if (ctrl.hasError('email')) {
+      return "Merci d'entrer une adresse mail valide";
+    } else if (ctrl.hasError('minlength')) {
+      return 'Ce numéro de téléphone ne contient pas assez de chiffres';
+    } else if (ctrl.hasError('maxlength')) {
+      return 'Ce numéro de téléphone contient trop de chiffres';
+    } else {
+      return 'Ce champ contient une erreur';
     }
   }
 

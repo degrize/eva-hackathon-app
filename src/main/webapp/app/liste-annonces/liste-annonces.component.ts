@@ -151,11 +151,6 @@ export class ListeAnnoncesComponent implements OnInit {
     this.annonceService.getAnnonceList().subscribe(
       (res: HttpResponse<IAnnonce[]>) => {
         this.annonces = res.body ?? [];
-        /* new List('users', {
-          valueNames: ['name', 'budget', 'status', 'completion'],
-          listClass: 'list',
-        }); */
-
         this.onSuccess();
       },
       () => {
@@ -187,12 +182,6 @@ export class ListeAnnoncesComponent implements OnInit {
   protected onSuccess(): void {
     if (this.annonces) {
       console.log(this.annonces);
-      /*this.temp = this.annonces.map((prop: any, key: any) => {
-        return {
-          ...prop,
-          id: key,
-        };
-      });*/
     }
 
     if (this.categories) {
