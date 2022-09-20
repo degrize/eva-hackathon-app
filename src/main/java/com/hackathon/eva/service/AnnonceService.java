@@ -2,6 +2,7 @@ package com.hackathon.eva.service;
 
 import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.service.dto.AnnonceDTO;
+import com.hackathon.eva.service.dto.AnnonceSearchDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -73,4 +74,5 @@ public interface AnnonceService {
     void delete(Long id);
 
     List<Annonce> findAllNoPageble();
+    List<Annonce> findAllNoPagebleSearch();
 }

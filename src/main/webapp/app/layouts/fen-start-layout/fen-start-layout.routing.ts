@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { navbarRoute } from '../navbar/navbar.route';
+import { GlobalSearchComponent } from '../../global-search/global-search.component';
 
 export const FenStartLayoutRoutes: Routes = [
   {
@@ -47,6 +48,10 @@ export const FenStartLayoutRoutes: Routes = [
       import(`../../mandataire-delegateur-create-profile/mandataire-delegateur-create-profile.module`).then(
         m => m.MandataireDelegateurCreateProfileModule
       ),
+  },
+  {
+    path: 'search',
+    component: GlobalSearchComponent,
   },
 
   navbarRoute,

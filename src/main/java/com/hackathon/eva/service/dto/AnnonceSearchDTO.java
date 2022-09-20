@@ -1,6 +1,5 @@
 package com.hackathon.eva.service.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -8,14 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Lob;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 
-/**
- * A DTO for the {@link com.hackathon.eva.domain.Annonce} entity.
- */
-@Schema(description = "Donnateur entity.\n@author BEVE.")
-@SuppressWarnings("common-java:DuplicatedBlocks")
-public class AnnonceDTO implements Serializable {
+public class AnnonceSearchDTO implements Serializable {
 
     private Long id;
 
@@ -39,6 +33,7 @@ public class AnnonceDTO implements Serializable {
     private String description;
 
     private String duree;
+
     private String categorieSearch;
 
     private Set<CategorieDTO> categories = new HashSet<>();
@@ -125,14 +120,6 @@ public class AnnonceDTO implements Serializable {
         this.duree = duree;
     }
 
-    public String getCategorieSearch() {
-        return categorieSearch;
-    }
-
-    public void setCategorieSearch(String categorieSearch) {
-        this.categorieSearch = categorieSearch;
-    }
-
     public Set<CategorieDTO> getCategories() {
         return categories;
     }
@@ -149,16 +136,24 @@ public class AnnonceDTO implements Serializable {
         this.mandataireDelegateur = mandataireDelegateur;
     }
 
+    public String getCategorieSearch() {
+        return categorieSearch;
+    }
+
+    public void setCategorieSearch(String categorieSearch) {
+        this.categorieSearch = categorieSearch;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AnnonceDTO)) {
+        if (!(o instanceof AnnonceSearchDTO)) {
             return false;
         }
 
-        AnnonceDTO annonceDTO = (AnnonceDTO) o;
+        AnnonceSearchDTO annonceDTO = (AnnonceSearchDTO) o;
         if (this.id == null) {
             return false;
         }

@@ -5,13 +5,13 @@
         <accordion-group>
           <div class="d-flex justify-between align-items-center w-60" accordion-heading>
             <button type="button" class="btn btn-secondary mb-0">
-              <span>{{ annonce?.titre }}</span>
+              <span>{{ annonce?.titre | shorten: 50 }}</span>
             </button>
-            <span>{{ annonce?.dateDeDelais }}</span>
+            <span>{{ annonce?.dateDeDelegation | timeAgo }}</span>
           </div>
 
           <blockquote class="blockquote">
-            <p class="mb-0">{{ annonce?.description }}</p>
+            <p class="mb-0">{{ annonce?.description | shorten: 60 }}</p>
             <footer class="blockquote-footer">
               Tarif : <cite title="Source Title">{{ annonce?.tarif }} FCFA</cite>
             </footer>

@@ -4,6 +4,7 @@ import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.repository.AnnonceRepository;
 import com.hackathon.eva.service.AnnonceService;
 import com.hackathon.eva.service.dto.AnnonceDTO;
+import com.hackathon.eva.service.dto.AnnonceSearchDTO;
 import com.hackathon.eva.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -203,5 +204,12 @@ public class AnnonceResource {
         log.debug("REST request to get list of Annonces");
         List<Annonce> annonceList = annonceService.findAllNoPageble();
         return ResponseEntity.ok().body(annonceList);
+    }
+
+    @GetMapping("/annonces/search-list")
+    public ResponseEntity<List<Annonce>> getAllAnnoncesSearchNoPageble() {
+        log.debug("REST request to get list of search Annonces");
+        List<Annonce> annonceSearchList = annonceService.findAllNoPagebleSearch();
+        return ResponseEntity.ok().body(annonceSearchList);
     }
 }

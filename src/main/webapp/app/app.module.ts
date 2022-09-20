@@ -31,6 +31,7 @@ import { ListeAnnoncesComponent } from './liste-annonces/liste-annonces.componen
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MandataireDelegateurCreateProfileComponent } from './mandataire-delegateur-create-profile/mandataire-delegateur-create-profile.component';
+import { GlobalSearchComponent } from './global-search/global-search.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { MandataireDelegateurCreateProfileComponent } from './mandataire-delegat
     ActiveMenuDirective,
     AdminLayoutComponent,
     EtatCompteComponent,
+    GlobalSearchComponent,
   ],
   bootstrap: [MainComponent],
   exports: [ActiveMenuDirective],

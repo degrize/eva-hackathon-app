@@ -1,0 +1,24 @@
+<mat-card>
+  <ng-container *ngIf="annonce$ | async as annonce">
+    <img [src]="" />
+    <div class="employee-info">
+      <h1>{{ annonce.titre }}</h1>
+      <h2>
+        <span *ngFor="let annonceCategorie of annonce?.categories">
+          {{ annonceCategorie.nom }} </span
+        >,
+      </h2>
+      <h3>Contact : {{ annonce?.mandataireDelegateur?.email }}</h3>
+    </div>
+  </ng-container>
+  <mat-card-actions>
+    <mat-spinner *ngIf="loading$ | async; else buttons"></mat-spinner>
+    <ng-template #buttons>
+      <div class="action-buttons">
+        <button mat-flat-button color="accent" (click)="onHire()">EMBAUCHER</button>
+        <button mat-flat-button color="warn" (click)="onRefuse()">REFUSER</button>
+      </div>
+      <button mat-flat-button color="primary" (click)="onGoBack()">RETOUR</button>
+    </ng-template>
+  </mat-card-actions>
+</mat-card>

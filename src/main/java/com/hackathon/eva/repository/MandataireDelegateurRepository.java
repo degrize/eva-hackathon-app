@@ -2,6 +2,7 @@ package com.hackathon.eva.repository;
 
 import com.hackathon.eva.domain.MandataireDelegateur;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
@@ -30,4 +31,9 @@ public interface MandataireDelegateurRepository extends JpaRepository<Mandataire
 
     @Query("select count(mandataireDelegateur) from MandataireDelegateur mandataireDelegateur")
     int getCountMandataireDelegateurPremiumPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    @Query(
+        "select mandataireDelegateur FROM MandataireDelegateur mandataireDelegateur WHERE (mandataireDelegateur.nomDeFamille Like %:nomprenom%) or (mandataireDelegateur.prenom like %:nomprenom%)"
+    )
+    List<MandataireDelegateur> findMandataireDelegateurByLikeNomDeFamilleAndPrenom(@Param("nomprenom") String nomprenom);
 }

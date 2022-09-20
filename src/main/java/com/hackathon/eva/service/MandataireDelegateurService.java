@@ -2,6 +2,7 @@ package com.hackathon.eva.service;
 
 import com.hackathon.eva.domain.MandataireDelegateur;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,4 +59,6 @@ public interface MandataireDelegateurService {
     void delete(Long id);
 
     MandataireDelegateur findUser(Long id);
+
+    List<MandataireDelegateur> findAllByNomPrenom(String nomprenom);
 }

@@ -59,6 +59,11 @@ form .email-field button {
   cursor: pointer;
   transition: background 0.3s ease;
 }
+form .email-field .searchOption {
+  width: 240px;
+  padding: 5px;
+  background: $color-eva;
+}
 form .email-field button:hover {
   background: #6a7e46;
 }
@@ -89,6 +94,25 @@ form .email-field button:hover {
 .count-down .clone {
   font-size: 45px;
 }
+
+.text-heure {
+  font-size: 12px;
+  opacity: 0.5;
+  text-align: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
+#card-component {
+  width: 780px;
+}
+
+.categorie {
+  width: 200px;
+}
+
 @media (max-width: 630px) {
   .wrapper .count-down {
     height: 80px;

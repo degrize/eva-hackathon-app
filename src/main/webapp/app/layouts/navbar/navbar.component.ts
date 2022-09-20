@@ -15,6 +15,7 @@ import { IMandataireDelegateur } from '../../entities/mandataire-delegateur/mand
 import { MandataireDelegateurService } from '../../entities/mandataire-delegateur/service/mandataire-delegateur.service';
 
 import Selectr from 'mobius1-selectr';
+import { AnnonceFormGroup } from '../../entities/annonce/update/annonce-form.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit {
   version = '';
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
+  searchInput = '';
 
   public focus: any;
   lang = 'fr';
@@ -104,6 +106,14 @@ export class NavbarComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  search(): void {
+    let inputSearch = document.getElementsByTagName('input');
+    this.searchInput = inputSearch[0].value;
+    if (this.searchInput !== '') {
+      this.router.navigateByUrl('/search?nomprenom=' + this.searchInput);
+    }
   }
 
   protected onError(): void {

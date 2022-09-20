@@ -59,6 +59,9 @@ public class Annonce implements Serializable {
     @Column(name = "duree")
     private String duree;
 
+    @Column(name = "categorie_search")
+    private String categorieSearch;
+
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "annonce" }, allowSetters = true)
@@ -219,6 +222,19 @@ public class Annonce implements Serializable {
         this.duree = duree;
     }
 
+    public String getCategorieSearch() {
+        return categorieSearch;
+    }
+
+    public Annonce categorieSearch(String categorieSearch) {
+        this.setCategorieSearch(categorieSearch);
+        return this;
+    }
+
+    public void setCategorieSearch(String categorieSearch) {
+        this.categorieSearch = categorieSearch;
+    }
+
     public Set<Message> getMessages() {
         return this.messages;
     }
@@ -371,6 +387,7 @@ public class Annonce implements Serializable {
             ", imageVideoContentType='" + getImageVideoContentType() + "'" +
             ", description='" + getDescription() + "'" +
             ", duree='" + getDuree() + "'" +
+            ", categorieSearch='" + getCategorieSearch() + "'" +
             "}";
     }
 }

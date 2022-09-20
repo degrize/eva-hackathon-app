@@ -12,6 +12,7 @@ import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
 import com.hackathon.eva.service.mapper.MandataireDelegateurMapper;
 import com.hackathon.eva.web.rest.AccountResource;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -119,5 +120,10 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
         MandataireDelegateur existingMandataireDelegateur = mandataireDelegateurRepository.findByJhiUserId(id);
 
         return existingMandataireDelegateur;
+    }
+
+    @Override
+    public List<MandataireDelegateur> findAllByNomPrenom(String nomprenom) {
+        return mandataireDelegateurRepository.findMandataireDelegateurByLikeNomDeFamilleAndPrenom(nomprenom);
     }
 }

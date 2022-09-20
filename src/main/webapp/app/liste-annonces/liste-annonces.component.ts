@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AnnonceService } from '../entities/annonce/service/annonce.service';
 import { IAnnonce } from '../entities/annonce/annonce.model';
 import { HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import List from 'list.js';
 import { CategorieService } from '../entities/categorie/service/categorie.service';
 import { ICategorie } from '../entities/categorie/categorie.model';
 import { DataUtils } from '../core/util/data-util.service';
-import { Observable, Subject } from 'rxjs';
+import { combineLatest, Observable, map, startWith, Subject } from 'rxjs';
 import { IPostulant } from '../entities/postulant/postulant.model';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { PostulantService } from '../entities/postulant/service/postulant.service';
@@ -18,35 +17,23 @@ import { MandataireDelegateurService } from '../entities/mandataire-delegateur/s
 import { Account } from '../core/auth/account.model';
 import { EtatCompte } from '../entities/enumerations/etat-compte.model';
 import { ITEM_DELETED_EVENT } from '../config/navigation.constants';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { AnnonceSearchType } from './enums/annonce-search-type.enum';
+import { AnnonceSearchService } from './services/annonce-search.service';
+import { SAnnonce } from './models/s-annonce.model';
 
 @Component({
   selector: 'jhi-liste-annonces',
   templateUrl: './liste-annonces.component.html',
   styleUrls: ['./liste-annonces.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListeAnnoncesComponent implements OnInit {
   entries: number = 10;
   selected: any[] = [];
   temp: any[] = [];
   activeRow: any;
-  rows: any = [
-    {
-      name: 'Michael Bruce',
-      position: 'Javascript Developer',
-      office: 'Singapore',
-      age: '29',
-      start: '2011/06/27',
-      salary: '$183,000',
-    },
-    {
-      name: 'Donna Snider',
-      position: 'Customer Support',
-      office: 'New York',
-      age: '27',
-      start: '2011/01/25',
-      salary: '$112,000',
-    },
-  ];
+
   annonces?: IAnnonce[];
   postulants?: IPostulant[];
   categories?: ICategorie[];
@@ -59,6 +46,17 @@ export class ListeAnnoncesComponent implements OnInit {
 
   editForm: PostulantFormGroup = this.postulantFormService.createPostulantFormGroup();
 
+  loading$!: Observable<boolean>;
+  annonces$!: Observable<SAnnonce[]>;
+
+  searchCtrl!: FormControl;
+  searchTypeCtrl!: FormControl;
+
+  searchTypeOptions!: {
+    value: AnnonceSearchType;
+    label: string;
+  }[];
+
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -68,39 +66,30 @@ export class ListeAnnoncesComponent implements OnInit {
     protected postulantService: PostulantService,
     protected postulantFormService: PostulantFormService,
     private accountService: AccountService,
-    private mandataireDelegateurService: MandataireDelegateurService
+    private mandataireDelegateurService: MandataireDelegateurService,
+    private formBuilder: FormBuilder,
+    private annonceSearchService: AnnonceSearchService
   ) {}
 
-  entriesChange($event: any) {
-    this.entries = $event.target?.value;
-  }
-
-  filterTable($event: any) {
-    let val = $event.target.value;
-    if (this.annonces) {
-      this.temp = this.rows.filter(function (d: { [x: string]: string }) {
-        for (let key in d) {
-          if (d[key].toLowerCase().indexOf(val) !== -1) {
-            return true;
-          }
-        }
-        return false;
-      });
-    }
-  }
-  onSelect({ selected }: any) {
-    this.selected.splice(0, this.selected.length);
-    this.selected.push(...selected);
-  }
-  onActivate(event: { row: any }) {
-    this.activeRow = event.row;
-  }
-
   ngOnInit(): void {
-    this.loadAnnonceList();
+    this.initForm();
+    this.initObservables();
+    this.annonceSearchService.getAnnoncesFromServer();
+
     this.loadCategorieList();
+    this.loadAnnonceList();
     this.loadProfileMandataire();
     this.loadPostulantList();
+  }
+
+  private initForm() {
+    this.searchCtrl = this.formBuilder.control('');
+    this.searchTypeCtrl = this.formBuilder.control(AnnonceSearchType.TITRE);
+    this.searchTypeOptions = [
+      { value: AnnonceSearchType.TITRE, label: 'Titre' },
+      { value: AnnonceSearchType.TARIF, label: 'Tarif' },
+      { value: AnnonceSearchType.CATEGORIES, label: 'Categorie' },
+    ];
   }
 
   printAlert(): void {
@@ -245,6 +234,21 @@ export class ListeAnnoncesComponent implements OnInit {
       console.log('DATA USERIO MANDATAIRE DELEGATEUR');
       console.log(this.mandataireDelegateur);
     }
+  }
+
+  private initObservables() {
+    this.loading$ = this.annonceSearchService.loading$;
+    this.annonces$ = this.annonceSearchService.annonces$;
+
+    const search$ = this.searchCtrl.valueChanges.pipe(
+      startWith(this.searchCtrl.value),
+      map(value => value.toLowerCase())
+    );
+    const searchType$: Observable<AnnonceSearchType> = this.searchTypeCtrl.valueChanges.pipe(startWith(this.searchTypeCtrl.value));
+
+    this.annonces$ = combineLatest([search$, searchType$, this.annonceSearchService.annonces$]).pipe(
+      map(([search, searchType, annonces]) => annonces.filter(annonce => annonce[searchType].toLowerCase().includes(search as string)))
+    );
   }
 
   protected notification(message: string, type: string): void {

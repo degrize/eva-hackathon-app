@@ -1,9 +1,11 @@
 package com.hackathon.eva.service.impl;
 
 import com.hackathon.eva.domain.Annonce;
+import com.hackathon.eva.domain.Categorie;
 import com.hackathon.eva.repository.AnnonceRepository;
 import com.hackathon.eva.service.AnnonceService;
 import com.hackathon.eva.service.dto.AnnonceDTO;
+import com.hackathon.eva.service.dto.AnnonceSearchDTO;
 import com.hackathon.eva.service.mapper.AnnonceMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -109,5 +111,21 @@ public class AnnonceServiceImpl implements AnnonceService {
     public List<Annonce> findAllNoPageble() {
         log.debug("Request to get list of Annonces");
         return annonceRepository.findAllWithEagerRelationships();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Annonce> findAllNoPagebleSearch() {
+        log.debug("Request to get list of Annonces Search");
+        List<Annonce> annonceList = annonceRepository.findAllWithEagerRelationships();
+        for (Annonce annonce : annonceList) {
+            String categorieSearch = "";
+            for (Categorie categorie : annonce.getCategories()) {
+                categorieSearch += " " + categorie.getNom();
+            }
+            annonce.setCategorieSearch(categorieSearch);
+        }
+
+        return annonceList;
     }
 }

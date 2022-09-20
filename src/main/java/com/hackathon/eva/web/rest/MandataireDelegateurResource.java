@@ -207,4 +207,12 @@ public class MandataireDelegateurResource {
 
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping("/mandataire-delegateurs/search/{nomprenom}")
+    public ResponseEntity<List<MandataireDelegateur>> getSearchMandataireDelegateurNoPageable(@PathVariable String nomprenom) {
+        log.debug("REST request to get a page of MandataireDelegateur serach ");
+
+        List<MandataireDelegateur> mandataireDelegateurs = mandataireDelegateurService.findAllByNomPrenom(nomprenom);
+        return ResponseEntity.ok().body(mandataireDelegateurs);
+    }
 }

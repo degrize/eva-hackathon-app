@@ -265,14 +265,14 @@ Pour la table aide
 ```
 CREATE TABLE aide
 (
-id bigint NOT NULL,
-nom character varying(255) NOT NULL,
-message character varying(255),
-email character varying(255),
-CONSTRAINT aide_pkey PRIMARY KEY (id)
+    id bigint NOT NULL,
+    nom character varying(255) NOT NULL,
+    message character varying(255),
+    email character varying(255),
+    CONSTRAINT aide_pkey PRIMARY KEY (id)
 )
 WITH (
-OIDS=FALSE
+    OIDS=FALSE
 );
 ALTER TABLE aide
 OWNER TO postgres;
@@ -284,7 +284,7 @@ insertion du champs duree
 
 ```
 alter table "public".annonce
-add duree varchar(255)
+    add duree varchar(255)
 ```
 
 relation entre postulant et le mandataireDelegateur
@@ -295,4 +295,11 @@ alter table "public".postulant
     add CONSTRAINT fk_postulant__mandataire_delegateur_id FOREIGN KEY (mandataire_delegateur_id)
         REFERENCES mandataire_delegateur (id) MATCH SIMPLE
             ON UPDATE NO ACTION ON DELETE NO ACTION
+```
+
+SQL categorieSearch colonne
+
+```
+alter table "public".annonce
+    add categorie_search varchar (255)
 ```

@@ -95,7 +95,7 @@
             <td>
               <a [routerLink]="['/annonce', annonce.id, 'view']">{{ annonce.id }}</a>
             </td>
-            <td>{{ annonce.titre }}</td>
+            <td>{{ annonce.titre | shorten: 50 }}</td>
             <td>{{ annonce.dateDeDelegation | formatMediumDatetime }}</td>
             <td>{{ annonce.dateDeDelais | formatMediumDate }}</td>
             <td>{{ annonce.tarif }}</td>
@@ -109,7 +109,7 @@
               >
               <span *ngIf="annonce.imageVideo">{{ annonce.imageVideoContentType }}, {{ byteSize(annonce.imageVideo) }}</span>
             </td>
-            <td>{{ annonce.description }}</td>
+            <td>{{ annonce.description | shorten: 50 }}</td>
             <td>
               <div *ngIf="annonce.mandataireDelegateur">
                 <a [routerLink]="['/mandataire-delegateur', annonce.mandataireDelegateur.id, 'view']">{{

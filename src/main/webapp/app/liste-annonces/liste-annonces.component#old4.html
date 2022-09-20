@@ -1,0 +1,128 @@
+<div id="users" class="component-main">
+  <div class="wrapper d-flex justify-content-center align-items-center flex-column">
+    <div class="title">Trouvez toutes les annonces <span>Que vous chercher</span>, renseignez le text juste en bas!</div>
+    <form action="#" class="form">
+      <div class="email-field shadow">
+        <input class="search form-control form-control-sm" placeholder="Trouver une annonce" aria-controls="datatable" />
+        <button type="submit">Rechercher</button>
+      </div>
+    </form>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-dark align-items-center">
+      <thead class="thead-light">
+        <tr>
+          <th class="sort hand" data-sort="name" scope="col">Titre</th>
+
+          <th class="sort hand" data-sort="budget" scope="col">Tarif</th>
+
+          <th class="sort hand" data-sort="status" scope="col">Categorie</th>
+
+          <th scope="col">Proprietaire</th>
+
+          <th class="sort" data-sort="completion" scope="col">Durée</th>
+
+          <th class="sort" data-sort="completion" scope="col">Posté le</th>
+
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody class="list">
+        <tr *ngFor="let annonce of annonces">
+          <th scope="row">
+            <div class="media align-items-center">
+              <a
+                class="avatar rounded-circle mr-3"
+                [tooltip]="annonce?.description + ' '"
+                placement="bottom"
+                (click)="openFile(annonce?.imageVideo + '', annonce?.imageVideoContentType + '')"
+              >
+                <img alt="Image placeholder" [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" />
+              </a>
+
+              <div class="media-body">
+                <span class="name mb-0 text-sm">{{ annonce?.titre }} </span>
+              </div>
+            </div>
+          </th>
+
+          <td class="budget">{{ annonce?.tarif }}</td>
+
+          <td>
+            <span class="badge badge-dot mr-4">
+              <i class="bg-warning"> </i>
+
+              <span *ngFor="let annonceCatgorie of annonce?.categories" class="status"> {{ annonceCatgorie?.nom }}, &nbsp; </span>
+            </span>
+          </td>
+
+          <td>
+            <div class="avatar-group">
+              <a
+                class="avatar avatar-sm rounded-circle"
+                [tooltip]="
+                  annonce?.mandataireDelegateur?.nomDeFamille +
+                  ' ' +
+                  annonce?.mandataireDelegateur?.prenom +
+                  ' ' +
+                  annonce?.mandataireDelegateur?.contact
+                "
+                placement="top"
+                href="javascript:void(0)"
+              >
+                <img
+                  alt="Image placeholder"
+                  [src]="'data:' + annonce?.mandataireDelegateur?.photoContentType + ';base64,' + annonce?.mandataireDelegateur?.photo"
+                />
+              </a>
+            </div>
+          </td>
+
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="completion mr-2"> {{ annonce?.duree }} </span>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="completion mr-2"> {{ annonce?.dateDeDelegation | timeAgo }} </span>
+            </div>
+          </td>
+
+          <td class="text-right">
+            <div dropdown class="dropdown no-caret">
+              <a
+                id="button-basic"
+                dropdownToggle
+                role="button"
+                class="btn btn-sm btn-icon-only text-light dropdown-toggle"
+                aria-controls="dropdown-basic"
+              >
+                <fa-icon icon="bars" [fixedWidth]="true"></fa-icon>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
+                <ng-container *ngFor="let postulantItem of postulants">
+                  <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
+                    <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">
+                      <a
+                        *ngIf="postulantItem?.mandataireDelegateur?.id === mandataireDelegateur?.id"
+                        class="dropdown-item"
+                        (click)="deleteAbonnement(postulantItem.id)"
+                      >
+                        Désabonner {{ printAlert() }}
+                      </a>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+                <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a>
+                <a class="dropdown-item" [routerLink]="['/annonce', annonce.id, 'edit']"> Afficher </a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
