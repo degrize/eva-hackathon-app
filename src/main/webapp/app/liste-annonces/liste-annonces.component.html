@@ -20,7 +20,7 @@
       <div *ngIf="loading$ | async" class="spinner-border text-eva" role="status">
         <span class="sr-only">Loading...</span>
       </div>
-      <div class="d-flex justify-content-between flex-wrap">
+      <div class="content-list d-flex justify-content-between flex-wrap">
         <mat-nav-list *ngIf="annonces$ | async as annonces">
           <div
             *ngFor="let annonce of annonces"
@@ -54,7 +54,7 @@
                       <fa-icon icon="bars" [fixedWidth]="true" class="text-eva"></fa-icon>
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
+                    <div id="option" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
                       <ng-container *ngFor="let postulantItem of postulants">
                         <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
                           <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">

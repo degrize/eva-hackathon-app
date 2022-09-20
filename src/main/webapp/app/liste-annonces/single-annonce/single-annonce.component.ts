@@ -33,4 +33,6 @@ export class SingleAnnonceComponent implements OnInit {
   onGoBack() {
     this.router.navigateByUrl('/liste-annonces');
   }
+
+  private start_javaScript(): void {}
 }

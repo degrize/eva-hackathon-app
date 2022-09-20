@@ -53,6 +53,11 @@ export const FenStartLayoutRoutes: Routes = [
     path: 'search',
     component: GlobalSearchComponent,
   },
+  {
+    path: 'mandataire-portfolio',
+    loadChildren: () =>
+      import(`../../mandataire-portfolio/mandataire-portfolio-routing.module`).then(m => m.MandatairePortfolioRoutingModule),
+  },
 
   navbarRoute,
 ];

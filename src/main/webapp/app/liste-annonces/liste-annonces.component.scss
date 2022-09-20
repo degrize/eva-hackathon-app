@@ -75,25 +75,6 @@ form .email-field button:hover {
   align-items: center;
   justify-content: space-around;
 }
-.wrapper .count-down .timer {
-  height: 100%;
-  width: 100px;
-  border: 2px solid;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.count-down .timer .numb {
-  font-size: 25px;
-  font-weight: 500;
-}
-.count-down .timer .text {
-  font-size: 15px;
-}
-.count-down .clone {
-  font-size: 45px;
-}
 
 .text-heure {
   font-size: 12px;
@@ -113,49 +94,68 @@ form .email-field button:hover {
   width: 200px;
 }
 
+@media (max-width: 890px) {
+  #card-component {
+    width: 560px;
+  }
+}
+
 @media (max-width: 630px) {
-  .wrapper .count-down {
-    height: 80px;
+  form .email-field input {
+    font-size: 12px;
   }
-  .wrapper .count-down .timer {
-    width: 80px;
+
+  .content-list {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: column-reverse;
   }
-  .count-down .timer .numb {
-    font-size: 20px;
-  }
-  .count-down .timer .text {
-    font-size: 13px;
-  }
-  .count-down .clone {
-    font-size: 40px;
+
+  #card-component {
+    width: 400px;
+
+    margin: 3px;
+    padding: 3px;
+
+    p {
+      display: none;
+    }
   }
 }
 @media (max-width: 542px) {
   .wrapper {
     padding: 0 20px;
+    .title {
+      font-size: 15px;
+    }
   }
-  .wrapper .count-down .timer {
-    border: none;
+
+  #card-component {
+    width: 300px;
+
+    margin: 3px;
+    padding: 3px;
+    h3 {
+      font-size: 13px;
+    }
+    p {
+      font-size: 12px;
+    }
   }
-  .count-down .timer .numb {
-    font-size: 28px;
-  }
-  .count-down .timer .text {
-    font-size: 15px;
-  }
-  .count-down .clone {
-    display: none;
-  }
-  .form .email-field button {
-    width: 150px;
-    font-size: 17px;
+
+  form .email-field input {
+    font-size: 9px;
+    padding-left: 8px;
   }
 }
 @media (max-width: 340px) {
-  .wrapper .count-down {
-    height: 30px;
-  }
-  .wrapper .count-down .timer {
-    width: 30px;
+  #card-component {
+    width: 210px;
+    h3 {
+      font-size: 10px;
+    }
+    h3 span {
+      font-size: 9px;
+    }
   }
 }
