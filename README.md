@@ -57,7 +57,7 @@ JHipster ships with PWA (Progressive Web App) support, and it's turned off by de
 The service worker initialization code is disabled by default. To enable it, uncomment the following code in `src/main/webapp/app/app.module.ts`:
 
 ```typescript
-ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+ServiceWorkerModule.register('ngsw-worker.js', { enabled: false });
 ```
 
 ### Managing dependencies
@@ -302,4 +302,30 @@ SQL categorieSearch colonne
 ```
 alter table "public".annonce
     add categorie_search varchar (255)
+```
+
+SQL la table commentaire
+
+```
+CREATE TABLE commentaire
+(
+  id bigint NOT NULL,
+  message character varying(255) NOT NULL,
+  mandataire_delegateur_id bigint,
+  date_de_message character varying(255),
+  email character varying(255),
+  nom_commentateur character varying(255),
+  CONSTRAINT commentaire_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_commentaire__mandataire_delegateur_id FOREIGN KEY (mandataire_delegateur_id)
+      REFERENCES mandataire_delegateur (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE commentaire
+  OWNER TO postgres;
+COMMENT ON TABLE commentaire
+  IS E'Commentaire entity.\\n@author EVA.';
+
 ```

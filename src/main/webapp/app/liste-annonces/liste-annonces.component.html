@@ -33,15 +33,19 @@
               <div class="card-body">
                 <a mat-list-item>
                   <img
+                    *ngIf="annonce?.imageVideo; else defaultPicture"
                     [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
                     [alt]="annonce.titre"
                     matListAvatar
                   />
-                  <h3 matLine>
+                  <ng-template #defaultPicture>
+                    <img src="../../content/images/eva-logo.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
+                  </ng-template>
+                  <h3 matLine [routerLink]="annonce.id.toString()">
                     {{ annonce.titre | uppercase }}
                     <span class="text-heure">{{ annonce.dateDeDelegation | timeAgo }}</span>
                   </h3>
-                  <p matLine>Durée : {{ annonce.duree }}</p>
+                  <p [routerLink]="annonce.id.toString()" matLine>Durée : {{ annonce.duree }}</p>
                   <p class="text-heure">{{ annonce.tarif }} FCFA</p>
                   <div dropdown class="dropdown no-caret">
                     <a
@@ -55,7 +59,7 @@
                     </a>
 
                     <div id="option" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
-                      <ng-container *ngFor="let postulantItem of postulants">
+                      <!--<ng-container *ngFor="let postulantItem of postulants">
                         <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
                           <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">
                             <a
@@ -68,8 +72,8 @@
                           </ng-container>
                         </ng-container>
                       </ng-container>
-                      <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a>
-                      <a class="dropdown-item" [routerLink]="['/annonce', annonce.id, 'edit']"> Afficher </a>
+                      <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a> -->
+                      <a class="dropdown-item" [routerLink]="['/liste-annonces', annonce.id]"> Afficher </a>
                     </div>
                   </div>
                 </a>

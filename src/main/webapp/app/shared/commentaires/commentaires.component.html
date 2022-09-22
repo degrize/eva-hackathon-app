@@ -1,0 +1,132 @@
+<div id="#container_parent">
+  <section class="contact" id="contact">
+    <div class="max-width">
+      <h2 class="title">Commentaires</h2>
+      <div class="contact-content">
+        <div class="column left">
+          <div class="text">Prendre contact</div>
+          <div class="icons">
+            <div class="row">
+              <i class="fas fa-user"></i>
+              <div class="info">
+                <div class="head">Nom</div>
+                <div class="sub-title">
+                  <span> {{ mandataireDelegateur?.prenom }} </span> {{ mandataireDelegateur?.nomDeFamille?.toUpperCase() }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="info">
+                <div class="head">Addresse</div>
+                <div class="sub-title">
+                  {{ mandataireDelegateur?.pays }} | {{ mandataireDelegateur?.ville }} | {{ mandataireDelegateur?.adresse }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <i class="fas fa-envelope"></i>
+              <div class="info">
+                <div class="head">Email</div>
+                <div class="sub-title">{{ mandataireDelegateur?.email }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column right">
+          <div class="text">Ecrivez un commentaire</div>
+          <form [formGroup]="editCommentForm">
+            <div class="fields mb-2">
+              <div class="field name">
+                <input [formControl]="nomCommentateurCtrl" formControlName="nomCommentateur" type="text" placeholder="Nom" required />
+                <div
+                  *ngIf="
+                    editCommentForm.get('nomCommentateur')!.invalid &&
+                    (editCommentForm.get('nomCommentateur')!.dirty || editCommentForm.get('nomCommentateur')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editCommentForm.get('nomCommentateur')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editCommentForm.get('nomCommentateur')?.errors?.minlength">
+                    Renseignez plus de 1 caractères
+                  </small>
+                </div>
+              </div>
+              <div class="field email">
+                <input [formControl]="emailCtrl" type="email" placeholder="Email" required />
+                <div
+                  *ngIf="
+                    editCommentForm.get('email')!.invalid && (editCommentForm.get('email')!.dirty || editCommentForm.get('email')!.touched)
+                  "
+                >
+                  <small
+                    class="form-text text-danger"
+                    *ngIf="editCommentForm.get('email')?.errors?.required"
+                    jhiTranslate="entity.validation.required"
+                  >
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger" *ngIf="editCommentForm.get('email')?.errors?.email">
+                    Renseignez un email valide
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="field textarea mb-4">
+              <textarea [formControl]="messageCtrl" cols="30" rows="10" placeholder="Message.." required></textarea>
+              <div
+                *ngIf="
+                  editCommentForm.get('message')!.invalid &&
+                  (editCommentForm.get('message')!.dirty || editCommentForm.get('message')!.touched)
+                "
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editCommentForm.get('message')?.errors?.required"
+                  jhiTranslate="entity.validation.required"
+                >
+                  Ce champ est obligatoire.
+                </small>
+                <small class="form-text text-danger" *ngIf="editCommentForm.get('message')?.errors?.minlength">
+                  Renseignez plus de 10 caractères
+                </small>
+              </div>
+            </div>
+            <div class="button-area">
+              <button (click)="onLeaveComment()" type="submit">commenter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <h2 class="title2 title mt-5"></h2>
+      <div class="list-group list-group-flush">
+        <div
+          *ngFor="let comment of commentaires; let i = index"
+          [@listItem]="animationStates[i]"
+          (mouseenter)="onListItemMouseEnter(i)"
+          (mouseleave)="onListItemMouseLeave(i)"
+          class="list-group-item list-group-item-action flex-column align-items-start mb-3 py-4 px-4"
+        >
+          <div class="d-flex w-100 justify-content-between">
+            <div>
+              <div class="d-flex w-100 align-items-center">
+                <img src="../../content/images/user_unknown.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
+                <h5 class="mb-1">
+                  <span class="text-info">●</span> {{ comment?.mandataireDelegateur?.prenom }}
+                  {{ (comment?.mandataireDelegateur?.nomDeFamille + '').toUpperCase() }}
+                </h5>
+              </div>
+            </div>
+            <small class="comment-date"> {{ comment?.dateDeMessage | timeAgo }}</small>
+          </div>
+          <p class="text-sm mb-0 comment-text">{{ comment?.message }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -13,6 +13,7 @@ export class SAnnonce {
   mandataireDelegateur?: IMandataireDelegateur | null;
   duree!: string;
   imageUrl!: string;
+  description!: string;
   photoUrl!: string;
   imageVideo!: string;
   imageVideoContentType!: string;

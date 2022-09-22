@@ -41,7 +41,7 @@
                 <h5 class="card-titlee">{{ annonce?.titre | shorten: 50 }}</h5>
                 <p class="card-text">{{ annonce?.description | shorten: 100 }}</p>
                 <h5 class="prix">{{ annonce?.tarif }}</h5>
-                <a [routerLink]="['/annonce', annonce.id, 'edit']" class="btn btn-primary">Commander</a>
+                <a [routerLink]="['/liste-annonces', annonce.id]" class="btn btn-primary">Commander</a>
               </div>
             </div>
           </ng-container>

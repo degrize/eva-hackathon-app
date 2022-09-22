@@ -27,10 +27,8 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { EtatCompteComponent } from './etat-compte/etat-compte.component';
-import { ListeAnnoncesComponent } from './liste-annonces/liste-annonces.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MandataireDelegateurCreateProfileComponent } from './mandataire-delegateur-create-profile/mandataire-delegateur-create-profile.component';
 import { GlobalSearchComponent } from './global-search/global-search.component';
 
 @NgModule({

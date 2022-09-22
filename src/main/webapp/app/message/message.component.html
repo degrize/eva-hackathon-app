@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-4">
+    <button class="btn btn-block btn-default" (click)="open(classic1, 'modal_mini', 'sm')">Appuyer pour ecrire</button>
+    <ng-template #classic1 let-c="close" let-d="dismiss">
+      <div class="modal-content">
+        <div class="modal-body p-0">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-white pb-2">
+              <div class="text-muted text-center mb-3">
+                <small>MESSAGERIE EVA</small>
+              </div>
+              <div class="btn-wrapper text-center">
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>placer votre fichier join</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+            </div>
+            <div class="card-body px-lg-5 py-lg-2">
+              <div class="text-center text-muted mb-2">
+                <small>Ou écrivez votre message ici</small>
+              </div>
+              <form role="form">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <textarea cols="20" rows="4" class="form-control" placeholder="Message..."></textarea>
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary my-4">Envoyer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

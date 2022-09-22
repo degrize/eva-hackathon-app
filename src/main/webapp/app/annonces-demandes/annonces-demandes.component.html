@@ -1,0 +1,70 @@
+<div>
+  <h1>Annonces Souscrites | Payées</h1>
+  <accordion [isAnimated]="true" [closeOthers]="true">
+    <ng-container *ngFor="let annonce of annonces">
+      <ng-container *ngIf="annonce?.postulantRetenu === mandataireDelegateur?.id">
+        <accordion-group>
+          <div class="d-flex justify-between align-items-center w-60" accordion-heading>
+            <button type="button" class="btn btn-secondary mb-0">
+              <span>{{ annonce?.titre | shorten: 50 }}</span>
+            </button>
+            <span>{{ annonce?.dateDeDelegation | timeAgo }}</span>
+          </div>
+
+          <blockquote class="blockquote">
+            <p class="mb-0">{{ annonce?.description | shorten: 60 }}</p>
+            <footer class="blockquote-footer">
+              Tarif : <cite title="Source Title">{{ annonce?.tarif }} FCFA</cite>
+            </footer>
+          </blockquote>
+
+          <div
+            id="card-stats-bg-component"
+            class="tab-pane tab-example-result fade show active"
+            role="tabpanel"
+            aria-labelledby="card-stats-bg-component-tab"
+          >
+            <div class="row mb-4">
+              <div class="col-lg-6">
+                <div class="card bg-gradient-success">
+                  <!-- Card body -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0 text-dark">
+                          {{ annonce?.mandataireDelegateur?.prenom }} {{ annonce?.mandataireDelegateur?.nomDeFamille + ''.toUpperCase() }}
+                        </h5>
+                        <span class="h2 font-weight-bold mb-0 text-white">{{ annonce?.mandataireDelegateur?.numeroMomo }}</span>
+                        <span class="text-sm"> compte MoMo</span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-white text-dark rounded-circle shadow">
+                          <img
+                            width="40"
+                            [src]="
+                              'data:' + annonce?.mandataireDelegateur?.photoContentType + ';base64,' + annonce?.mandataireDelegateur?.photo
+                            "
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-sm">
+                      <button type="button" class="btn btn-secondary btn-sm">échanger</button>
+                      <a [routerLink]="['/mandataire-portfolio', mandataireDelegateur?.id, 'view']">Afficher</a>
+                      <span class="text-white mr-2"><i class="fa fa-arrow-up"></i></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </ng-container>
+    </ng-container>
+
+    <button class="btn btn-eva p-2 mt-2 mb-2" routerLinkActive="active" (click)="previousState()" jhiTranslate="entity.action.cancel">
+      <fa-icon icon="arrow-left"></fa-icon> Retour
+    </button>
+  </accordion>
+</div>

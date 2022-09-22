@@ -15,6 +15,7 @@ import { MandataireDelegateurService } from '../entities/mandataire-delegateur/s
 import { finalize, takeUntil } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-mes-echanges',
@@ -118,15 +119,13 @@ export class MesEchangesComponent implements OnInit {
     return this.dataUtils.openFile(base64String, contentType);
   }
 
+  previousState(): void {
+    window.history.back();
+  }
+
   protected onSuccess(): void {
     if (this.annonces) {
       console.log(this.annonces);
-      /*this.temp = this.annonces.map((prop: any, key: any) => {
-        return {
-          ...prop,
-          id: key,
-        };
-      });*/
     }
 
     if (this.categories) {

@@ -15,8 +15,6 @@ import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandata
 import { AccountService } from '../core/auth/account.service';
 import { MandataireDelegateurService } from '../entities/mandataire-delegateur/service/mandataire-delegateur.service';
 import { Account } from '../core/auth/account.model';
-import { EtatCompte } from '../entities/enumerations/etat-compte.model';
-import { ITEM_DELETED_EVENT } from '../config/navigation.constants';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { AnnonceSearchType } from './enums/annonce-search-type.enum';
 import { AnnonceSearchService } from './services/annonce-search.service';
@@ -121,8 +119,6 @@ export class ListeAnnoncesComponent implements OnInit {
       this.subscribeToSaveResponse(this.postulantService.update(postulant));
     } else {
       this.subscribeToSaveResponse(this.postulantService.create(postulant));
-      console.log(" qui vient d'inserer");
-      console.log(postulant);
     }
   }
 

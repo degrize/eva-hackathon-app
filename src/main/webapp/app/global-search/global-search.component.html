@@ -9,7 +9,7 @@
     <ng-container>
       <a
         *ngFor="let mandataireDelegateur of mandataireDelegateurs"
-        [routerLink]="['/mandataire-delegateur', mandataireDelegateur.id, 'view']"
+        [routerLink]="['/mandataire-portfolio', mandataireDelegateur.id, 'view']"
         class="list-group-item mb-2 list-group-item-action flex-column align-items-start py-4 px-4"
       >
         <div class="d-flex w-100 justify-content-between">
@@ -22,7 +22,7 @@
                 class="avatar avatar-xs mr-2"
               />
               <ng-template #defaultPicture>
-                <img src="../../../content/images/eva-logo.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
+                <img src="../../content/images/user_unknown.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
               </ng-template>
               <h5 class="mb-1">{{ mandataireDelegateur.prenom }} {{ mandataireDelegateur.nomDeFamille }}</h5>
             </div>

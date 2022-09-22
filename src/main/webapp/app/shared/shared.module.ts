@@ -17,9 +17,11 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { UsernamePipe } from './pipes/username.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 import { MaterialModule } from './material.module';
+import { CommentairesComponent } from './commentaires/commentaires.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
-  imports: [SharedLibsModule, MaterialModule],
+  imports: [SharedLibsModule, MaterialModule, NgxDropzoneModule],
   declarations: [
     FindLanguageFromKeyPipe,
     TranslateDirective,
@@ -36,6 +38,7 @@ import { MaterialModule } from './material.module';
     TimeAgoPipe,
     ShortenPipe,
     UsernamePipe,
+    CommentairesComponent,
   ],
   exports: [
     SharedLibsModule,
@@ -55,6 +58,8 @@ import { MaterialModule } from './material.module';
     ShortenPipe,
     UsernamePipe,
     MaterialModule,
+    CommentairesComponent,
+    NgxDropzoneModule,
   ],
 })
 export class SharedModule {}

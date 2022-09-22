@@ -5,9 +5,14 @@ import { Authority } from '../../config/authority.constants';
 import { UserRouteAccessService } from '../../core/auth/user-route-access.service';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { EtatCompteComponent } from '../../etat-compte/etat-compte.component';
+import { MessageComponent } from '../../message/message.component';
 
 export const AdminLayoutRoutes: Routes = [
   { path: 'premium', component: EtatCompteComponent },
+  {
+    path: 'message-annonce',
+    loadChildren: () => import(`../../message/message.module`).then(m => m.MessageModule),
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -42,7 +47,7 @@ export const AdminLayoutRoutes: Routes = [
       authorities: [Authority.USER],
     },
     canActivate: [UserRouteAccessService],
-    loadChildren: () => import(`../../mes-echanges/mes-echanges.module`).then(m => m.MesEchangesModule),
+    loadChildren: () => import(`../../type-echanges/type-echanges.module`).then(m => m.TypeEchangesModule),
   },
   {
     path: 'account',
