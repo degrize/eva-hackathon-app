@@ -1,5 +1,7 @@
 package com.hackathon.eva.web.rest;
 
+import com.hackathon.eva.domain.Annonce;
+import com.hackathon.eva.domain.Message;
 import com.hackathon.eva.repository.MessageRepository;
 import com.hackathon.eva.service.MessageService;
 import com.hackathon.eva.service.dto.MessageDTO;
@@ -186,5 +188,12 @@ public class MessageResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/messages/liste")
+    public ResponseEntity<List<Message>> getAllAnnoncesNoPageble() {
+        log.debug("REST request to get list of messages");
+        List<Message> messagesList = messageService.findAllNoPageble();
+        return ResponseEntity.ok().body(messagesList);
     }
 }

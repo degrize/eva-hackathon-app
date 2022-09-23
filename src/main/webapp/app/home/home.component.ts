@@ -81,10 +81,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         '        <h4 class="text-uppercase ls-1 text-white py-3 mb-0"> ' +
         '' +
         this.account?.login +
-        ', finalisez votre profile EVA </h4>\n' +
+        ', finalisez votre profil EVA </h4>\n' +
         '      </div>\n' +
         '      <div class="card-body px-lg-7">\n' +
-        '        <div class="display-4 text-white">PROFILE EVA</div>\n' +
+        '        <div class="display-4 text-white">PROFIL EVA</div>\n' +
         '        <span class=" text-white">Veuillez suivre ces étapes </span>\n' +
         '        <ul class="list-unstyled my-4">\n' +
         '          <li>\n' +
@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         '                </div>\n' +
         '              </div>\n' +
         '              <div>\n' +
-        '                <span class="pl-2 text-sm text-white">(Envoyer - Recevvoir) de l\'argent </span>\n' +
+        '                <span class="pl-2 text-sm text-white">(Envoyer - Reçevoir) de l\'argent </span>\n' +
         '              </div>\n' +
         '            </div>\n' +
         '          </li>\n' +

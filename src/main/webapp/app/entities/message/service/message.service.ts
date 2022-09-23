@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IMessage, NewMessage } from '../message.model';
+import { ICommentaire } from '../../../shared/models/commentaire.model';
 
 export type PartialUpdateMessage = Partial<IMessage> & Pick<IMessage, 'id'>;
 
@@ -37,6 +38,10 @@ export class MessageService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IMessage[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  getMessageList(): Observable<HttpResponse<any>> {
+    return this.http.get<IMessage[]>(`${this.resourceUrl}/liste`, { observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

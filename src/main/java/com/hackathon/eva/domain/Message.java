@@ -23,6 +23,12 @@ public class Message implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "nom_transmeteur")
+    private String nomTransmeteur;
+
+    @Column(name = "date_envoie")
+    private String dateEnvoie;
+
     @Column(name = "texte")
     private String texte;
 
@@ -63,6 +69,32 @@ public class Message implements Serializable {
 
     public void setTexte(String texte) {
         this.texte = texte;
+    }
+
+    public String getNomTransmeteur() {
+        return nomTransmeteur;
+    }
+
+    public Message nomTransmeteur(String nomTransmeteur) {
+        this.setNomTransmeteur(nomTransmeteur);
+        return this;
+    }
+
+    public void setNomTransmeteur(String nomTransmeteur) {
+        this.nomTransmeteur = nomTransmeteur;
+    }
+
+    public String getDateEnvoie() {
+        return dateEnvoie;
+    }
+
+    public Message dateEnvoie(String dateEnvoie) {
+        this.setDateEnvoie(dateEnvoie);
+        return this;
+    }
+
+    public void setDateEnvoie(String dateEnvoie) {
+        this.dateEnvoie = dateEnvoie;
     }
 
     public byte[] getFichierJoin() {
@@ -129,6 +161,8 @@ public class Message implements Serializable {
         return "Message{" +
             "id=" + getId() +
             ", texte='" + getTexte() + "'" +
+            ", dateEnvoie='" + getDateEnvoie() + "'" +
+            ", nomTransmeteur='" + getNomTransmeteur() + "'" +
             ", fichierJoin='" + getFichierJoin() + "'" +
             ", fichierJoinContentType='" + getFichierJoinContentType() + "'" +
             "}";

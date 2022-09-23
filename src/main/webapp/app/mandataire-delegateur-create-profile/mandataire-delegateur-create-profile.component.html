@@ -1,5 +1,7 @@
 <div class="col-md-4">
-  <button class="btn btn-block btn-default text-center" (click)="open(classic1, 'modal_mini', 'sm')">Ajoutez vous un profie EVA</button>
+  <button class="btn btn-block btn-default text-center" (click)="open(classic1, 'modal_mini', 'sm')">
+    Appuyer pour Ajouter vous un profie EVA
+  </button>
   <ng-template #classic1 let-c="close" let-d="dismiss">
     <div class="modal-content">
       <div class="modal-body p-0">
@@ -24,7 +26,7 @@
                   <input
                     class="form-control"
                     [placeholder]="'evaHackathonApp.mandataireDelegateur.contact' | translate"
-                    type="number"
+                    type="text"
                     name="contact"
                     id="field_contact"
                     data-cy="contact"
@@ -58,13 +60,12 @@
                   </div>
                   <input
                     [placeholder]="'evaHackathonApp.mandataireDelegateur.numeroMomo' | translate"
-                    type="number"
+                    type="text"
                     class="form-control"
                     name="numeroMomo"
                     id="field_numeroMomo"
                     data-cy="numeroMomo"
                     formControlName="numeroMomo"
-                    placeholder="05xxxxxxxx"
                   />
                 </div>
                 <div
@@ -205,7 +206,7 @@
                   <a
                     class="pull-start"
                     (click)="openFile(editForm.get('photo')!.value!, editForm.get('photoContentType')!.value!)"
-                    jhiTranslate="entity.action.open"
+                    jhiTranslate="entity.action.addimage"
                     >Ouvrir</a
                   ><br />
                   <span class="pull-start"

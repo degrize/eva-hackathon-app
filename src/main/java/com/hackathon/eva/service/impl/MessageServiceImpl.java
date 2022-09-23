@@ -1,10 +1,12 @@
 package com.hackathon.eva.service.impl;
 
+import com.hackathon.eva.domain.Annonce;
 import com.hackathon.eva.domain.Message;
 import com.hackathon.eva.repository.MessageRepository;
 import com.hackathon.eva.service.MessageService;
 import com.hackathon.eva.service.dto.MessageDTO;
 import com.hackathon.eva.service.mapper.MessageMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,5 +86,12 @@ public class MessageServiceImpl implements MessageService {
     public void delete(Long id) {
         log.debug("Request to delete Message : {}", id);
         messageRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Message> findAllNoPageble() {
+        log.debug("Request to get list of Message");
+        return messageRepository.findAllWithEagerRelationships();
     }
 }

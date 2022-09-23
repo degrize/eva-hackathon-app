@@ -43,10 +43,15 @@
         </div>
       </div>
       <ng-template #btnDemander>
-        <div class="button1 mb-5">
-          <button routerLink="paiement" routerLinkActive="active" [routerLink]="['/paiement', annonce.id]">Demander</button>
+        <div class="button1 mb-2">
+          <button routerLinkActive="active" [routerLink]="['/paiement', annonce.id]">Demander</button>
         </div>
       </ng-template>
+      <div class="button1 mb-2">
+        <button routerLinkActive="active" [routerLink]="['/mandataire-portfolio', annonce?.mandataireDelegateur?.id, 'view']">
+          Voir l'annonceur
+        </button>
+      </div>
       <div class="button3">
         <button class="btn btn-eva p-2" routerLinkActive="active" (click)="previousState()" jhiTranslate="entity.action.cancel">
           Retour

@@ -12,13 +12,11 @@
       <div class="footer-col">
         <h4>Catégories</h4>
         <ul>
-          <li><a href="/utilisation">Audio & Vidéo</a></li>
-          <li><a href="/utilisation">Creat & Design</a></li>
-          <li><a href="/utilisation">Maketing digital</a></li>
-          <li><a href="/utilisation">Loisir</a></li>
-          <li><a href="/utilisation">Programmation</a></li>
-          <li><a href="/utilisation">Redaction & Traduction</a></li>
-          <li><a href="/utilisation">Traduction</a></li>
+          <li *ngFor="let categorie of categories">
+            <a href="/utilisation">
+              {{ categorie.nom }}
+            </a>
+          </li>
         </ul>
       </div>
       <div class="footer-col">

@@ -1,6 +1,9 @@
 package com.hackathon.eva.service;
 
+import com.hackathon.eva.domain.Annonce;
+import com.hackathon.eva.domain.Message;
 import com.hackathon.eva.service.dto.MessageDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -63,4 +66,6 @@ public interface MessageService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<Message> findAllNoPageble();
 }

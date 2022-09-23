@@ -13,6 +13,8 @@ public class MessageDTO implements Serializable {
     private Long id;
 
     private String texte;
+    private String NomTransmeteur;
+    private String dateEnvoie;
 
     @Lob
     private byte[] fichierJoin;
@@ -34,6 +36,22 @@ public class MessageDTO implements Serializable {
 
     public void setTexte(String texte) {
         this.texte = texte;
+    }
+
+    public String getNomTransmeteur() {
+        return NomTransmeteur;
+    }
+
+    public void setNomTransmeteur(String nomTransmeteur) {
+        NomTransmeteur = nomTransmeteur;
+    }
+
+    public String getDateEnvoie() {
+        return dateEnvoie;
+    }
+
+    public void setDateEnvoie(String dateEnvoie) {
+        this.dateEnvoie = dateEnvoie;
     }
 
     public byte[] getFichierJoin() {
@@ -87,6 +105,8 @@ public class MessageDTO implements Serializable {
         return "MessageDTO{" +
             "id=" + getId() +
             ", texte='" + getTexte() + "'" +
+            ", nomTransmeteur='" + getNomTransmeteur() + "'" +
+            ", dateEnvoie='" + getDateEnvoie() + "'" +
             ", fichierJoin='" + getFichierJoin() + "'" +
             ", annonce=" + getAnnonce() +
             "}";

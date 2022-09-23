@@ -97,6 +97,7 @@ import { IAnnonce } from '../../entities/annonce/annonce.model';
 })
 export class CommentairesComponent implements OnInit {
   @Input() commentaires?: ICommentaire[];
+  @Input() annonceur?: IMandataireDelegateur | null;
   @Output() newComment = new EventEmitter<ICommentaire>();
 
   messageCtrl!: FormControl;
@@ -161,13 +162,13 @@ export class CommentairesComponent implements OnInit {
         email: this.emailCtrl.value,
         nomCommentateur: this.nomCommentateurCtrl.value,
         dateDeMessage: new Date().toISOString(),
-        mandataireDelegateur: this.mandataireDelegateur,
+        mandataireDelegateur: this.annonceur,
       });
     }
 
     const comment = this.commentaireFormService.getCommentaire(this.editCommentForm);
     comment.message = this.messageCtrl.value;
-    comment.mandataireDelegateur = this.mandataireDelegateur;
+    comment.mandataireDelegateur = this.annonceur;
     comment.email = this.emailCtrl.value;
     comment.nomCommentateur = this.nomCommentateurCtrl.value;
     comment.dateDeMessage = new Date().toISOString();
@@ -217,8 +218,6 @@ export class CommentairesComponent implements OnInit {
   protected onSucessUser(data: IMandataireDelegateur | null): void {
     if (data) {
       this.mandataireDelegateur = data;
-      console.log('DATA USERIO MANDATAIRE DELEGATEUR');
-      console.log(this.mandataireDelegateur);
     }
   }
 

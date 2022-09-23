@@ -329,3 +329,11 @@ COMMENT ON TABLE commentaire
   IS E'Commentaire entity.\\n@author EVA.';
 
 ```
+
+La Table Message ajout de colonnes
+
+```
+alter table "public".message
+    add nom_transmeteur varchar(255),
+    add date_envoie varchar(255)
+```

@@ -19,6 +19,8 @@ type MessageFormDefaults = Pick<NewMessage, 'id'>;
 type MessageFormGroupContent = {
   id: FormControl<IMessage['id'] | NewMessage['id']>;
   texte: FormControl<IMessage['texte']>;
+  nomTransmeteur: FormControl<IMessage['nomTransmeteur']>;
+  dateEnvoie: FormControl<IMessage['dateEnvoie']>;
   fichierJoin: FormControl<IMessage['fichierJoin']>;
   fichierJoinContentType: FormControl<IMessage['fichierJoinContentType']>;
   annonce: FormControl<IMessage['annonce']>;
@@ -41,7 +43,9 @@ export class MessageFormService {
           validators: [Validators.required],
         }
       ),
-      texte: new FormControl(messageRawValue.texte),
+      texte: new FormControl(messageRawValue.texte, [Validators.required, Validators.minLength(2)]),
+      nomTransmeteur: new FormControl(messageRawValue.nomTransmeteur),
+      dateEnvoie: new FormControl(messageRawValue.dateEnvoie),
       fichierJoin: new FormControl(messageRawValue.fichierJoin),
       fichierJoinContentType: new FormControl(messageRawValue.fichierJoinContentType),
       annonce: new FormControl(messageRawValue.annonce),

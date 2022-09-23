@@ -11,7 +11,7 @@
               <div class="info">
                 <div class="head">Nom</div>
                 <div class="sub-title">
-                  <span> {{ mandataireDelegateur?.prenom }} </span> {{ mandataireDelegateur?.nomDeFamille?.toUpperCase() }}
+                  <span> {{ annonceur?.prenom }} </span> {{ annonceur?.nomDeFamille?.toUpperCase() }}
                 </div>
               </div>
             </div>
@@ -19,16 +19,14 @@
               <i class="fas fa-map-marker-alt"></i>
               <div class="info">
                 <div class="head">Addresse</div>
-                <div class="sub-title">
-                  {{ mandataireDelegateur?.pays }} | {{ mandataireDelegateur?.ville }} | {{ mandataireDelegateur?.adresse }}
-                </div>
+                <div class="sub-title">{{ annonceur?.pays }} | {{ annonceur?.ville }} | {{ annonceur?.adresse }}</div>
               </div>
             </div>
             <div class="row">
               <i class="fas fa-envelope"></i>
               <div class="info">
                 <div class="head">Email</div>
-                <div class="sub-title">{{ mandataireDelegateur?.email }}</div>
+                <div class="sub-title">{{ annonceur?.email }}</div>
               </div>
             </div>
           </div>
@@ -105,27 +103,26 @@
       </div>
       <h2 class="title2 title mt-5"></h2>
       <div class="list-group list-group-flush">
-        <div
-          *ngFor="let comment of commentaires; let i = index"
-          [@listItem]="animationStates[i]"
-          (mouseenter)="onListItemMouseEnter(i)"
-          (mouseleave)="onListItemMouseLeave(i)"
-          class="list-group-item list-group-item-action flex-column align-items-start mb-3 py-4 px-4"
-        >
-          <div class="d-flex w-100 justify-content-between">
-            <div>
-              <div class="d-flex w-100 align-items-center">
-                <img src="../../content/images/user_unknown.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
-                <h5 class="mb-1">
-                  <span class="text-info">●</span> {{ comment?.mandataireDelegateur?.prenom }}
-                  {{ (comment?.mandataireDelegateur?.nomDeFamille + '').toUpperCase() }}
-                </h5>
+        <ng-container *ngFor="let comment of commentaires; let i = index">
+          <div
+            *ngIf="comment?.mandataireDelegateur?.id === annonceur?.id"
+            [@listItem]="animationStates[i]"
+            (mouseenter)="onListItemMouseEnter(i)"
+            (mouseleave)="onListItemMouseLeave(i)"
+            class="list-group-item list-group-item-action flex-column align-items-start mb-3 py-4 px-4"
+          >
+            <div class="d-flex w-100 justify-content-between">
+              <div>
+                <div class="d-flex w-100 align-items-center">
+                  <img src="../../content/images/user_unknown.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
+                  <h5 class="mb-1"><span class="text-info">●</span> {{ comment?.nomCommentateur }}</h5>
+                </div>
               </div>
+              <small class="comment-date"> {{ comment?.dateDeMessage | timeAgo }}</small>
             </div>
-            <small class="comment-date"> {{ comment?.dateDeMessage | timeAgo }}</small>
+            <p class="text-sm mb-0 comment-text">{{ comment?.message }}</p>
           </div>
-          <p class="text-sm mb-0 comment-text">{{ comment?.message }}</p>
-        </div>
+        </ng-container>
       </div>
     </div>
   </section>

@@ -3,6 +3,8 @@ import { IAnnonce } from 'app/entities/annonce/annonce.model';
 export interface IMessage {
   id: number;
   texte?: string | null;
+  nomTransmeteur?: string | null;
+  dateEnvoie?: string | null;
   fichierJoin?: string | null;
   fichierJoinContentType?: string | null;
   annonce?: Pick<IAnnonce, 'id' | 'titre'> | null;

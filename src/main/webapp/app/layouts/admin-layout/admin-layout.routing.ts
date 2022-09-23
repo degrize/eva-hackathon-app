@@ -12,6 +12,7 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: 'message-annonce',
     loadChildren: () => import(`../../message/message.module`).then(m => m.MessageModule),
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'dashboard',

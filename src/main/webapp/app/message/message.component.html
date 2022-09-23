@@ -1,42 +1,111 @@
 <div class="row">
-  <div class="col-md-4">
-    <button class="btn btn-block btn-default" (click)="open(classic1, 'modal_mini', 'sm')">Appuyer pour ecrire</button>
+  <div class="col-md-4 mb-5">
+    <button class="btn btn-block btn-default" (click)="open(classic1, 'modal_mini', 'sm')">Appuyer pour ecrire un message</button>
+
     <ng-template #classic1 let-c="close" let-d="dismiss">
       <div class="modal-content">
         <div class="modal-body p-0">
-          <div class="card bg-secondary shadow border-0">
-            <div class="card-header bg-white pb-2">
-              <div class="text-muted text-center mb-3">
-                <small>MESSAGERIE EVA</small>
-              </div>
-              <div class="btn-wrapper text-center">
-                <ngx-dropzone (change)="onSelect($event)">
-                  <ngx-dropzone-label>placer votre fichier join</ngx-dropzone-label>
-                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                  </ngx-dropzone-preview>
-                </ngx-dropzone>
-              </div>
-            </div>
-            <div class="card-body px-lg-5 py-lg-2">
-              <div class="text-center text-muted mb-2">
-                <small>Ou écrivez votre message ici</small>
-              </div>
-              <form role="form">
-                <div class="form-group mb-3">
-                  <div class="input-group input-group-alternative">
-                    <textarea cols="20" rows="4" class="form-control" placeholder="Message..."></textarea>
+          <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <div class="card bg-secondary shadow border-0">
+              <div class="card-header bg-white pb-2">
+                <div class="text-muted text-center mb-3">
+                  <small>MESSAGERIE EVA</small>
+                </div>
+                <div class="btn-wrapper text-center">
+                  <div class="row mb-3">
+                    <label class="form-label" jhiTranslate="evaHackathonApp.message.fichierJoin" for="field_fichierJoin"
+                      >Fichier Join</label
+                    >
+                    <div>
+                      <div *ngIf="editForm.get('fichierJoin')!.value" class="form-text text-danger clearfix">
+                        <a
+                          class="pull-start"
+                          (click)="openFile(editForm.get('fichierJoin')!.value!, editForm.get('fichierJoinContentType')!.value!)"
+                          jhiTranslate="entity.action.open"
+                          >Ouvrir</a
+                        ><br />
+                        <span class="pull-start"
+                          >{{ editForm.get('fichierJoinContentType')!.value }}, {{ byteSize(editForm.get('fichierJoin')!.value!) }}</span
+                        >
+                        <button
+                          type="button"
+                          (click)="editForm.patchValue({ fichierJoin: undefined, fichierJoinContentType: undefined })"
+                          class="btn btn-secondary btn-xs pull-end"
+                        >
+                          <fa-icon icon="times"></fa-icon>
+                        </button>
+                      </div>
+                      <input
+                        type="file"
+                        id="file_fichierJoin"
+                        data-cy="fichierJoin"
+                        (change)="setFileData($event, 'fichierJoin', false)"
+                        jhiTranslate="entity.action.addblob"
+                      />
+                    </div>
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      name="fichierJoin"
+                      id="field_fichierJoin"
+                      data-cy="fichierJoin"
+                      formControlName="fichierJoin"
+                    />
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      name="fichierJoinContentType"
+                      id="field_fichierJoinContentType"
+                      formControlName="fichierJoinContentType"
+                    />
                   </div>
                 </div>
-
-                <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Envoyer</button>
+              </div>
+              <div class="card-body px-lg-5 py-lg-2">
+                <div class="text-center text-muted mb-2">
+                  <small>Ou écrivez votre message ici</small>
                 </div>
-              </form>
+                <div>
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-alternative">
+                      <textarea data-cy="texte" formControlName="texte" cols="20" rows="4" class="form-control" placeholder="Message...">
+                      </textarea>
+                    </div>
+                    <div *ngIf="editForm.get('texte')!.invalid && (editForm.get('texte')!.dirty || editForm.get('texte')!.touched)">
+                      <small
+                        class="form-text text-danger"
+                        *ngIf="editForm.get('texte')?.errors?.required"
+                        jhiTranslate="entity.validation.required"
+                      >
+                        Ce champ est obligatoire.
+                      </small>
+                      <small class="form-text text-danger" *ngIf="editForm.get('texte')?.errors?.minLength">
+                        Renseignez au moins de 2 caractères
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      id="save-entity"
+                      data-cy="entityCreateSaveButton"
+                      [disabled]="editForm.invalid || isSaving"
+                      class="btn btn-primary my-4"
+                    >
+                      Envoyer
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </ng-template>
+  </div>
+
+  <div class="col-md-12">
+    <jhi-message-list [annonce]="annonce" [messages]="messages"></jhi-message-list>
   </div>
 </div>

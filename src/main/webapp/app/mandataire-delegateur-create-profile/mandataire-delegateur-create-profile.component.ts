@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {
   MandataireDelegateurFormGroup,
@@ -26,7 +26,7 @@ import Swal from 'sweetalert2';
   templateUrl: './mandataire-delegateur-create-profile.component.html',
   styleUrls: ['./mandataire-delegateur-create-profile.component.scss'],
 })
-export class MandataireDelegateurCreateProfileComponent implements OnInit {
+export class MandataireDelegateurCreateProfileComponent implements OnInit, OnDestroy {
   account: Account | null = null;
   closeResult = '';
   isSaving = false;
@@ -41,7 +41,7 @@ export class MandataireDelegateurCreateProfileComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    protected activeModal: NgbActiveModal,
+    public activeModal: NgbActiveModal,
     private accountService: AccountService,
     protected mandataireDelegateurService: MandataireDelegateurService,
     protected mandataireDelegateurFormService: MandataireDelegateurFormService,
@@ -119,6 +119,10 @@ export class MandataireDelegateurCreateProfileComponent implements OnInit {
     window.history.back();
   }
 
+  ngOnDestroy(): void {
+    this.activeModal.dismiss();
+  }
+
   save(): void {
     this.isSaving = true;
     const mandataireDelegateur = this.mandataireDelegateurFormService.getMandataireDelegateur(this.editForm);
@@ -126,8 +130,8 @@ export class MandataireDelegateurCreateProfileComponent implements OnInit {
       this.subscribeToSaveResponse(this.mandataireDelegateurService.update(mandataireDelegateur));
     } else {
       mandataireDelegateur.email = this.account?.email;
-      mandataireDelegateur.nomDeFamille = this.account?.lastName ? this.account?.lastName : 'anonyme';
-      mandataireDelegateur.prenom = this.account?.firstName ? this.account?.firstName : 'anonyme';
+      mandataireDelegateur.nomDeFamille = this.account?.lastName ? this.account?.lastName : 'Sans nom';
+      mandataireDelegateur.prenom = this.account?.firstName ? this.account?.firstName : 'Sans Prenom';
 
       this.subscribeToSaveResponse(this.mandataireDelegateurService.create(mandataireDelegateur));
     }
@@ -161,7 +165,7 @@ export class MandataireDelegateurCreateProfileComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.activeModal.dismiss();
-    this.router.navigate(['/user-profile']);
+    this.router.navigateByUrl('/user-profile');
     this.makeNotification();
   }
 
