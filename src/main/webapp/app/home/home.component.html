@@ -30,6 +30,7 @@
       </div>
       <div class="card-deck">
         <ng-container *ngFor="let annonce of annonces">
+          <ng-container *ngIf="annonce?.mandataireDelegateur?.etatCompte === comptePremium"></ng-container>
           <ng-container *ngFor="let annonceCategorie of annonce.categories">
             <div *ngIf="annonceCategorie.id === categorie.id" class="card" style="width: 14rem">
               <img

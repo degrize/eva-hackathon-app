@@ -41,6 +41,9 @@
                   >
                     Ce champ est obligatoire.
                   </small>
+                  <small class="form-text text-danger" *ngIf="editForm.get('contact')?.errors?.pattern">
+                    Renseignez un numero de 10 chiffres.
+                  </small>
                   <small class="form-text text-danger" *ngIf="editForm.get('contact')?.errors?.maxlength">
                     Renseignez un numero de 10 chiffres.
                   </small>
@@ -78,10 +81,7 @@
                   >
                     Ce champ est obligatoire.
                   </small>
-                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.maxlength">
-                    Renseignez un numero de 10 chiffres.
-                  </small>
-                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.minlength">
+                  <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.pattern">
                     Renseignez un numero de 10 chiffres.
                   </small>
                   <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.validValidator">
@@ -129,15 +129,18 @@
                       <span class="text-eva">&nbsp; {{ 'evaHackathonApp.mandataireDelegateur.pays' | translate }}</span>
                     </span>
                   </div>
-                  <input
-                    [placeholder]="'evaHackathonApp.mandataireDelegateur.ville' | translate"
-                    type="text"
-                    class="form-control"
+                  <ng-select
+                    style="width: 86%"
                     name="pays"
+                    formControlName="pays"
+                    [placeholder]="'evaHackathonApp.mandataireDelegateur.pays' | translate"
                     id="field_pays"
                     data-cy="pays"
-                    formControlName="pays"
-                  />
+                  >
+                    <ng-option *ngFor="let country of countryList" [value]="country.country">
+                      {{ country.country }} (+{{ country.dial_code }})
+                    </ng-option>
+                  </ng-select>
                 </div>
               </div>
 

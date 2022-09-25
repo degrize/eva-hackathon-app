@@ -14,7 +14,7 @@ import { DataUtils, FileLoadError } from '../../../core/util/data-util.service';
 import { EventManager, EventWithContent } from '../../../core/util/event-manager.service';
 import { AlertError } from '../../../shared/alert/alert-error.model';
 
-import * as country from '../../../../content/country.json';
+import countries from '../../../../content/country.json';
 import { AbstractControl } from '@angular/forms';
 
 @Component({
@@ -29,6 +29,8 @@ export class MandataireDelegateurUpdateComponent implements OnInit {
   situationMatrimonialeValues = Object.keys(SituationMatrimoniale);
 
   editForm: MandataireDelegateurFormGroup = this.mandataireDelegateurFormService.createMandataireDelegateurFormGroup();
+
+  countryList: { country: string; dial_code: string }[] = countries;
 
   constructor(
     protected mandataireDelegateurService: MandataireDelegateurService,

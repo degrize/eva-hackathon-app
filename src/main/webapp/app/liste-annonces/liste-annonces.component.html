@@ -22,64 +22,66 @@
       </div>
       <div class="content-list d-flex justify-content-between flex-wrap">
         <mat-nav-list *ngIf="annonces$ | async as annonces">
-          <div
-            *ngFor="let annonce of annonces"
-            id="card-component"
-            class="tab-pane tab-example-result fade show active text-left align-self-start mb-2"
-            role="tabpanel"
-            aria-labelledby="card-component-tab"
-          >
-            <div class="card card-frame">
-              <div class="card-body">
-                <a mat-list-item>
-                  <img
-                    *ngIf="annonce?.imageVideo; else defaultPicture"
-                    [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
-                    [alt]="annonce.titre"
-                    matListAvatar
-                  />
-                  <ng-template #defaultPicture>
-                    <img src="../../content/images/eva-logo.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
-                  </ng-template>
-                  <h3 matLine [routerLink]="annonce.id.toString()">
-                    {{ annonce.titre | uppercase }}
-                    <span class="text-heure">{{ annonce.dateDeDelegation | timeAgo }}</span>
-                  </h3>
-                  <p [routerLink]="annonce.id.toString()" matLine>Durée : {{ annonce.duree }}</p>
-                  <p class="text-heure">{{ annonce.tarif }} FCFA</p>
-                  <div dropdown class="dropdown no-caret">
-                    <a
-                      id="button-basic"
-                      dropdownToggle
-                      role="button"
-                      class="btn btn-sm btn-icon-only text-light dropdown-toggle"
-                      aria-controls="dropdown-basic"
-                    >
-                      <fa-icon icon="bars" [fixedWidth]="true" class="text-eva"></fa-icon>
-                    </a>
+          <ng-container *ngFor="let annonce of annonces">
+            <div
+              *ngIf="!annonce?.estTerminee"
+              id="card-component"
+              class="tab-pane tab-example-result fade show active text-left align-self-start mb-2"
+              role="tabpanel"
+              aria-labelledby="card-component-tab"
+            >
+              <div class="card card-frame">
+                <div class="card-body">
+                  <a mat-list-item>
+                    <img
+                      *ngIf="annonce?.imageVideo; else defaultPicture"
+                      [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
+                      [alt]="annonce.titre"
+                      matListAvatar
+                    />
+                    <ng-template #defaultPicture>
+                      <img src="../../content/images/eva-logo.png" alt="Image placeholder" class="avatar avatar-xs mr-2" />
+                    </ng-template>
+                    <h3 matLine [routerLink]="annonce.id.toString()">
+                      {{ annonce.titre | uppercase }}
+                      <span class="text-heure">{{ annonce.dateDeDelegation | timeAgo }}</span>
+                    </h3>
+                    <p [routerLink]="annonce.id.toString()" matLine>Durée : {{ annonce.duree }}</p>
+                    <p class="text-heure">{{ annonce.tarif }} FCFA</p>
+                    <div dropdown class="dropdown no-caret">
+                      <a
+                        id="button-basic"
+                        dropdownToggle
+                        role="button"
+                        class="btn btn-sm btn-icon-only text-light dropdown-toggle"
+                        aria-controls="dropdown-basic"
+                      >
+                        <fa-icon icon="bars" [fixedWidth]="true" class="text-eva"></fa-icon>
+                      </a>
 
-                    <div id="option" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
-                      <!--<ng-container *ngFor="let postulantItem of postulants">
-                        <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
-                          <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">
-                            <a
-                              *ngIf="postulantItem?.mandataireDelegateur?.id === mandataireDelegateur?.id"
-                              class="dropdown-item"
-                              (click)="deleteAbonnement(postulantItem.id)"
-                            >
-                              Désabonner {{ printAlert() }}
-                            </a>
+                      <div id="option" class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" *dropdownMenu>
+                        <!--<ng-container *ngFor="let postulantItem of postulants">
+                          <ng-container *ngFor="let postulantItemAnnonce of postulantItem?.annonces">
+                            <ng-container *ngIf="postulantItemAnnonce?.id === annonce?.id">
+                              <a
+                                *ngIf="postulantItem?.mandataireDelegateur?.id === mandataireDelegateur?.id"
+                                class="dropdown-item"
+                                (click)="deleteAbonnement(postulantItem.id)"
+                              >
+                                Désabonner {{ printAlert() }}
+                              </a>
+                            </ng-container>
                           </ng-container>
                         </ng-container>
-                      </ng-container>
-                      <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a> -->
-                      <a class="dropdown-item" [routerLink]="['/liste-annonces', annonce.id]"> Afficher </a>
+                        <a *ngIf="!verifDoublonAbonnement" class="dropdown-item" (click)="startAbonnement(annonce)"> Abonner </a> -->
+                        <a class="dropdown-item" [routerLink]="['/liste-annonces', annonce.id]"> Afficher </a>
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </mat-nav-list>
         <div class="align-items-start categorie">
           <ul class="list-group">

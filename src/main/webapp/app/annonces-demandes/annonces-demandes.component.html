@@ -49,11 +49,28 @@
                         </div>
                       </div>
                     </div>
-                    <p class="mt-3 mb-0 text-sm">
-                      <button type="button" class="btn btn-secondary btn-sm">échanger</button>
-                      <a [routerLink]="['/mandataire-portfolio', mandataireDelegateur?.id, 'view']">Afficher</a>
-                      <span class="text-white mr-2"><i class="fa fa-arrow-up"></i></span>
+                    <p class="mt-3 mb-0 text-sm" *ngIf="!annonce.estTerminee; else tacheTerminee">
+                      <button
+                        type="button"
+                        [routerLink]="['/message-annonce', annonce.id]"
+                        class="btn btn-secondary btn-sm"
+                        routerLinkActive="active"
+                      >
+                        échanger
+                      </button>
+                      <a
+                        (click)="save(annonce)"
+                        placement="bottom"
+                        ngbTooltip="En appuyant vous transferez l'argent  à celui qui a réalisé la tâche"
+                      >
+                        Cliquez si la tache est terminée
+                      </a>
+                      <span class="text-info">●</span> <span class="text-white mr-2">encours</span>
                     </p>
+                    <ng-template #tacheTerminee>
+                      <a href="javascript:void(0)"> <span class="text-success">●</span> Tâche est Terminée </a>
+                      <span class="text-white mr-2"><i class="fa fa-arrow-up"></i></span>
+                    </ng-template>
                   </div>
                 </div>
               </div>

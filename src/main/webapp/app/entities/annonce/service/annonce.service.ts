@@ -14,7 +14,6 @@ export type PartialUpdateAnnonce = Partial<IAnnonce> & Pick<IAnnonce, 'id'>;
 
 type RestOf<T extends IAnnonce | NewAnnonce> = Omit<T, 'dateDeDelegation' | 'dateDeDelais'> & {
   dateDeDelegation?: string | null;
-  dateDeDelais?: string | null;
 };
 
 export type RestAnnonce = RestOf<IAnnonce>;
@@ -106,7 +105,6 @@ export class AnnonceService {
     return {
       ...annonce,
       dateDeDelegation: annonce.dateDeDelegation?.toJSON() ?? null,
-      dateDeDelais: annonce.dateDeDelais?.format(DATE_FORMAT) ?? null,
     };
   }
 
@@ -114,7 +112,6 @@ export class AnnonceService {
     return {
       ...restAnnonce,
       dateDeDelegation: restAnnonce.dateDeDelegation ? dayjs(restAnnonce.dateDeDelegation) : undefined,
-      dateDeDelais: restAnnonce.dateDeDelais ? dayjs(restAnnonce.dateDeDelais) : undefined,
     };
   }
 

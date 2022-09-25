@@ -58,7 +58,7 @@ export class TransactionFormService {
         }
       ),
       numeroMtn: new FormControl(transactionRawValue.numeroMtn, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.pattern('^((\\+225-?)|0)?[0-9]{10}$')],
       }),
       montant: new FormControl(transactionRawValue.montant, {
         validators: [Validators.required],

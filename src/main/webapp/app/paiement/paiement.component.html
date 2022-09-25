@@ -69,10 +69,7 @@
           >
             Ce champ est obligatoire.
           </small>
-          <small class="form-text text-danger" *ngIf="mainForm.get('numeroMomo')?.errors?.maxlength">
-            Renseignez un numero de 10 chiffres.
-          </small>
-          <small class="form-text text-danger" *ngIf="mainForm.get('numeroMomo')?.errors?.minlength">
+          <small class="form-text text-danger" *ngIf="editForm.get('numeroMomo')?.errors?.pattern">
             Renseignez un numero de 10 chiffres.
           </small>
           <small class="form-text text-danger" *ngIf="mainForm.get('numeroMomo')?.errors?.validValidator">

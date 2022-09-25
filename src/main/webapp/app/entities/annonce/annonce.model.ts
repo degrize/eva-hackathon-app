@@ -7,9 +7,10 @@ export interface IAnnonce {
   id: number;
   titre?: string | null;
   dateDeDelegation?: dayjs.Dayjs | null;
-  dateDeDelais?: dayjs.Dayjs | null;
+  dateDeDelais?: dayjs.Dayjs | null | string;
   tarif?: string | null;
   postulantRetenu?: number | null;
+  estTerminee?: boolean | null;
   imageVideo?: string | null;
   imageVideoContentType?: string | null;
   description?: string | null;

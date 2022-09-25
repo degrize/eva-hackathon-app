@@ -57,11 +57,22 @@ export class MandataireDelegateurFormService {
       nomDeFamille: new FormControl(mandataireDelegateurRawValue.nomDeFamille),
       prenom: new FormControl(mandataireDelegateurRawValue.prenom),
       contact: new FormControl(mandataireDelegateurRawValue.contact, {
-        validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10)],
+        validators: [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern('^((\\+225-?)|0)?[0-9]{10}$'),
+        ],
       }),
       email: new FormControl(mandataireDelegateurRawValue.email),
       numeroMomo: new FormControl(mandataireDelegateurRawValue.numeroMomo, {
-        validators: [Validators.required, Validators.minLength(10), Validators.maxLength(10), numeroMoMoValidator()],
+        validators: [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          numeroMoMoValidator(),
+          Validators.pattern('^((\\+225-?)|0)?[0-9]{10}$'),
+        ],
       }),
       sexe: new FormControl(mandataireDelegateurRawValue.sexe, {
         validators: [Validators.required],

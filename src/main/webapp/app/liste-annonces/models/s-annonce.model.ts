@@ -18,6 +18,7 @@ export class SAnnonce {
   imageVideo!: string;
   imageVideoContentType!: string;
   postulantRetenu!: number;
+  estTerminee!: boolean;
   postulants!: IPostulant[];
   categories!: Pick<ICategorie, 'id' | 'nom'>[];
 }

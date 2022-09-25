@@ -1,19 +1,19 @@
 {
   "home": {
-    "title": "Bienvenue, {{username}} !",
+    "title": "Bienvenue",
     "subtitle": "Ceci est votre page d'accueil",
     "logged": {
       "message": "Vous êtes connecté en tant que \"{{username}}\"."
     },
-    "question": "Si vous avez des questions à propos de JHipster :",
+    "question": "Si vous avez des questions à propos de EVA :",
     "link": {
       "homepage": "Page d'accueil de JHipster",
-      "stackoverflow": "JHipster sur Stack Overflow",
+      "stackoverflow": "EVA sur Stack Overflow",
       "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "Suivez @jhipster sur Twitter"
+      "chat": "EVA public chat room",
+      "follow": "Suivez @eva sur Twitter"
     },
-    "like": "Si vous aimez JHipster, donnez nous une étoile sur",
+    "like": "Si vous aimez EVA, donnez nous une étoile sur",
     "github": "GitHub "
   }
 }

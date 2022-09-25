@@ -38,6 +38,7 @@ export class EtatCompteComponent implements OnInit {
   account: Account | null = null;
   mandataireDelegateur?: IMandataireDelegateur | null;
   premium = false;
+  motCle = 101;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -96,8 +97,8 @@ export class EtatCompteComponent implements OnInit {
 
   startPayementForm(): void {
     Swal.fire({
-      title: 'Renseignez votre password',
-      input: 'password',
+      title: 'Renseignez le mot clé : eva' + this.getRandomIntInclusive(100, 999),
+      input: 'text',
       inputAttributes: {
         autocapitalize: 'off',
       },
@@ -105,23 +106,22 @@ export class EtatCompteComponent implements OnInit {
       confirmButtonText: 'Souscrire',
       showLoaderOnConfirm: true,
       preConfirm: login => {
-        return fetch(`//api.github.com/users/${login}`)
+        return fetch(`//api.github.com/users/degrize`)
           .then(response => {
-            if (!response.ok) {
+            if (this.motCle !== login) {
               throw new Error(response.statusText);
             }
             return response.json();
           })
           .catch(error => {
-            Swal.showValidationMessage(`Request failed: ${error}`);
+            Swal.showValidationMessage(`Incorrect: ${error}`);
           });
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then(result => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url,
+          title: 'Félicitations Votre profile est mis à jour',
         });
         this.changeEtatCompte();
       }
@@ -130,6 +130,14 @@ export class EtatCompteComponent implements OnInit {
 
   switch(value: boolean): void {
     this.premium = value;
+  }
+
+  getRandomIntInclusive(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let nbreAleatoire = Math.floor(Math.random() * (max - min + 1)) + min;
+    this.motCle = nbreAleatoire;
+    return this.motCle;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IMandataireDelegateur>>): void {

@@ -213,7 +213,7 @@ public class MandataireDelegateurDTO implements Serializable {
             ", situationMatrimoniale='" + getSituationMatrimoniale() + "'" +
             ", photo='" + getPhoto() + "'" +
             ", photoContentType='" + getPhotoContentType() + "'" +
-            ", mandataireDelegateur=" + getUser() +
+            ", jhiUser=" + getUser() +
             "}";
     }
 }

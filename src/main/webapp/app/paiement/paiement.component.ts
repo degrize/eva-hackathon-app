@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { IMandataireDelegateur } from '../entities/mandataire-delegateur/mandataire-delegateur.model';
@@ -64,7 +64,8 @@ export class PaiementComponent implements OnInit {
     private formBuilder: FormBuilder,
     protected postulantService: PostulantService,
     protected postulantFormService: PostulantFormService,
-    protected annonceService: AnnonceService
+    protected annonceService: AnnonceService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -88,7 +89,13 @@ export class PaiementComponent implements OnInit {
 
   private initFormControls(): void {
     this.numeroMomo = this.formBuilder.control('', {
-      validators: [Validators.required, Validators.maxLength(10), Validators.minLength(10), numeroMoMoValidator()],
+      validators: [
+        Validators.required,
+        Validators.maxLength(10),
+        Validators.minLength(10),
+        numeroMoMoValidator(),
+        Validators.pattern('^((\\+225-?)|0)?[0-9]{10}$'),
+      ],
     });
     this.precision = this.formBuilder.control('');
   }
@@ -118,6 +125,7 @@ export class PaiementComponent implements OnInit {
     if (transaction.id !== null) {
       //
     } else {
+      console.log(transaction.numeroMtn);
       this.subscribeToSaveResponse(this.transactionService.create(transaction));
     }
   }
@@ -158,8 +166,19 @@ export class PaiementComponent implements OnInit {
       this.subscribeToSaveResponseAnnonce(this.annonceService.update(this.annonce));
     }
 
-    this.notification('Paiement Effectué avec succès', 'success');
-    this.previousState();
+    this.paiementNotification();
+
+    setTimeout(() => {
+      this.notification('Paiement Effectué avec succès', 'success');
+    }, 5000);
+
+    setTimeout(() => {
+      this.transfertEffecue();
+    }, 10000);
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/');
+    }, 15000);
   }
 
   protected onSaveSuccess(): void {
@@ -251,5 +270,43 @@ export class PaiementComponent implements OnInit {
         title: message,
       });
     }
+  }
+
+  private paiementNotification(): void {
+    let timerInterval: any;
+    Swal.fire({
+      title: "Nous sommes entraint d'éffectuer la transaction...",
+      html: "Patientez jusqu'a <b></b> millisecondes.",
+      timer: 200,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        const b = Swal.getHtmlContainer()?.querySelector('b');
+        timerInterval = setInterval(() => {
+          if (b?.textContent != undefined) {
+            b.textContent = Swal.getTimerLeft() + '';
+          }
+        }, 100);
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then(result => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer');
+      }
+    });
+  }
+
+  private transfertEffecue(): void {
+    Swal.fire({
+      title: 'Transaction MoMo vers EVA!',
+      text: "l'argent a bien été transmit sur le compte EVA.",
+      imageUrl: '../../../content/images/sendMoneyToEva.jpg',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'transaction vers EVA',
+    });
   }
 }

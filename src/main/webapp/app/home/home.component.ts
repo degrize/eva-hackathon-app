@@ -17,6 +17,7 @@ import { IAnnonce } from '../entities/annonce/annonce.model';
 import { ICategorie } from '../entities/categorie/categorie.model';
 import { CategorieService } from '../entities/categorie/service/categorie.service';
 import List from 'list.js';
+import { EtatCompte } from '../entities/enumerations/etat-compte.model';
 
 @Component({
   selector: 'jhi-home',
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   photoAnnonce = '';
   annonces?: IAnnonce[];
   categories?: ICategorie[];
+  comptePremium = EtatCompte.PREMIUM;
 
   private readonly destroy$ = new Subject<void>();
 

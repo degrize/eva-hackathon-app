@@ -39,12 +39,12 @@
         </p>
         <div class="price-box">
           <div class="price">{{ annonce.tarif }} Fcfa</div>
-          <div *ngIf="annonce.postulantRetenu; else btnDemander" class="discount">Demander</div>
+          <div *ngIf="annonce.postulantRetenu; else btnDemander" class="discount">Embaucher</div>
         </div>
       </div>
       <ng-template #btnDemander>
         <div class="button1 mb-2">
-          <button routerLinkActive="active" [routerLink]="['/paiement', annonce.id]">Demander</button>
+          <button routerLinkActive="active" [routerLink]="['/paiement', annonce.id]">Embaucher</button>
         </div>
       </ng-template>
       <div class="button1 mb-2">
@@ -64,7 +64,6 @@
           <img [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" [alt]="annonce.titre" />
         </div>
         <div class="info">
-          <div class="brand">Mon Momo : {{ annonce.mandataireDelegateur?.numeroMomo }}</div>
           <div class="name">{{ annonce.titre | shorten: 30 }}</div>
           <div class="button2"></div>
         </div>

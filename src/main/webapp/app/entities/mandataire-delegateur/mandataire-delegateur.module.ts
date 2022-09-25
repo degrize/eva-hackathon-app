@@ -5,9 +5,10 @@ import { MandataireDelegateurDetailComponent } from './detail/mandataire-delegat
 import { MandataireDelegateurUpdateComponent } from './update/mandataire-delegateur-update.component';
 import { MandataireDelegateurDeleteDialogComponent } from './delete/mandataire-delegateur-delete-dialog.component';
 import { MandataireDelegateurRoutingModule } from './route/mandataire-delegateur-routing.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
-  imports: [SharedModule, MandataireDelegateurRoutingModule],
+  imports: [SharedModule, MandataireDelegateurRoutingModule, NgSelectModule],
   declarations: [
     MandataireDelegateurComponent,
     MandataireDelegateurDetailComponent,

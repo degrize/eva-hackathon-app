@@ -20,6 +20,7 @@ import { AccountService } from '../core/auth/account.service';
 import { Account } from '../core/auth/account.model';
 import { ITEM_DELETED_EVENT } from '../config/navigation.constants';
 import Swal from 'sweetalert2';
+import countries from '../../content/country.json';
 
 @Component({
   selector: 'jhi-mandataire-delegateur-create-profile',
@@ -36,6 +37,8 @@ export class MandataireDelegateurCreateProfileComponent implements OnInit, OnDes
   situationMatrimonialeValues = Object.keys(SituationMatrimoniale);
 
   editForm: MandataireDelegateurFormGroup = this.mandataireDelegateurFormService.createMandataireDelegateurFormGroup();
+
+  countryList: { country: string; dial_code: string }[] = countries;
 
   private readonly destroy$ = new Subject<void>();
 

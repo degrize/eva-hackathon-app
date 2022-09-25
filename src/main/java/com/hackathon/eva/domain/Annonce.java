@@ -46,6 +46,9 @@ public class Annonce implements Serializable {
     @Column(name = "postulant_retenu")
     private Integer postulantRetenu;
 
+    @Column(name = "est_terminee")
+    private Boolean estTerminee;
+
     @Lob
     @Column(name = "image_video")
     private byte[] imageVideo;
@@ -168,6 +171,19 @@ public class Annonce implements Serializable {
 
     public void setPostulantRetenu(Integer postulantRetenu) {
         this.postulantRetenu = postulantRetenu;
+    }
+
+    public Boolean getEstTerminee() {
+        return estTerminee;
+    }
+
+    public Annonce estTerminee(Boolean estTerminee) {
+        this.setEstTerminee(estTerminee);
+        return this;
+    }
+
+    public void setEstTerminee(Boolean estTerminee) {
+        this.estTerminee = estTerminee;
     }
 
     public byte[] getImageVideo() {
@@ -388,6 +404,7 @@ public class Annonce implements Serializable {
             ", description='" + getDescription() + "'" +
             ", duree='" + getDuree() + "'" +
             ", categorieSearch='" + getCategorieSearch() + "'" +
+            ", estTerminee='" + getEstTerminee() + "'" +
             "}";
     }
 }

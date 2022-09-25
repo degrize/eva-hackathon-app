@@ -22,28 +22,30 @@
       </ng-container>
       <ng-container *ngIf="annonces$ | async as annonces">
         <ng-container *ngFor="let annonce of annonces">
-          <div
-            *ngIf="annonce?.mandataireDelegateur?.id === mandataireDelegateur?.id"
-            id="card-component"
-            class="tab-pane tab-example-result fade show active"
-            role="tabpanel"
-            aria-labelledby="card-component-tab"
-          >
-            <div class="card mb-3">
-              <div class="about-content">
-                <div class="column left">
-                  <img [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" [alt]="annonce?.titre" />
-                </div>
-                <div class="column right">
-                  <div class="text">{{ annonce?.titre }} <span class="typing-2"></span></div>
-                  <p>
-                    {{ annonce?.description }}
-                  </p>
-                  <a [href]="'/liste-annonces/' + annonce?.id" routerLinkActive="active">Souscrire</a>
+          <ng-container *ngIf="!annonce?.estTerminee">
+            <div
+              *ngIf="annonce?.mandataireDelegateur?.id === mandataireDelegateur?.id"
+              id="card-component"
+              class="tab-pane tab-example-result fade show active"
+              role="tabpanel"
+              aria-labelledby="card-component-tab"
+            >
+              <div class="card mb-3">
+                <div class="about-content">
+                  <div class="column left">
+                    <img [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" [alt]="annonce?.titre" />
+                  </div>
+                  <div class="column right">
+                    <div class="text">{{ annonce?.titre }} <span class="typing-2"></span></div>
+                    <p>
+                      {{ annonce?.description }}
+                    </p>
+                    <a [href]="'/liste-annonces/' + annonce?.id" routerLinkActive="active">Souscrire</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </ng-container>
         </ng-container>
       </ng-container>
     </div>

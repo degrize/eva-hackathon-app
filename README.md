@@ -337,3 +337,10 @@ alter table "public".message
     add nom_transmeteur varchar(255),
     add date_envoie varchar(255)
 ```
+
+Tache annonce terminée
+
+```
+alter table "public".annonce
+add est_terminee boolean
+```

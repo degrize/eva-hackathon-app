@@ -118,7 +118,6 @@ public class MandataireDelegateurServiceImpl implements MandataireDelegateurServ
     @Override
     public MandataireDelegateur findUser(Long id) {
         MandataireDelegateur existingMandataireDelegateur = mandataireDelegateurRepository.findByJhiUserId(id);
-
         return existingMandataireDelegateur;
     }
 

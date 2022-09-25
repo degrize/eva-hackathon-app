@@ -32,6 +32,8 @@ public class AnnonceDTO implements Serializable {
 
     private Integer postulantRetenu;
 
+    private Boolean estTerminee;
+
     @Lob
     private byte[] imageVideo;
 
@@ -91,6 +93,14 @@ public class AnnonceDTO implements Serializable {
 
     public void setPostulantRetenu(Integer postulantRetenu) {
         this.postulantRetenu = postulantRetenu;
+    }
+
+    public Boolean getEstTerminee() {
+        return estTerminee;
+    }
+
+    public void setEstTerminee(Boolean estTerminee) {
+        this.estTerminee = estTerminee;
     }
 
     public byte[] getImageVideo() {
@@ -186,6 +196,7 @@ public class AnnonceDTO implements Serializable {
             ", duree=" + getDuree() +
             ", categorieSearch=" + getCategorieSearch() +
             ", mandataireDelegateur=" + getMandataireDelegateur() +
+            ", estTerminee=" + getEstTerminee() +
             "}";
     }
 }
