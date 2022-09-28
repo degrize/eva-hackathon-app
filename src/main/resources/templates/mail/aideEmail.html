@@ -59,16 +59,15 @@
       />
     </div>
 
-    <p th:text="#{email.global.message(${aide.message})}"></p>
+    <p th:text="#{email.global.message(${aide.getMessage()})}"></p>
     <br />
 
     <p>
       <span th:text="#{email.activation.text2}">Regards, </span>
       <br />
-      <span th:text="#{email.global.message(${aide.prenom})}">JHipster.</span>
-      <span th:text="#{email.global.message(${aide.nom})}">JHipster.</span>
+      <span th:text="#{email.global.message(${aide.getNom()})}">JHipster.</span>
       <br />
-      <em th:text="#{email.global.message(${aide.email})}">JHipster.</em>
+      <em th:text="#{email.global.message(${aide.getEmail()})}">JHipster.</em>
     </p>
   </body>
 </html>
