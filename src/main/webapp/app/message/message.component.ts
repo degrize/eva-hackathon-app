@@ -171,6 +171,23 @@ export class MessageComponent implements OnInit {
       });
   }
 
+  public clearForm(): void {
+    let inputMessage = document.getElementsByTagName('textarea');
+    for (let i = 0; i < inputMessage.length; i++) {
+      inputMessage[i].value = '';
+    }
+
+    let inputNomAndEmail = document.getElementsByTagName('input');
+    for (let i = 0; i < inputNomAndEmail.length; i++) {
+      inputNomAndEmail[i].value = '';
+    }
+  }
+
+  public onSaveSuccess(): void {
+    this.clearForm();
+    this.activeModal.dismiss();
+  }
+
   protected onSucessUser(data: IMandataireDelegateur | null): void {
     if (data) {
       this.mandataireDelegateur = data;
@@ -182,10 +199,6 @@ export class MessageComponent implements OnInit {
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
     });
-  }
-
-  protected onSaveSuccess(): void {
-    this.activeModal.dismiss();
   }
 
   protected onSaveError(): void {

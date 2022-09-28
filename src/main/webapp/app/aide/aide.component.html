@@ -65,7 +65,7 @@
 
         <div class="row">
           <div class="col-sm-12 form-group">
-            <button type="submit" [disabled]="editForm.invalid" class="btn btn-lg btn-default pull-right" data-cy="submit">
+            <button type="submit" [disabled]="editForm.invalid || isSaving" class="btn btn-lg btn-default pull-right" data-cy="submit">
               Envoyer →
             </button>
           </div>

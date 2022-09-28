@@ -71,6 +71,20 @@ export class AideComponent implements OnInit {
     });
   }
 
+  public clearForm(): void {
+    let inputMessage = document.getElementsByTagName('textarea');
+    for (let i = 0; i < inputMessage.length; i++) {
+      inputMessage[i].value = '';
+    }
+
+    let inputNomAndEmail = document.getElementsByTagName('input');
+    for (let i = 0; i < inputNomAndEmail.length; i++) {
+      inputNomAndEmail[i].value = '';
+    }
+
+    this.isSaving = false;
+  }
+
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IAide>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -79,6 +93,7 @@ export class AideComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
+    this.clearForm();
     this.startNotificationMailSend();
   }
 
