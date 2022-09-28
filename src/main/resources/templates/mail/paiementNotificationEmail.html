@@ -59,8 +59,8 @@
       />
     </div>
 
-    <p th:text="#{email.paiement.message(${transaction.montant})}"></p>
-    <p th:text="#{email.paiementnumero.message(${transaction.numeroMtn})}"></p>
+    <p th:text="#{email.paiement.message(${transaction.getMontant()})}"></p>
+    <p th:text="#{email.paiementnumero.message(${transaction.getNumeroMtn()})}"></p>
     <br />
 
     <p>
