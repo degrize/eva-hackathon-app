@@ -88,6 +88,7 @@ public class SecurityConfiguration {
             .antMatchers("/api/annonces/liste").permitAll()
             .antMatchers("/api/postulants/liste").permitAll()
             .antMatchers("/api/categories/liste").permitAll()
+            .antMatchers("/api/mandataire-delegateurs/account").permitAll()
             .antMatchers("/api/aide").permitAll()
             .antMatchers("/api/transactions").permitAll()
             .antMatchers("/api/account/reset-password/init").permitAll()

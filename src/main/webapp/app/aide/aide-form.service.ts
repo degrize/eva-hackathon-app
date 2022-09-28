@@ -54,11 +54,11 @@ export class AideFormService {
         }
       ),
       message: new FormControl(aideRawValue.message, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.minLength(10)],
       }),
       nom: new FormControl(aideRawValue.nom),
       email: new FormControl(aideRawValue.email, {
-        validators: [Validators.required],
+        validators: [Validators.required, Validators.email],
       }),
     });
   }

@@ -37,10 +37,12 @@
                 class="card-img-top"
                 [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
                 alt="Card image cap"
+                height="200"
+                width="200"
               />
               <div class="card-body">
-                <h5 class="card-titlee">{{ annonce?.titre | shorten: 50 }}</h5>
-                <p class="card-text">{{ annonce?.description | shorten: 100 }}</p>
+                <h5 class="card-titlee">{{ (annonce?.titre + '').toLowerCase() | shorten: 20 }}</h5>
+                <p class="card-text">{{ (annonce?.description + '').toLowerCase() | shorten: 20 }}</p>
                 <h5 class="prix">{{ annonce?.tarif }}</h5>
                 <a [routerLink]="['/liste-annonces', annonce.id]" class="btn btn-primary">Commander</a>
               </div>

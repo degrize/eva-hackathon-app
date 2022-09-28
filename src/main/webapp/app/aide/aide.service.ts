@@ -3,8 +3,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import { IAide, NewAide } from './aide.model';
-import { NewCategorie } from '../entities/categorie/categorie.model';
+import { IAide } from './aide.model';
 
 export type EntityResponseType = HttpResponse<IAide>;
 export type EntityArrayResponseType = HttpResponse<IAide[]>;

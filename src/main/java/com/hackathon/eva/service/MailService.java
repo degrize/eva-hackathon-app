@@ -1,8 +1,10 @@
 package com.hackathon.eva.service;
 
+import com.hackathon.eva.domain.Transaction;
 import com.hackathon.eva.domain.User;
 import com.hackathon.eva.service.dto.AideDTO;
 import com.hackathon.eva.service.dto.ReportDTO;
+import com.hackathon.eva.service.dto.TransactionDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import javax.mail.MessagingException;
@@ -31,6 +33,7 @@ public class MailService {
 
     private static final String USER = "user";
     private static final String AIDE = "aide";
+    private static final String TRANSACTION = "transaction";
 
     private static final String BASE_URL = "baseUrl";
 
@@ -98,6 +101,21 @@ public class MailService {
     }
 
     @Async
+    public void sendEmailFromTemplate(TransactionDTO transactionDTO, String templateName, String titleKey) {
+        if (transactionDTO.getAnnonce().getMandataireDelegateur().getEmail() == null) {
+            log.debug("Email doesn't exist for user '{}'", transactionDTO.getAnnonce().getMandataireDelegateur().getNomDeFamille());
+            return;
+        }
+        Locale locale = Locale.forLanguageTag("fr");
+        Context context = new Context(locale);
+        context.setVariable(TRANSACTION, transactionDTO);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(transactionDTO.getAnnonce().getMandataireDelegateur().getEmail(), subject, content, false, true);
+    }
+
+    @Async
     public void sendAideEmailFromTemplate(AideDTO aide, String templateName, String titleKey) {
         if (aide.getEmail() == null) {
             log.debug("Email doesn't exist for user '{}'", aide.getNom());
@@ -158,5 +176,15 @@ public class MailService {
     public void sendBeveAvantage(User user) {
         log.info("Daily mail send to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "mail/createDocumentServiceEmail", "email.createDocumentService.title");
+    }
+
+    @Async
+    public void sendPaiementNotificationEmail(TransactionDTO transaction) {
+        log.debug(
+            "Sending notification Don email to Mandataire '{}' email : '{}'",
+            transaction.getAnnonce().getMandataireDelegateur().getNomDeFamille(),
+            transaction.getAnnonce().getMandataireDelegateur().getEmail()
+        );
+        sendEmailFromTemplate(transaction, "mail/paiementNotificationEmail", "email.donnotification.title");
     }
 }

@@ -1,6 +1,7 @@
 package com.hackathon.eva.web.rest;
 
 import com.hackathon.eva.repository.TransactionRepository;
+import com.hackathon.eva.service.MailService;
 import com.hackathon.eva.service.TransactionService;
 import com.hackathon.eva.service.dto.TransactionDTO;
 import com.hackathon.eva.web.rest.errors.BadRequestAlertException;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +43,9 @@ public class TransactionResource {
 
     private final TransactionService transactionService;
 
+    @Autowired
+    private MailService mailService;
+
     private final TransactionRepository transactionRepository;
 
     public TransactionResource(TransactionService transactionService, TransactionRepository transactionRepository) {
@@ -62,6 +67,7 @@ public class TransactionResource {
             throw new BadRequestAlertException("A new transaction cannot already have an ID", ENTITY_NAME, "idexists");
         }
         TransactionDTO result = transactionService.save(transactionDTO);
+        mailService.sendPaiementNotificationEmail(transactionDTO);
         return ResponseEntity
             .created(new URI("/api/transactions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))

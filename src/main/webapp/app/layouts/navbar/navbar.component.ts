@@ -31,6 +31,7 @@ export class NavbarComponent implements OnInit {
   account: Account | null = null;
   entitiesNavbarItems: any[] = [];
   searchInput = '';
+  public isCollapsed = true;
 
   public focus: any;
   lang = 'fr';
