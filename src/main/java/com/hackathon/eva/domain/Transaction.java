@@ -45,14 +45,23 @@ public class Transaction implements Serializable {
     @Column(name = "precision")
     private String precision;
 
+    @Column(name = "transmeteur_id")
+    private Long transmeteurId;
+
+    @Column(name = "receiver_id")
+    private Long receiverId;
+
+    @Column(name = "annonce_transaction_id")
+    private Long annonceTransactionId;
+
     @JsonIgnoreProperties(value = { "messages", "categories", "transaction", "mandataireDelegateur", "postulants" }, allowSetters = true)
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private Annonce annonce;
 
     @JsonIgnoreProperties(value = { "annonces", "transaction" }, allowSetters = true)
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn(unique = false)
     private Postulant postulant;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -135,6 +144,45 @@ public class Transaction implements Serializable {
         this.precision = precision;
     }
 
+    public Long getTransmeteurId() {
+        return transmeteurId;
+    }
+
+    public Transaction transmeteurId(Long transmeteurId) {
+        this.setTransmeteurId(transmeteurId);
+        return this;
+    }
+
+    public void setTransmeteurId(Long transmeteurId) {
+        this.transmeteurId = transmeteurId;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public Transaction receiverId(Long receiverId) {
+        this.setReceiverId(receiverId);
+        return this;
+    }
+
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public Long getAnnonceTransactionId() {
+        return annonceTransactionId;
+    }
+
+    public Transaction annonceTransactionId(Long annonceTransactionId) {
+        this.setAnnonceTransactionId(annonceTransactionId);
+        return this;
+    }
+
+    public void setAnnonceTransactionId(Long annonceTransactionId) {
+        this.annonceTransactionId = annonceTransactionId;
+    }
+
     public Annonce getAnnonce() {
         return this.annonce;
     }
@@ -190,6 +238,9 @@ public class Transaction implements Serializable {
             ", devise='" + getDevise() + "'" +
             ", dateTransaction='" + getDateTransaction() + "'" +
             ", precision='" + getPrecision() + "'" +
+            ", transmeteurId='" + getTransmeteurId() + "'" +
+            ", receiverId='" + getReceiverId() + "'" +
+            ", annonceTransactionId='" + getAnnonceTransactionId() + "'" +
             "}";
     }
 }

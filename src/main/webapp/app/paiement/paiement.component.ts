@@ -19,6 +19,7 @@ import { numeroMoMoValidator } from '../shared/validators/valid.validator';
 import { PostulantFormGroup, PostulantFormService } from '../entities/postulant/update/postulant-form.service';
 import { PostulantService } from '../entities/postulant/service/postulant.service';
 import { AnnonceService } from '../entities/annonce/service/annonce.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'jhi-paiement',
@@ -26,6 +27,8 @@ import { AnnonceService } from '../entities/annonce/service/annonce.service';
   styleUrls: ['./paiement.component.scss'],
 })
 export class PaiementComponent implements OnInit {
+  uploadedFiles: any[] = [];
+
   fraisEVa = 200;
   numeroMTN = '';
   precisionInput = '';
@@ -56,6 +59,7 @@ export class PaiementComponent implements OnInit {
   private readonly destroy$ = new Subject<void>();
 
   constructor(
+    private messageService: MessageService,
     protected activatedRoute: ActivatedRoute,
     private accountService: AccountService,
     private mandataireDelegateurService: MandataireDelegateurService,
@@ -103,7 +107,6 @@ export class PaiementComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const transaction = this.transactionFormService.getTransaction(this.editForm);
-    transaction.annonce = this.annonce;
     transaction.devise = Devise.FCFA;
     transaction.montant = parseInt(this.annonce?.tarif + '');
 
@@ -114,6 +117,9 @@ export class PaiementComponent implements OnInit {
       }
     }
     transaction.numeroMtn = this.numeroMTN;
+    transaction.transmeteurId = this.mandataireDelegateur?.id;
+    transaction.receiverId = this.annonce?.mandataireDelegateur?.id;
+    transaction.annonceTransactionId = this.annonce?.id;
 
     let inputPrecision = document.getElementsByTagName('textarea');
     for (let i = 0; i < inputPrecision.length; i++) {
@@ -128,6 +134,14 @@ export class PaiementComponent implements OnInit {
       console.log(transaction.numeroMtn);
       this.subscribeToSaveResponse(this.transactionService.create(transaction));
     }
+  }
+
+  onUpload(event: { files: any }) {
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
+
+    this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
   }
 
   protected subscribeToSaveResponseAnnonce(result: Observable<HttpResponse<IAnnonce>>): void {
@@ -170,15 +184,15 @@ export class PaiementComponent implements OnInit {
 
     setTimeout(() => {
       this.notification('Paiement Effectué avec succès', 'success');
-    }, 5000);
+    }, 2000);
 
     setTimeout(() => {
       this.transfertEffecue();
-    }, 10000);
+    }, 6000);
 
     setTimeout(() => {
       this.router.navigateByUrl('/');
-    }, 15000);
+    }, 10000);
   }
 
   protected onSaveSuccess(): void {
@@ -277,7 +291,7 @@ export class PaiementComponent implements OnInit {
     Swal.fire({
       title: "Nous sommes entraint d'éffectuer la transaction...",
       html: "Patientez jusqu'a <b></b> millisecondes.",
-      timer: 200,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();

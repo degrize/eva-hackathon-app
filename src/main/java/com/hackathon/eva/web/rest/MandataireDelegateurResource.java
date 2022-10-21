@@ -10,6 +10,8 @@ import com.hackathon.eva.service.dto.AdminUserDTO;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
 import com.hackathon.eva.service.dto.UserDTO;
 import com.hackathon.eva.web.rest.errors.BadRequestAlertException;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -17,10 +19,13 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.dom4j.DocumentException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -214,5 +219,17 @@ public class MandataireDelegateurResource {
 
         List<MandataireDelegateur> mandataireDelegateurs = mandataireDelegateurService.findAllByNomPrenom(nomprenom);
         return ResponseEntity.ok().body(mandataireDelegateurs);
+    }
+
+    @RequestMapping("/mandataire-delegateurs/excel/{id}")
+    public ResponseEntity<InputStreamResource> viewExcel(@PathVariable long id)
+        throws IOException, InvalidFormatException, DocumentException {
+        String title = "transactions-eva";
+        ByteArrayInputStream in = mandataireDelegateurService.generateExcelFile(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=" + title + ".xlsx");
+
+        return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
     }
 }

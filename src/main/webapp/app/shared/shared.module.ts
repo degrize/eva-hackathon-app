@@ -19,9 +19,10 @@ import { ShortenPipe } from './pipes/shorten.pipe';
 import { MaterialModule } from './material.module';
 import { CommentairesComponent } from './commentaires/commentaires.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MultipleSlideModule } from './multiple-slide/multiple-slide.module';
 
 @NgModule({
-  imports: [SharedLibsModule, MaterialModule, NgxDropzoneModule],
+  imports: [SharedLibsModule, MaterialModule, NgxDropzoneModule, MultipleSlideModule],
   declarations: [
     FindLanguageFromKeyPipe,
     TranslateDirective,
@@ -60,6 +61,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MaterialModule,
     CommentairesComponent,
     NgxDropzoneModule,
+    MultipleSlideModule,
   ],
 })
 export class SharedModule {}

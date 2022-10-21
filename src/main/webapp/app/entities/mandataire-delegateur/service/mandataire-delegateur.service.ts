@@ -89,4 +89,8 @@ export class MandataireDelegateurService {
       observe: 'response',
     });
   }
+
+  genarateExcel(id: number): void {
+    window.open(`${this.resourceUrl}/excel/${id}`, '_blank');
+  }
 }

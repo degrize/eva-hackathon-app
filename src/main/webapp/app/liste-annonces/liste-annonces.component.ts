@@ -24,7 +24,6 @@ import { SAnnonce } from './models/s-annonce.model';
   selector: 'jhi-liste-annonces',
   templateUrl: './liste-annonces.component.html',
   styleUrls: ['./liste-annonces.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListeAnnoncesComponent implements OnInit {
   entries: number = 10;

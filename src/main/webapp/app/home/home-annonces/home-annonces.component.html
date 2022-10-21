@@ -1,0 +1,35 @@
+<ng-container *ngIf="annoncesList.length > 0">
+  <p-carousel [value]="annoncesList" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="header">
+      <h2 class="ap text-white justify-content-center rounded">{{ categorie.nom }}</h2>
+    </ng-template>
+    <ng-template let-annonceItem pTemplate="item">
+      <div class="product-item">
+        <a [href]="['/liste-annonces/' + annonceItem.id]">
+          <div class="product-item-content">
+            <div>
+              <img
+                class="card-img-top card-image product-image"
+                [src]="'data:' + annonceItem?.imageVideoContentType + ';base64,' + annonceItem?.imageVideo"
+                alt="Card image cap"
+              />
+            </div>
+            <div>
+              <h4 class="p-mb-1">{{ (annonceItem?.titre + '').toLowerCase() | shorten: 20 }}</h4>
+              <h6 class="p-mt-0 p-mb-3">
+                {{ (annonceItem?.description + '').toLowerCase() | shorten: 20 }}
+              </h6>
+              <div class="d-flex justify-content-between px-3">
+                <span class="p-mt-0 p-mb-3">{{ annonceItem?.tarif }} FCFA</span>
+                <span *ngIf="annonceItem.postulantRetenu; else disponible"><span class="text-warning">●</span> En Cours</span>
+                <ng-template #disponible>
+                  <span><span class="text-success">●</span> Disponible</span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-template>
+  </p-carousel>
+</ng-container>

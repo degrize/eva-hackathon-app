@@ -44,4 +44,9 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     @Query("select count(transaction) from Transaction transaction")
     int getCountTransactionParPeriode(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    /* @Query("select eleve from Eleve eleve where eleve.classe.id =:id order by eleve.nom asc, eleve.prenoms asc")
+     */
+    List<Transaction> findTransactionsByReceiverId(Long id);
+    List<Transaction> findTransactionsByTransmeteurId(Long id);
 }

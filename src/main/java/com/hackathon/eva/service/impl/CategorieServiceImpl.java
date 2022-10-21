@@ -88,6 +88,6 @@ public class CategorieServiceImpl implements CategorieService {
     @Transactional(readOnly = true)
     public List<Categorie> findAllNoPageble() {
         log.debug("Request to get list of Categories");
-        return categorieRepository.findAll();
+        return categorieRepository.findAllWithEagerRelationships();
     }
 }

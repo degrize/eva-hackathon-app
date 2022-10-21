@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
   selector: 'app-single-annonce',
   templateUrl: './single-annonce.component.html',
   styleUrls: ['./single-annonce.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleAnnonceComponent implements OnInit {
   loading$!: Observable<boolean>;

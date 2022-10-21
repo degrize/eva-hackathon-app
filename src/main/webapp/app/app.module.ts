@@ -30,6 +30,7 @@ import { EtatCompteComponent } from './etat-compte/etat-compte.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GlobalSearchComponent } from './global-search/global-search.component';
+import { StyleClassModule } from 'primeng/styleclass';
 
 @NgModule({
   imports: [

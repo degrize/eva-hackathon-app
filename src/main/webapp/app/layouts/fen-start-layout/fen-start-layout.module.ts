@@ -10,10 +10,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { FenStartLayoutRoutes } from './fen-start-layout.routing';
 import { FooterComponent } from '../footer/footer.component';
 import { HomeModule } from '../../home/home.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [FenStartLayoutComponent, FooterComponent],
   imports: [
+    SharedModule,
     CommonModule,
     RouterModule.forChild(FenStartLayoutRoutes),
     FormsModule,

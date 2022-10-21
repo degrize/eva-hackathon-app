@@ -38,6 +38,9 @@ type TransactionFormGroupContent = {
   precision: FormControl<TransactionFormRawValue['precision']>;
   annonce: FormControl<TransactionFormRawValue['annonce']>;
   postulant: FormControl<TransactionFormRawValue['postulant']>;
+  transmeteurId: FormControl<TransactionFormRawValue['transmeteurId']>;
+  receiverId: FormControl<TransactionFormRawValue['receiverId']>;
+  annonceTransactionId: FormControl<TransactionFormRawValue['annonceTransactionId']>;
 };
 
 export type TransactionFormGroup = FormGroup<TransactionFormGroupContent>;
@@ -68,6 +71,9 @@ export class TransactionFormService {
       }),
       dateTransaction: new FormControl(transactionRawValue.dateTransaction),
       precision: new FormControl(transactionRawValue.precision),
+      transmeteurId: new FormControl(transactionRawValue.transmeteurId),
+      receiverId: new FormControl(transactionRawValue.receiverId),
+      annonceTransactionId: new FormControl(transactionRawValue.annonceTransactionId),
       annonce: new FormControl(transactionRawValue.annonce),
       postulant: new FormControl(transactionRawValue.postulant),
     });

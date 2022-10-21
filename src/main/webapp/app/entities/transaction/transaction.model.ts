@@ -10,6 +10,9 @@ export interface ITransaction {
   devise?: Devise | null;
   dateTransaction?: dayjs.Dayjs | null;
   precision?: string | null;
+  transmeteurId?: number | null;
+  annonceTransactionId?: number | null;
+  receiverId?: number | null;
   annonce?: Pick<IAnnonce, 'id' | 'titre'> | null;
   postulant?: Pick<IPostulant, 'id'> | null;
 }

@@ -1,64 +1,42 @@
 <div [ngSwitch]="account !== null" class="home flex-column d-flex justify-content-center">
   <div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="head col-xl-6 d-flex flex-column align-items-center col-sm-10">
-      <carousel class="slider mt-5">
-        <slide>
-          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/av.png" alt="First slide" />
-        </slide>
+    <jhi-hero-page [account]="account"></jhi-hero-page>
 
-        <slide>
-          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/tr.png" alt="Second slide" />
-        </slide>
-
-        <slide>
-          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/md.png" alt="Second slide" />
-        </slide>
-
-        <slide>
-          <img class="img-fluid shadow rounded" src="../../../content/assets/img/beve/pr.png" alt="First slide" />
-        </slide>
-      </carousel>
-
-      <button *ngSwitchCase="false" type="button" routerLink="/account/register" class="btn btn-info btn-slider text-white">
-        Commencer
-      </button>
-    </div>
-
-    <div *ngFor="let categorie of categories" class="box">
-      <div>
-        <h2 class="ap text-white justify-content-center">{{ categorie.nom }}</h2>
-      </div>
-      <div class="card-deck">
-        <ng-container *ngFor="let annonce of annonces">
-          <ng-container *ngIf="annonce?.mandataireDelegateur?.etatCompte === comptePremium"></ng-container>
-          <ng-container *ngFor="let annonceCategorie of annonce.categories">
-            <div *ngIf="annonceCategorie.id === categorie.id" class="card" style="width: 14rem">
-              <img
-                class="card-img-top"
-                [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo"
-                alt="Card image cap"
-                height="200"
-                width="200"
-              />
-              <div class="card-body">
-                <h5 class="card-titlee">{{ (annonce?.titre + '').toLowerCase() | shorten: 20 }}</h5>
-                <p class="card-text">{{ (annonce?.description + '').toLowerCase() | shorten: 20 }}</p>
-                <h5 class="prix">{{ annonce?.tarif }}</h5>
-                <a [routerLink]="['/liste-annonces', annonce.id]" class="btn btn-primary">Commander</a>
-              </div>
-            </div>
-          </ng-container>
-        </ng-container>
-      </div>
-    </div>
-
-    <section id="clients" class="section-bg">
-      <div class="container">
-        <div class="section-header">
-          <h3>Nos partenaires</h3>
+    <div class="py-5 mt-4">
+      <div class="text-900 font-bold text-6xl mb-2 text-center">
+        <div class="text-900 font-bold text-6xl mb-2 text-center">
+          <span class="text-900"> Categories,</span>
+          <span class="text-eva">Annonces</span>
         </div>
+      </div>
+      <div class="text-700 text-2xl text-center line-height-3">Decouvrez la liste des annonces en fonction des categories</div>
+    </div>
 
-        <div class="row no-gutters clients-wrap clearfix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp">
+    <section class="surface-section py-3 text-center shadow col-xl-12">
+      <ng-container *ngFor="let categorie of categories">
+        <jhi-home-annonces [annonce]="categorie.annonces" [categorie]="categorie"></jhi-home-annonces>
+      </ng-container>
+    </section>
+
+    <section>
+      <jhi-home-solutions></jhi-home-solutions>
+    </section>
+
+    <div class="py-1 mt-8 d-flex justify-content-center align-items-center flex-column">
+      <div class="text-900 font-bold text-6xl mb-2 text-center">
+        <div class="text-900 font-bold text-6xl mb-2 text-center">
+          <span class="text-900"> Remerciements,</span>
+          <span class="text-eva">nos partenaires</span>
+        </div>
+      </div>
+      <div class="text-700 text-1xl col-xl-8 text-center line-height-3">
+        Sincère Remerciement au partenaires qui nous ont soutenu durant toute la conception jusqu'a la réalisation du projet EVA
+      </div>
+    </div>
+
+    <section id="clients" class="surface-section mt-4 text-center col-xl-12">
+      <div class="container d-flex justify-content-center align-items-center flex-column">
+        <div class="row col-xl-10 no-gutters clients-wrap clearfix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp">
           <div class="col-lg-3 col-md-4 col-xs-6 mb-4">
             <div class="client-logo">
               <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1559460379/client-5.png" class="img-fluid" alt="" />

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { navbarRoute } from '../navbar/navbar.route';
 import { GlobalSearchComponent } from '../../global-search/global-search.component';
 import { UserRouteAccessService } from '../../core/auth/user-route-access.service';
+import { MultipleSlideComponent } from '../../shared/multiple-slide/multiple-slide.component';
 
 export const FenStartLayoutRoutes: Routes = [
   {
@@ -54,6 +55,10 @@ export const FenStartLayoutRoutes: Routes = [
   {
     path: 'search',
     component: GlobalSearchComponent,
+  },
+  {
+    path: 'test-carousel',
+    component: MultipleSlideComponent,
   },
   {
     path: 'mandataire-portfolio',

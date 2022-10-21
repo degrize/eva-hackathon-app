@@ -4,6 +4,7 @@ import com.hackathon.eva.domain.enumeration.Devise;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 /**
@@ -26,6 +27,12 @@ public class TransactionDTO implements Serializable {
     private Instant dateTransaction;
 
     private String precision;
+
+    private Long transmeteurId;
+
+    private Long receiverId;
+
+    private Long annonceTransactionId;
 
     private AnnonceDTO annonce;
 
@@ -79,6 +86,30 @@ public class TransactionDTO implements Serializable {
         this.precision = precision;
     }
 
+    public Long getTransmeteurId() {
+        return transmeteurId;
+    }
+
+    public void setTransmeteurId(Long transmeteurId) {
+        this.transmeteurId = transmeteurId;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public Long getAnnonceTransactionId() {
+        return annonceTransactionId;
+    }
+
+    public void setAnnonceTransactionId(Long annonceTransactionId) {
+        this.annonceTransactionId = annonceTransactionId;
+    }
+
     public AnnonceDTO getAnnonce() {
         return annonce;
     }
@@ -128,6 +159,9 @@ public class TransactionDTO implements Serializable {
             ", precision='" + getPrecision() + "'" +
             ", annonce=" + getAnnonce() +
             ", postulant=" + getPostulant() +
+            ", transmeteurId='" + getTransmeteurId() + "'" +
+            ", receiverId='" + getReceiverId() + "'" +
+            ", annonceTransactionId='" + getAnnonceTransactionId() + "'" +
             "}";
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Observable, Subject, switchMap, tap } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
@@ -31,6 +31,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   photoAnnonce = '';
   annonces?: IAnnonce[];
   categories?: ICategorie[];
+  categorie?: ICategorie;
+  annonce?: IAnnonce;
+  annoncesByCategories = [this.categorie];
+  oneAnnonce = [this.annonce];
   comptePremium = EtatCompte.PREMIUM;
 
   private readonly destroy$ = new Subject<void>();
@@ -162,6 +166,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
+  loadAnnonesCategories(): void {
+    this.categories?.forEach(categorie => {
+      this.annonces?.forEach(annonce => {
+        annonce.categories?.forEach(annonceCateg => {
+          if (categorie.id === annonceCateg.id) {
+            categorie.annonces?.push(annonce);
+            this.oneAnnonce?.push(annonce);
+          }
+        });
+      });
+
+      this.annoncesByCategories?.push(categorie);
+
+      this.oneAnnonce = [];
+
+      console.log('CATEGOr ANNOnces');
+      console.log(this.annoncesByCategories);
+    });
+  }
+
   public loadImages(): void {
     this.annonces?.forEach(annonce => {
       if (annonce?.imageVideo && annonce?.imageVideoContentType) {
@@ -183,6 +207,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (this.categories) {
       console.log(this.categories);
+      this.loadAnnonesCategories();
     }
   }
 

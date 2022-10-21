@@ -37,6 +37,10 @@ export class UserProfileComponent implements OnInit {
       });
   }
 
+  doReportExcel(id: any): void {
+    this.mandataireDelegateurService.genarateExcel(id);
+  }
+
   public loadImages(): void {
     if (this.mandataireDelegateur?.photo && this.mandataireDelegateur?.photoContentType) {
       this.photoProfile = `data:${this.mandataireDelegateur.photoContentType};base64,${this.mandataireDelegateur.photo}`;

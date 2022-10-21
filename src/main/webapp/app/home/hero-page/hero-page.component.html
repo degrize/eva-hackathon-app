@@ -1,0 +1,63 @@
+<div [ngSwitch]="account !== null">
+  <div class="grid grid-nogutter surface-section text-800">
+    <div class="md:col-6 p-6 text-center md:text-left flex align-items-center">
+      <section>
+        <span class="block text-2xl font-bold mb-1">Create the screens your</span>
+        <div class="text-2xl text-primary font-bold mb-3">your visitors deserve to see</div>
+        <p class="mt-0 mb-4 text-700 line-height-3">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+
+        <button
+          pButton
+          pRipple
+          label="Commencer"
+          *ngSwitchCase="false"
+          routerLink="/login"
+          type="button"
+          class="mr-3 p-button-raised p-button-success button-start"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="S'inscrire"
+          *ngSwitchCase="false"
+          routerLink="/account/register"
+          type="button"
+          class="p-button-outlined p-button-success button-login"
+        ></button>
+        <button
+          pButton
+          pRipple
+          label="voir les annonces"
+          *ngSwitchCase="true"
+          routerLink="/liste-annonces"
+          type="button"
+          class="p-button-outlined p-button-success button-start"
+        ></button>
+      </section>
+    </div>
+    <div class="md:col-6 overflow-hidden">
+      <p-carousel
+        [value]="imagesList"
+        [autoplayInterval]="3000"
+        orientation="vertical"
+        [style]="{ 'max-width': '400px', 'margin-top': '2em' }"
+        [circular]="true"
+        verticalViewPortHeight="352px"
+        [numVisible]="1"
+        [numScroll]="1"
+      >
+        <ng-template let-image pTemplate="item">
+          <div class="product-item">
+            <div class="product-item-content">
+              <div class="mb-3">
+                <img src="../../../content/assets/img/beve/{{ image }}" class="product-image" />
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>

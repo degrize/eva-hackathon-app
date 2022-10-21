@@ -46,8 +46,16 @@
                       {{ annonce.titre | uppercase }}
                       <span class="text-heure">{{ annonce.dateDeDelegation | timeAgo }}</span>
                     </h3>
-                    <p [routerLink]="annonce.id.toString()" matLine>Durée : {{ annonce.duree }}</p>
-                    <p class="text-heure">{{ annonce.tarif }} FCFA</p>
+                    <p [routerLink]="annonce.id.toString()" matLine>
+                      <span>Durée : {{ annonce.duree }}</span>
+                    </p>
+                    <p class="text-heure d-flex flex-column mr-2">
+                      {{ annonce.tarif }} FCFA
+                      <span *ngIf="annonce.postulantRetenu; else disponible"><span class="text-warning">●</span> En Cours</span>
+                      <ng-template #disponible>
+                        <span><span class="text-success">●</span> Disponible</span>
+                      </ng-template>
+                    </p>
                     <div dropdown class="dropdown no-caret">
                       <a
                         id="button-basic"

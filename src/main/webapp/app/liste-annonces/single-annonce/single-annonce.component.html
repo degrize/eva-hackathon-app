@@ -39,12 +39,16 @@
         </p>
         <div class="price-box">
           <div class="price">{{ annonce.tarif }} Fcfa</div>
-          <div *ngIf="annonce.postulantRetenu; else btnDemander" class="discount">Embaucher</div>
+          <div *ngIf="annonce.postulantRetenu; else btnDemander" class="d-flex flex-column">
+            <span class="discount">Embaucher</span>
+            <span><span class="text-warning">●</span> En Cours</span>
+          </div>
         </div>
       </div>
       <ng-template #btnDemander>
-        <div class="button1 mb-2">
+        <div class="button1 mb-2 d-flex flex-column">
           <button routerLinkActive="active" [routerLink]="['/paiement', annonce.id]">Embaucher</button>
+          <span><span class="text-success">●</span> Disponible</span>
         </div>
       </ng-template>
       <div class="button1 mb-2">

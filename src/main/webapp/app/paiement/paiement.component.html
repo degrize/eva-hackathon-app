@@ -1,22 +1,22 @@
 <div class="paiement flex-column d-flex justify-content-center">
   <div>
-    <h2 class="ap text-white justify-content-center" style="width: 35rem">PAIEMENT</h2>
+    <h2 class="ap text-white justify-content-center rounded font-bold" style="width: 35rem">PAIEMENT</h2>
   </div>
 
   <div classe="row">
-    <div class="card" style="width: 18rem">
+    <div class="card shadow-sm pt-4" style="width: 18rem">
       <img [src]="'data:' + annonce?.imageVideoContentType + ';base64,' + annonce?.imageVideo" class="card-img-top" />
-      <div class="card-body">
-        <h5 class="card-title">{{ annonce?.titre }}</h5>
-        <p class="card-text">{{ annonce?.description | shorten: 50 }}</p>
+      <div class="card-body text-center">
+        <h5 class="card-title text-1xl font-bold underline">{{ annonce?.titre }}</h5>
+        <p class="card-text text-center">{{ annonce?.description | shorten: 50 }}</p>
         <p class="cout">cout : {{ annonce?.tarif }} Fcfa</p>
       </div>
     </div>
   </div>
 
-  <div class="alert" role="alert">
-    <h4 class="alert-heading">Durée</h4>
-    <p>{{ annonce?.duree }}</p>
+  <div class="alert d-flex gap-1" role="alert">
+    <h4 class="alert-heading">Durée :</h4>
+    <p class="text-white justify-content-center font-bold bg-eva px-2">{{ annonce?.duree }}</p>
   </div>
 
   <form [formGroup]="mainForm" (ngSubmit)="save()">
@@ -25,11 +25,13 @@
       <div class="col-sm-10">
         <textarea
           id="inputPrecision"
-          class="form-control"
-          placeholder="Precisions"
+          style="width: 80%"
+          pInputTextarea
+          placeholder="Renseignez les précisions"
           type="textarea"
           name="message"
           id="message"
+          [autoResize]="true"
           maxlength="6000"
           formControlName="precision"
           rows="4"
@@ -37,30 +39,52 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="exampleFormControlFile1">Image/Vidéo</label>
-      <div class="col-sm-10">
-        <input type="file" class="form-control-file" id="exampleFormControlFile1" />
+    <div>
+      <p-toast></p-toast>
+
+      <div>
+        <h5>Image/Vidéo</h5>
+        <p-fileUpload
+          name="demo[]"
+          url="./upload.php"
+          (onUpload)="onUpload($event)"
+          [multiple]="true"
+          accept="image/*"
+          [maxFileSize]="1000000"
+          [auto]="true"
+          chooseLabel="choisir"
+          chooseStyleClass="bg-secondary text-black-50"
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+              <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
       </div>
     </div>
 
     <p class="ptext">Paiement</p>
 
-    <div>
+    <div class="text-center d-flex justify-content-center align-items-center flex-column">
       <img src="../../../content/images/mtn.png" class="mtn" />
-      <div class="alert" role="alert">
+      <div class="d-flex gap-4 justify-content-center">
         <p>Cout : {{ annonce?.tarif }} FCFA</p>
         <p>Frais Eva : {{ fraisEVa }} FCFA</p>
         <p>Total : {{ tarif - fraisEVa }} FCFA</p>
-        <input
-          formControlName="numeroMomo"
-          id="inputMoMo"
-          class="form-control form-control-lg"
-          style="width: 10rem"
-          type="tel"
-          placeholder="05xxxxxxxx"
-        />
-
+      </div>
+      <div class="mb-3">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon">+225</span>
+          <input
+            pInputText
+            formControlName="numeroMomo"
+            id="inputMoMo"
+            type="tel"
+            class="border-top-0 border-bottom-0"
+            placeholder="05xxxxxxxx"
+          />
+        </div>
         <div *ngIf="mainForm.get('numeroMomo')!.invalid && (mainForm.get('numeroMomo')!.dirty || mainForm.get('numeroMomo')!.touched)">
           <small
             class="form-text text-danger"

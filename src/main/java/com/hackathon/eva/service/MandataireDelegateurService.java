@@ -2,8 +2,12 @@ package com.hackathon.eva.service;
 
 import com.hackathon.eva.domain.MandataireDelegateur;
 import com.hackathon.eva.service.dto.MandataireDelegateurDTO;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.dom4j.DocumentException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -61,4 +65,6 @@ public interface MandataireDelegateurService {
     MandataireDelegateur findUser(Long id);
 
     List<MandataireDelegateur> findAllByNomPrenom(String nomprenom);
+
+    ByteArrayInputStream generateExcelFile(long id) throws IOException, InvalidFormatException, DocumentException;
 }

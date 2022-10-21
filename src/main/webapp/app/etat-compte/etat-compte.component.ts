@@ -23,7 +23,7 @@ export class EtatCompteComponent implements OnInit {
     text2: '-',
     text3: '-',
     text4: '-',
-    title: 'For beginner use',
+    title: 'Utilisation Sans Forfait',
     price: '0',
   };
   ComptePremium = {

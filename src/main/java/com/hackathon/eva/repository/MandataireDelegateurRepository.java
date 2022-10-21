@@ -36,4 +36,9 @@ public interface MandataireDelegateurRepository extends JpaRepository<Mandataire
         "select mandataireDelegateur FROM MandataireDelegateur mandataireDelegateur WHERE (mandataireDelegateur.nomDeFamille Like %:nomprenom%) or (mandataireDelegateur.prenom like %:nomprenom%)"
     )
     List<MandataireDelegateur> findMandataireDelegateurByLikeNomDeFamilleAndPrenom(@Param("nomprenom") String nomprenom);
+
+    @Query(
+        "select distinct mandataireDelegateur from MandataireDelegateur mandataireDelegateur left join fetch mandataireDelegateur.annonces where mandataireDelegateur.id =:id"
+    )
+    MandataireDelegateur findByMandateurId(@Param("id") Long id);
 }

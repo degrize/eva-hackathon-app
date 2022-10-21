@@ -15,6 +15,7 @@
           Ceci est votre page de profil. Vous pouvez voir l'avancement de votre travail et gérer vos projets ou tâches assignées
         </p>
         <a [routerLink]="'/mandataire-delegateur/' + mandataireDelegateur?.id + '/edit'" class="btn btn-info">Editer votre profile</a>
+        <button class="btn btn-info" (click)="doReportExcel(mandataireDelegateur?.id)">Telecharger (Excel)</button>
       </div>
     </div>
   </div>
@@ -37,7 +38,7 @@
             <h3>
               {{ mandataireDelegateur?.nomDeFamille }}<span class="font-weight-light"> {{ mandataireDelegateur?.prenom }}</span>
             </h3>
-            <div class="h5 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Poster une activité - Creative Tim Officer</div>
+            <div class="h5 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Poster une activité - EVA</div>
             <div><i class="ni education_hat mr-2"></i>{{ mandataireDelegateur?.email }}</div>
             <hr class="my-4" />
             <p>
